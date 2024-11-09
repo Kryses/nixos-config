@@ -5,6 +5,7 @@
     ./zram.nix
     ./env.nix
     ./user.nix
+    ./nvidia.nix
     ./xserver.nix
     ./nm.nix
     ./virtmanager.nix

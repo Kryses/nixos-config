@@ -9,11 +9,12 @@
     ./modules/xserver.nix
   ];
 
+  services.openssh.enable = true;
   nixpkgs.overlays = [ inputs.polymc.overlay ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "kryses-nixos"; # Define your hostname.
 
-  time.timeZone = "Asia/Tashkent"; # Set your time zone.
+  time.timeZone = "America/New_York"; # Set your time zone.
 
   i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
 

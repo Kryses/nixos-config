@@ -18,9 +18,10 @@
       touchpad.accelProfile = "flat";
     };
 
-    videoDrivers = [ "amdgpu" ];
+    videoDrivers = [ "nvidia" "nvidia-dkms" ];
     deviceSection = ''Option "TearFree" "True"'';
     #displayManager.gdm.enable = true;
     #desktopManager.gnome.enable = true;
   };
+  
 }
