@@ -22,6 +22,8 @@
     pcmanfm-qt
     polymc
     nushell
+    appgate-sdp
+    slack
 
     # Coding stuff
     gnumake
