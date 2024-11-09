@@ -15,6 +15,9 @@
         "XCURSOR_SIZE,36"
         "QT_QPA_PLATFORM,wayland"
         "XDG_SCREENSHOTS_DIR,~/screens"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "WLR_NO_HARDWARE_CURSORS=1"
       ];
 
       debug = {
@@ -109,7 +112,6 @@
         "float, ^(imv)$"
         "float, ^(mpv)$"
       ];
-
       exec-once = [
         "swww init"
         "swww img ~/Downloads/nixos-chan.png"
@@ -128,13 +130,13 @@
         "$mainMod, F, togglefloating,"
         "$mainMod, D, exec, wofi --show drun"
         "$mainMod, P, pseudo, # dwindle"
-        "$mainMod, J, togglesplit, # dwindle"
+        "$mainMod, S, togglesplit, # dwindle"
 
         # Move focus with mainMod + arrow keys
-        "$mainMod, left,  movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up,    movefocus, u"
-        "$mainMod, down,  movefocus, d"
+        "$mainMod, H,  movefocus, l"
+        "$mainMod, L, movefocus, r"
+        "$mainMod, K,    movefocus, u"
+        "$mainMod, J,  movefocus, d"
 
         # Moving windows
         "$mainMod SHIFT, left,  swapwindow, l"

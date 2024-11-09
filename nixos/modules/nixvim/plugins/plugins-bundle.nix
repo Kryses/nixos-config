@@ -1,5 +1,6 @@
 {
   imports = [
+    ./alpha.nix
     ./lualine.nix
     ./transparent.nix
     ./neotree.nix

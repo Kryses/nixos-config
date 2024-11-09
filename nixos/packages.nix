@@ -9,7 +9,7 @@
     audacity
     chromium
     telegram-desktop
-    alacritty
+    kitty
     obs-studio
     rofi
     wofi
@@ -21,6 +21,7 @@
     zoom-us
     pcmanfm-qt
     polymc
+    nushell
 
     # Coding stuff
     gnumake
@@ -56,6 +57,7 @@
     lazygit
     bluez
     bluez-tools
+    tmux
 
     # GUI utils
     feh

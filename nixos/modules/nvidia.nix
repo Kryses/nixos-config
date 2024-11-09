@@ -1,54 +1,33 @@
-{ lib, pkgs, config, ... }:
-let
-  nvidiaDriverChannel =
-    config.boot.kernelPackages.nvidiaPackages.stable; # stable, latest, beta, etc.
-in {
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers =
-    [ "nvidia" "displayLink" ]; # or "nvidiaLegacy470 etc.
-  boot.kernelParams =
-    lib.optionals (lib.elem "nvidia" config.services.xserver.videoDrivers) [
-      "nvidia-drm.modeset=1"
-      "nvidia_drm.fbdev=1"
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    ];
-  environment.variables = {
-    # GBM_BACKEND = "nvidia-drm"; # If crash in firefox, remove this line
-    LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    NVD_BACKEND = "direct";
-  };
-  nixpkgs.config = {
-    nvidia.acceptLicense = true;
-    allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "cudatoolkit"
-        "nvidia-persistenced"
-        "nvidia-settings"
-        "nvidia-x11"
-      ];
-  };
-  hardware = {
-    nvidia = {
-      open = false;
-      nvidiaSettings = true;
-      powerManagement.enable =
-        true; # This can cause sleep/suspend to fail and saves entire VRAM to /tmp/
-      modesetting.enable = true;
-      package = nvidiaDriverChannel;
-    };
-    graphics = {
-      enable = true;
-      package = nvidiaDriverChannel;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        vaapiVdpau
-        libvdpau-va-gl
-        mesa
-        egl-wayland
-      ];
-    };
-  };
-}
+{ config, lib, pkgs, ... }:
 
+# Nvidia Related settings
+{
+
+  boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.prime = {
+    #offload.enable = true;
+    sync.enable = true;
+
+    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+    nvidiaBusId = "PCI:1:0:0";
+
+    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+    intelBusId = "PCI:0:2:0";
+  };
+
+  services.xserver = {
+    videoDrivers = lib.mkForce [ "nvidia" ];
+    # Manualy setting dpi, for nvidia prime sync
+    dpi = 96;
+    # Fix Screen tearing (may cause some others problems)
+    screenSection = ''
+      Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+      Option         "AllowIndirectGLXProtocol" "off"
+      Option         "TripleBuffer" "on"
+    '';
+  };
+
+}

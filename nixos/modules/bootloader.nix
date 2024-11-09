@@ -3,7 +3,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "nouveau" ];
   boot.kernelModules = [
-        "nvidia-dkms"
+        "nvidia"
         "nvidia_modeset"
         "nvidia_drm"
         "nvidia_uvm"
