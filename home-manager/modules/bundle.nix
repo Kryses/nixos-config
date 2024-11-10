@@ -1,5 +1,6 @@
 {
   imports = [
+    ./nushell/default.nix
     ./cursor.nix
     ./kitty.nix
     ./tmux.nix

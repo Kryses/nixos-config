@@ -42,6 +42,7 @@
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils
+    zoxide
     neofetch
     file
     tree
