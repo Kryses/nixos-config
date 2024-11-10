@@ -30,6 +30,8 @@
     gcc
     nodejs
     python
+    neovim
+    neomake
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils

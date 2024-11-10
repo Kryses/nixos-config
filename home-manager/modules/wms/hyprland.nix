@@ -139,16 +139,16 @@
         "$mainMod, J,  movefocus, d"
 
         # Moving windows
-        "$mainMod SHIFT, left,  swapwindow, l"
-        "$mainMod SHIFT, right, swapwindow, r"
-        "$mainMod SHIFT, up,    swapwindow, u"
-        "$mainMod SHIFT, down,  swapwindow, d"
+        "$mainMod SHIFT, H,  swapwindow, l"
+        "$mainMod SHIFT, L, swapwindow, r"
+        "$mainMod SHIFT, K,    swapwindow, u"
+        "$mainMod SHIFT, J,  swapwindow, d"
 
         # Window resizing                     X  Y
-        "$mainMod CTRL, left,  resizeactive, -60 0"
-        "$mainMod CTRL, right, resizeactive,  60 0"
-        "$mainMod CTRL, up,    resizeactive,  0 -60"
-        "$mainMod CTRL, down,  resizeactive,  0  60"
+        "$mainMod CTRL, H,  resizeactive, -60 0"
+        "$mainMod CTRL, L, resizeactive,  60 0"
+        "$mainMod CTRL, K,    resizeactive,  0 -60"
+        "$mainMod CTRL, J,  resizeactive,  0  60"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
@@ -195,7 +195,7 @@
         # Configuration files
         ''$mainMod SHIFT, N, exec, alacritty -e sh -c "rb"''
         ''$mainMod SHIFT, C, exec, alacritty -e sh -c "conf"''
-        ''$mainMod SHIFT, H, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/hyprland.nix"''
+       # ''$mainMod SHIFT, H, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/hyprland.nix"''
         ''$mainMod SHIFT, W, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/waybar.nix''
         '', Print, exec, grim -g "$(slurp)" - | swappy -f -''
 
