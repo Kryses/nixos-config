@@ -1,3 +1,0 @@
-{
-  services.appgatedriver.enable = true;
-}

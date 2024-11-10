@@ -1,6 +1,5 @@
 {
   imports = [
-    ./appgate.nix
     ./bootloader.nix
     ./steam.nix
     ./sound.nix
