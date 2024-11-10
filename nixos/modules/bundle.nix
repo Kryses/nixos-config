@@ -13,6 +13,7 @@
     ./hyprland.nix
     ./trim.nix
     ./bluetooth.nix
+    ./appgate-sdp.nix
 #    ./nixvim/nixvim.nix
   ];
 }
