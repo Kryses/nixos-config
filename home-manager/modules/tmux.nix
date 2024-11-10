@@ -1,4 +1,16 @@
-{ config, pkgs, fetchFromGitHub, ... }:
+{ config, pkgs, ... }:
+let
+  tmux-floax = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-floax";
+    version = "0.1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "omerxx";
+      repo = "tmux-floax";
+      rev = "864ceb9372cb496eda704a40bb080846d3883634";
+      sha256 = "sha256-vG8UmqYXk4pCvOjoSBTtYb8iffdImmtgsLwgevTu8pI=";
+    };
+  };
+in
 {
   programs.tmux = {
     enable = true;
@@ -6,12 +18,13 @@
     baseIndex = 1;
     prefix = "C-Space";
     plugins = with pkgs; [
-      tmuxPlugins.catppuccine
+      tmuxPlugins.catppuccin
       tmuxPlugins.sensible
       tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.tmux-yank
-      tmuxPlugins.tmux-resurrect
-      tmuxPlugins.tmux-continuum
+      tmuxPlugins.yank
+      tmuxPlugins.resurrect
+      tmuxPlugins.continuum
+      tmux-floax
     ];
     extraConfig = ''
       set -g @catppuccin_custom_plugin_dir "/home/kryses/.config/tmux/custom"
@@ -48,12 +61,10 @@
       bind l split-window -h -c "#{pane_current_path}"
       bind-key R source-file ~/.tmux.conf \; display-message "  Config Reloaded`"
 
-
       set -g @sessionx-bind 'o'
       set -g @sessionx-window-mode 'on'
       set -g @sessionx-tree-mode 'on'
       set -g display-panes-active-colour colour33
-      set-option -g default-shell /bin/nu
       set-option -g status-position top
       set -g status-interval 10
       set -g @floax-change-path 'false'
@@ -107,6 +118,6 @@
       bind-key -T copy-mode-vi 'C-k' select-pane -U
       bind-key -T copy-mode-vi 'C-l' select-pane -R
       bind-key -T copy-mode-vi 'C-\' select-pane -l
-  '';
+    '';
   };
 }
