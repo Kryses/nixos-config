@@ -14,7 +14,7 @@
       upd = "nix flake update ${flakeDir}";
       upg = "sudo nixos-rebuild switch --upgrade --flake ${flakeDir}";
 
-      hms = "home-manager switch --flake ${flakeDir}";
+      hms = "home-manager switch --impure --flake ${flakeDir}";
 
       conf = "nvim ${flakeDir}/nixos/configuration.nix";
       pkgs = "nvim ${flakeDir}/nixos/packages.nix";

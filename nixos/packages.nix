@@ -24,6 +24,7 @@
     nushell
     appgate-sdp
     slack
+    remmina
 
     # Coding stuff
     gnumake
@@ -31,7 +32,12 @@
     nodejs
     python
     neovim
-    neomake
+    telescope
+    ripgrep
+    fd
+    carapace
+    starship
+    cargo
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils
@@ -40,6 +46,7 @@
     tree
     wget
     git
+    fzf
     fastfetch
     htop
     nix-index
@@ -49,7 +56,7 @@
     light
     lux
     mediainfo
-    ranger
+    yazi
     zram-generator
     cava
     zip

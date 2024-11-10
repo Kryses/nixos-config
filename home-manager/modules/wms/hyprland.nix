@@ -14,7 +14,7 @@
         "XDG_SESSION_DESKTOP,Hyprland"
         "XCURSOR_SIZE,36"
         "QT_QPA_PLATFORM,wayland"
-        "XDG_SCREENSHOTS_DIR,~/screens"
+        "XDG_SCREENSHOTS_DIR,~/wallpaper"
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "WLR_NO_HARDWARE_CURSORS=1"
@@ -114,7 +114,7 @@
       ];
       exec-once = [
         "swww init"
-        "swww img ~/Downloads/nixos-chan.png"
+        "swww img ~/wallpaper/51202139522_fbf4788f42_o.png"
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
@@ -128,7 +128,7 @@
         "$mainMod, M, exit,"
         "$mainMod, E, exec, dolphin"
         "$mainMod, F, togglefloating,"
-        "$mainMod, D, exec, wofi --show drun"
+        "ALT, Space, exec, wofi --show drun"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, S, togglesplit, # dwindle"
 
@@ -149,6 +149,7 @@
         "$mainMod CTRL, L, resizeactive,  60 0"
         "$mainMod CTRL, K,    resizeactive,  0 -60"
         "$mainMod CTRL, J,  resizeactive,  0  60"
+        "$mainMod, Z,  fullscreen, 1"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
