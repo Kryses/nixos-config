@@ -25,6 +25,7 @@
     appgate-sdp
     slack
     remmina
+    spotify
 
     # Coding stuff
     gnumake
@@ -100,7 +101,7 @@
     pipewire
     pulseaudio
     pamixer
-
+    pavucontrol
     # GPU stuff 
     amdvlk
     rocm-opencl-icd
