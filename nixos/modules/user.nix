@@ -9,6 +9,7 @@
       description = "Kryses";
       extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
       packages = with pkgs; [];
+      shell = pkgs.nushell;
     };
   };
 

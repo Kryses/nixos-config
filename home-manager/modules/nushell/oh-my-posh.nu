@@ -1,66 +1,43 @@
-# make sure we have the right prompt render correctly
-if ($env.config? | is-not-empty) {
-    $env.config = ($env.config | upsert render_right_prompt_on_last_line true)
-}
+$env.config = ($env.config | upsert render_right_prompt_on_last_line true)
 
 $env.POWERLINE_COMMAND = 'oh-my-posh'
-$env.POSH_THEME = (echo "/home/kryses/dotfiles/ohmyposh/omp-kryses.toml")
+$env.POSH_THEME = '~/.config/ohmyposh/omp-kryses.toml'
 $env.PROMPT_INDICATOR = ""
-$env.POSH_SESSION_ID = (echo "de8af5a7-af7d-45fd-9ae3-3b8b040d1c2e")
+$env.POSH_PID = (random uuid)
 $env.POSH_SHELL_VERSION = (version | get version)
 
-let _omp_executable: string = (echo "/home/kryses/.local/bin/oh-my-posh")
+def posh_cmd_duration [] {
+    # We have to do this because the initial value of `$env.CMD_DURATION_MS` is always `0823`,
+    # which is an official setting.
+    # See https://github.com/nushell/nushell/discussions/6402#discussioncomment-3466687.
+    if $env.CMD_DURATION_MS == "0823" { 0 } else { $env.CMD_DURATION_MS }
+}
+
+def posh_width [] {
+    (term size).columns | into string
+}
 
 # PROMPTS
+$env.PROMPT_MULTILINE_INDICATOR = (^"~/.nix-profile/bin/oh-my-posh" print secondary $"--config=($env.POSH_THEME)" --shell=nu $"--shell-version=($env.POSH_SHELL_VERSION)")
 
-def --wrapped _omp_get_prompt [
-    type: string,
-    ...args: string
-] {
-    mut execution_time = -1
-    mut no_status = true
-    # We have to do this because the initial value of `$env.CMD_DURATION_MS` is always `0823`, which is an official setting.
-    # See https://github.com/nushell/nushell/discussions/6402#discussioncomment-3466687.
-    if $env.CMD_DURATION_MS != '0823' {
-        $execution_time = $env.CMD_DURATION_MS
-        $no_status = false
-    }
-
-    (
-        ^$_omp_executable print $type
-            --save-cache
-            --shell=nu
-            $"--shell-version=($env.POSH_SHELL_VERSION)"
-            $"--status=($env.LAST_EXIT_CODE)"
-            $"--no-status=($no_status)"
-            $"--execution-time=($execution_time)"
-            $"--terminal-width=((term size).columns)"
-            ...$args
-    )
-}
-
-$env.PROMPT_MULTILINE_INDICATOR = (
-    ^$_omp_executable print secondary
-        --shell=nu
-        $"--shell-version=($env.POSH_SHELL_VERSION)"
-)
-
-$env.PROMPT_COMMAND = {||
+$env.PROMPT_COMMAND = { ||
     # hack to set the cursor line to 1 when the user clears the screen
     # this obviously isn't bulletproof, but it's a start
-    mut clear = false
-    if $nu.history-enabled {
-        $clear = (history | is-empty) or ((history | last 1 | get 0.command) == "clear")
-    }
+    let clear = (history | is-empty) or ((history | last 1 | get 0.command) == "clear")
 
-    if ($env.SET_POSHCONTEXT? | is-not-empty) {
-        do --env $env.SET_POSHCONTEXT
-    }
-
-    _omp_get_prompt primary $"--cleared=($clear)"
+    ^"~/.nix-profile/bin/oh-my-posh" print primary $"--config=($env.POSH_THEME)" --shell=nu $"--shell-version=($env.POSH_SHELL_VERSION)" $"--execution-time=(posh_cmd_duration)" $"--status=($env.LAST_EXIT_CODE)" $"--terminal-width=(posh_width)" $"--cleared=($clear)"
 }
 
-$env.PROMPT_COMMAND_RIGHT = {|| _omp_get_prompt right }
+$env.PROMPT_COMMAND_RIGHT = { ||    
+    ^"~/.nix-profile/bin/oh-my-posh" print right $"--config=($env.POSH_THEME)" --shell=nu $"--shell-version=($env.POSH_SHELL_VERSION)" $"--execution-time=(posh_cmd_duration)" $"--status=($env.LAST_EXIT_CODE)" $"--terminal-width=(posh_width)"
+}
 
-$env.TRANSIENT_PROMPT_COMMAND = {|| _omp_get_prompt transient }
-^$_omp_executable notice
+if "true" == "true" {
+    $env.TRANSIENT_PROMPT_COMMAND = { ||
+        ^"~/.nix-profile/bin/oh-my-posh" print transient $"--config=($env.POSH_THEME)" --shell=nu $"--shell-version=($env.POSH_SHELL_VERSION)" $"--execution-time=(posh_cmd_duration)" $"--status=($env.LAST_EXIT_CODE)" $"--terminal-width=(posh_width)"
+    }
+}
+
+if "false" == "true" {
+    echo ""
+}
