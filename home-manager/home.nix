@@ -18,5 +18,6 @@
     ".config/nushell/env.nu".source = ~/dotfiles/nushell/env.nu;
     ".config/nushell/zoxide.nu".source = ~/dotfiles/nushell/zoxide.nu;
     ".config/ohmyposh".source = ~/dotfiles/ohmyposh;
+    ".config/tmux".source = ~/dotfiles/tmux;
   };
 }

@@ -2,6 +2,7 @@
   imports = [
     ./cursor.nix
     ./kitty.nix
+    ./tmux.nix
     ./git.nix
     ./htop.nix
     ./alacritty.nix
