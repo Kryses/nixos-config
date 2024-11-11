@@ -50,7 +50,7 @@ alias ayon-workspace = cd ~/work/repos/ayon-workspace
 
 
 def cwork [] {
-    ssh -o ServerAliveInterval=60 (pass work/hl/hal-ssh-ip) -i ~/.ssh/id_rsa -p 22 
+    ssh -o ServerAliveInterval=60 (pass work/hl/hal-ssh-ip) -i ~/.ssh/id_ed25519 -p 22 
 }
 
 let flake_dir = $"($env.HOME)/nix"

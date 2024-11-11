@@ -14,6 +14,7 @@
     ./trim.nix
     ./bluetooth.nix
     ./appgate-sdp.nix
+    ./gpg.nix
 #    ./nixvim/nixvim.nix
   ];
 }
