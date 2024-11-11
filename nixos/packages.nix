@@ -71,6 +71,8 @@
     bluez
     bluez-tools
     tmux
+    pass
+    gnupg
 
     # GUI utils
     feh
