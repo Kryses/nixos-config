@@ -15,7 +15,7 @@
     wofi
     mpv
     kdenlive
-    discord
+    discord-development
     gparted
     obsidian
     zoom-us
@@ -72,6 +72,9 @@
     bluez-tools
     tmux
     pass
+    gnupg
+    poetry
+    pyenv
 
     # GUI utils
     feh
@@ -106,7 +109,7 @@
     pavucontrol
     # GPU stuff 
     amdvlk
-    rocm-opencl-icd
+    # rocm-opencl-icd
     glaxnimate
 
     # Screenshotting

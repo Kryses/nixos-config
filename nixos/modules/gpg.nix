@@ -1,8 +1,8 @@
 {
   services.pcscd.enable = true;
-  programs.gnupg.agent = {
+  programs.gnupg.agent.pinentryPackage = {
     enable = true;
-    pinentryFlavor = "curses";
+    pinentryFlavor = "gtk2";
     enableSSHSupport = true;
   };
 }

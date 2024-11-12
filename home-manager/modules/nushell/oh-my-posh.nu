@@ -1,7 +1,7 @@
 $env.config = ($env.config | upsert render_right_prompt_on_last_line true)
 
 $env.POWERLINE_COMMAND = 'oh-my-posh'
-$env.POSH_THEME = '~/.config/ohmyposh/omp-kryses.toml'
+$env.POSH_THEME = $'($env.HOME)/.config/ohmyposh/omp-kryses.toml'
 $env.PROMPT_INDICATOR = ""
 $env.POSH_PID = (random uuid)
 $env.POSH_SHELL_VERSION = (version | get version)
@@ -18,7 +18,7 @@ def posh_width [] {
 }
 
 # PROMPTS
-$env.PROMPT_MULTILINE_INDICATOR = (^"~/.nix-profile/bin/oh-my-posh" print secondary $"--config=($env.POSH_THEME)" --shell=nu $"--shell-version=($env.POSH_SHELL_VERSION)")
+$env.PROMPT_MULTILINE_INDICATOR = (^$"($env.HOME)/.nix-profile/bin/oh-my-posh" print secondary $"--config=($env.POSH_THEME)" --shell=nu $"--shell-version=($env.POSH_SHELL_VERSION)")
 
 $env.PROMPT_COMMAND = { ||
     # hack to set the cursor line to 1 when the user clears the screen
