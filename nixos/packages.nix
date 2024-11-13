@@ -1,132 +1,136 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }:
+let
+  system = "x86_64-linux";
+in
+
+{
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = ["python-2.7.18.8" "electron-25.9.0"];
+    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
   };
-
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     # Desktop apps
-    audacity
-    chromium
-    telegram-desktop
-    kitty
-    obs-studio
-    rofi
-    wofi
-    mpv
-    kdenlive
-    discord-development
-    gparted
-    obsidian
-    zoom-us
-    pcmanfm-qt
-    polymc
-    nushell
-    appgate-sdp
-    slack
-    remmina
-    spotify
+    inputs.zen-browser.packages."${system}".default
+    pkgs.audacity
+    pkgs.chromium
+    pkgs.telegram-desktop
+    pkgs.kitty
+    pkgs.obs-studio
+    pkgs.rofi
+    pkgs.wofi
+    pkgs.mpv
+    pkgs.kdenlive
+    pkgs.discord-development
+    pkgs.gparted
+    pkgs.obsidian
+    pkgs.zoom-us
+    pkgs.pcmanfm-qt
+    pkgs.polymc
+    pkgs.nushell
+    pkgs.appgate-sdp
+    pkgs.slack
+    pkgs.remmina
+    pkgs.spotify
 
-    # Coding stuff
-    gnumake
-    gcc
-    nodejs
-    python
-    neovim
-    telescope
-    ripgrep
-    fd
-    carapace
-    starship
-    cargo
-    (python3.withPackages (ps: with ps; [ requests ]))
+    # pkgs.Coding stuff
+    pkgs.gnumake
+    pkgs.gcc
+    pkgs.nodejs
+    pkgs.python
+    pkgs.neovim
+    pkgs.telescope
+    pkgs.ripgrep
+    pkgs.fd
+    pkgs.carapace
+    pkgs.starship
+    pkgs.cargo
+    (pkgs.python3.withPackages (ps: with ps; [ requests ]))
 
-    # CLI utils
-    tmuxinator
-    zoxide
-    neofetch
-    file
-    tree
-    wget
-    git
-    fzf
-    fastfetch
-    htop
-    nix-index
-    unzip
-    scrot
-    ffmpeg
-    light
-    lux
-    mediainfo
-    yazi
-    zram-generator
-    cava
-    zip
-    ntfs3g
-    yt-dlp
-    brightnessctl
-    swww
-    openssl
-    lazygit
-    bluez
-    bluez-tools
-    tmux
-    pass
-    pinentry-curses
-    gnupg
-    poetry
-    pyenv
+    # pkgs.CLI utils
+    pkgs.tmuxinator
+    pkgs.zoxide
+    pkgs.neofetch
+    pkgs.file
+    pkgs.tree
+    pkgs.wget
+    pkgs.git
+    pkgs.fzf
+    pkgs.fastfetch
+    pkgs.htop
+    pkgs.nix-index
+    pkgs.unzip
+    pkgs.scrot
+    pkgs.ffmpeg
+    pkgs.light
+    pkgs.lux
+    pkgs.mediainfo
+    pkgs.yazi
+    pkgs.zram-generator
+    pkgs.cava
+    pkgs.zip
+    pkgs.ntfs3g
+    pkgs.yt-dlp
+    pkgs.brightnessctl
+    pkgs.swww
+    pkgs.openssl
+    pkgs.lazygit
+    pkgs.bluez
+    pkgs.bluez-tools
+    pkgs.tmux
+    pkgs.pass
+    pkgs.pinentry-curses
+    pkgs.gnupg
+    pkgs.poetry
+    pkgs.pyenv
+    # pkgs.GUI utils
+    pkgs.feh
+    pkgs.imv
+    pkgs.dmenu
+    pkgs.screenkey
+    pkgs.mako
+    pkgs.gromit-mpx
 
-    # GUI utils
-    feh
-    imv
-    dmenu
-    screenkey
-    mako
-    gromit-mpx
+    # pkgs.Xorg stuff
+    #pkgs.xterm
+    #pkgs.xclip
+    #pkgs.xorg.xbacklight
 
-    # Xorg stuff
-    #xterm
-    #xclip
-    #xorg.xbacklight
+    # pkgs.Wayland stuff
+    pkgs.xwayland
+    pkgs.wl-clipboard
+    pkgs.cliphist
 
-    # Wayland stuff
-    xwayland
-    wl-clipboard
-    cliphist
+    # pkgs.WMs and stuff
+    pkgs.herbstluftwm
+    pkgs.hyprland
+    pkgs.seatd
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.polybar
+    pkgs.waybar
 
-    # WMs and stuff
-    herbstluftwm
-    hyprland
-    seatd
-    xdg-desktop-portal-hyprland
-    polybar
-    waybar
+    # pkgs.Sound
+    pkgs.pipewire
+    pkgs.pulseaudio
+    pkgs.pamixer
+    pkgs.pavucontrol
+    # pkgs.GPU stuff 
+    pkgs.amdvlk
+    # pkgs.rocm-opencl-icd
+    pkgs.glaxnimate
 
-    # Sound
-    pipewire
-    pulseaudio
-    pamixer
-    pavucontrol
-    # GPU stuff 
-    amdvlk
-    # rocm-opencl-icd
-    glaxnimate
+    # pkgs.Screenshotting
+    pkgs.grim
+    pkgs.grimblast
+    pkgs.slurp
+    pkgs.flameshot
+    pkgs.swappy
 
-    # Screenshotting
-    grim
-    grimblast
-    slurp
-    flameshot
-    swappy
-
-    # Other
-    home-manager
-    spice-vdagent
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct
-    papirus-nord
+    # pkgs.Other
+    pkgs.home-manager
+    pkgs.spice-vdagent
+    pkgs.libsForQt5.qtstyleplugin-kvantum
+    pkgs.libsForQt5.qt5ct
+    pkgs.papirus-nord
   ];
 
   fonts.packages = with pkgs; [
