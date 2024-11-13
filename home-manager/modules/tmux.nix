@@ -1,13 +1,23 @@
 { config, pkgs, ... }:
 let
   tmux-floax = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-floax";
+    pluginName = "floax";
     version = "0.1.0";
     src = pkgs.fetchFromGitHub {
       owner = "omerxx";
       repo = "tmux-floax";
       rev = "864ceb9372cb496eda704a40bb080846d3883634";
       sha256 = "sha256-vG8UmqYXk4pCvOjoSBTtYb8iffdImmtgsLwgevTu8pI=";
+    };
+  };
+  tmux-sessionx = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "sessionx";
+    version = "0.1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "omerxx";
+      repo = "tmux-sessionx";
+      rev = "0711d0374fe0ace8fd8774396469ab34c5fbf360";
+      sha256 = "sha256-9IhXoW9o/ftbhIree+I3vT6r3uNgkZ7cskSyedC3xG4=";
     };
   };
 in
@@ -17,17 +27,18 @@ in
 
     baseIndex = 1;
     prefix = "C-Space";
-    plugins = with pkgs; [
-      tmuxPlugins.catppuccin
-      tmuxPlugins.sensible
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.yank
-      tmuxPlugins.resurrect
-      tmuxPlugins.continuum
+    plugins = [
       tmux-floax
+      tmux-sessionx
+      pkgs.tmuxPlugins.catppuccin
+      pkgs.tmuxPlugins.sensible
+      pkgs.tmuxPlugins.vim-tmux-navigator
+      pkgs.tmuxPlugins.yank
+      pkgs.tmuxPlugins.resurrect
+      pkgs.tmuxPlugins.continuum
     ];
     extraConfig = ''
-      set -g @catppuccin_custom_plugin_dir "/home/kryses/.config/tmux/custom"
+      set -g @catppuccin_custom_plugin_dir "$HOME/.config/tmux/custom"
       set-option -sa terminal-overrides ",xterm*,Tc"
       set -g mouse on
       set -g pane-base-index 1

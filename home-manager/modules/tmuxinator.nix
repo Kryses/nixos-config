@@ -1,5 +1,0 @@
-{
-  programs.temuxinator = {
-    enable = true;
-  };
-}

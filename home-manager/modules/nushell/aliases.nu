@@ -50,7 +50,7 @@ alias ayon-workspace = cd ~/work/repos/ayon-workspace
 
 
 def cwork [] {
-    ssh -o ServerAliveInterval=60 (pass work/hl/hal-ssh-ip) -i ~/.ssh/id_ed25519 -p 22 
+    ssh -o ServerAliveInterval=60 (pass work/hl/hal-ssh-ip) -p 22 
 }
 
 let flake_dir = $"($env.HOME)/nix"
@@ -68,3 +68,5 @@ alias ll = ls -l
 alias v = nvim
 alias se = sudoedit
 alias ff = fastfetch
+
+alias p39 = nix shell nixpkgs/0343e3415784b2cd9c68924294794f7dbee12ab3#python39 -c nu 

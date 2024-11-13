@@ -42,6 +42,7 @@
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils
+    tmuxinator
     zoxide
     neofetch
     file
@@ -72,6 +73,7 @@
     bluez-tools
     tmux
     pass
+    pinentry-curses
     gnupg
     poetry
     pyenv

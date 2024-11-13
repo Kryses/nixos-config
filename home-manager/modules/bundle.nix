@@ -8,7 +8,6 @@
     ./htop.nix
     ./alacritty.nix
     ./qt.nix
-    ./tmuxinator.nix
     ./ohmyposh.nix
     ./wms/hyprland.nix
     ./wms/waybar.nix
