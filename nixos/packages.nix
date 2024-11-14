@@ -10,6 +10,7 @@ in
   };
   environment.systemPackages = [
     # Desktop apps
+    (pkgs.callPackage ./pkgs/splashtop/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
