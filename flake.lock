@@ -451,15 +451,15 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1727721329,
-        "narHash": "sha256-QYlWZwUSwrM7BuO+dXclZIwoPvBIuJr6GpFKv9XKFPI=",
-        "owner": "MarceColl",
+        "lastModified": 1731318473,
+        "narHash": "sha256-4PqV2qV+1iXNkb56NpkAN/eGw+0eTeYpVwFBUt6T8wU=",
+        "owner": "VCPYC",
         "repo": "zen-browser-flake",
-        "rev": "e6ab73f405e9a2896cce5956c549a9cc359e5fcc",
+        "rev": "96d0525ba685252d3384da2a2a4db1dedab4156b",
         "type": "github"
       },
       "original": {
-        "owner": "MarceColl",
+        "owner": "VCPYC",
         "repo": "zen-browser-flake",
         "type": "github"
       }

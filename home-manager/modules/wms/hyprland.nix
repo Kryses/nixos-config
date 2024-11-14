@@ -30,10 +30,10 @@
         kb_variant = "lang";
         kb_options = "grp:caps_toggle";
 
-        follow_mouse = 1;
+        follow_mouse = 0;
 
         touchpad = {
-          natural_scroll = false;
+          natural_scroll = true;
         };
 
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
@@ -126,7 +126,7 @@
         "$mainMod, Return, exec, kitty"
         "$mainMod, Q, killactive,"
         "$mainMod, M, exit,"
-        "$mainMod, E, exec, dolphin"
+        "$mainMod, E, exec, kitty -e yazi"
         "$mainMod, F, togglefloating,"
         "ALT, Space, exec, wofi --show drun"
         "$mainMod, P, pseudo, # dwindle"
