@@ -16,6 +16,11 @@
   networking.extraHosts = ''
     192.168.1.231 ayon.work.local
   '';
+  nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "14m";
+    options = "--delete-older-than 10d";
+  };
 
   time.timeZone = "America/New_York"; # Set your time zone.
 

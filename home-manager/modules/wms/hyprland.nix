@@ -6,7 +6,7 @@
     settings = {
       "$mainMod" = "SUPER";
 
-      monitor = ",1920x1080@90,auto,1";
+      monitor = ",3440x1440@120,auto,1";
 
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"

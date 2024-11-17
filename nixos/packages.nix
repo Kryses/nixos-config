@@ -10,7 +10,7 @@ in
   };
   environment.systemPackages = [
     # Desktop apps
-    (pkgs.callPackage ./packages/splashtop/default.nix {})
+    # (pkgs.callPackage ./packages/splashtop/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
@@ -45,7 +45,7 @@ in
     pkgs.carapace
     pkgs.cargo
     pkgs.vit
-    (pkgs.python311.withPackages (ps: with ps; [ 
+    (pkgs.python3.withPackages (ps: with ps; [ 
       pbr
       notify-py
       pycairo
