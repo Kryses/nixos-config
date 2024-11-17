@@ -24,9 +24,10 @@ in
 {
   programs.tmux = {
     enable = true;
-
     baseIndex = 1;
     prefix = "C-Space";
+    sensibleOnTop = true;
+    terminal = "screen-256color";
     plugins = [
       tmux-floax
       tmux-sessionx
@@ -48,8 +49,6 @@ in
       set -g pane-border-style 'fg=brightblack,bg=default'
       # Set Prefix
       unbind C-b
-      set -g prefix C-Space
-      bind C-Space send-prefix
 
       # Shift Alt vim keys for switch windows
       bind -n M-H previous-window
@@ -70,11 +69,11 @@ in
 
       bind j split-window -v -c "#{pane_current_path}"
       bind l split-window -h -c "#{pane_current_path}"
-      bind-key R source-file ~/.tmux.conf \; display-message "  Config Reloaded`"
+      bind-key R source-file ~/.config/tmux/tmux.conf \; display-message "  Config Reloaded`"
 
       set -g @sessionx-bind 'o'
       set -g @sessionx-window-mode 'on'
-      set -g @sessionx-tree-mode 'on'
+      set -g @sessionx-tree-mode 'off'
       set -g display-panes-active-colour colour33
       set-option -g status-position top
       set -g status-interval 10
@@ -90,7 +89,6 @@ in
       set -g @catppuccin_window_current_fill "number"
       set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
 
-      set -g @catppuccin_status_modules_right "github_notifications project task task_status date_time "
 
       set -g @catppuccin_status_left_separator  " "
       set -g @catppuccin_status_right_separator " "
@@ -100,6 +98,7 @@ in
       set -g @catppuccin_directory_text "#{b:pane_current_path}"
 
 
+      %hidden MODULE_NAME="github_notifications"
       set -g @catppuccin_github_notifications_color "green"
       set -g @catppuccin_github_notifications_text "#($HOME/.config/tmux/scripts/github_notifications.sh)"
 
@@ -111,6 +110,8 @@ in
 
       set -g @catppuccin_task_status_text "#($HOME/.config/tmux/scripts/task_status.sh)"
       set -g @catppuccin_date_time_text "%H:%M:%S"
+
+      set -g @catppuccin_status_modules_right "github_notifications project task task_status date_time "
 
       is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
           | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf)(diff)?$'"

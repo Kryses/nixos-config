@@ -10,7 +10,7 @@ in
   };
   environment.systemPackages = [
     # Desktop apps
-    (pkgs.callPackage ./pkgs/splashtop/default.nix {})
+    (pkgs.callPackage ./packages/splashtop/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
@@ -43,10 +43,16 @@ in
     pkgs.ripgrep
     pkgs.fd
     pkgs.carapace
-    pkgs.starship
     pkgs.cargo
-    (pkgs.python3.withPackages (ps: with ps; [ requests ]))
-
+    pkgs.vit
+    (pkgs.python311.withPackages (ps: with ps; [ 
+      pbr
+      notify-py
+      pycairo
+      pygobject3
+      requests 
+      bugwarrior
+    ]))
     # pkgs.CLI utils
     pkgs.tmuxinator
     pkgs.zoxide
@@ -82,7 +88,6 @@ in
     pkgs.pinentry-curses
     pkgs.gnupg
     pkgs.poetry
-    pkgs.pyenv
     # pkgs.GUI utils
     pkgs.feh
     pkgs.imv
@@ -90,6 +95,14 @@ in
     pkgs.screenkey
     pkgs.mako
     pkgs.gromit-mpx
+    pkgs.taskwarrior3
+    pkgs.timewarrior
+    pkgs.gh
+    pkgs.jq
+
+
+    #Python
+
 
     # pkgs.Xorg stuff
     #pkgs.xterm

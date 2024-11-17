@@ -69,4 +69,6 @@ alias v = nvim
 alias se = sudoedit
 alias ff = fastfetch
 
-alias p39 = nix shell nixpkgs/0343e3415784b2cd9c68924294794f7dbee12ab3#python39 -c nu 
+alias python39 = nix shell nixpkgs/0343e3415784b2cd9c68924294794f7dbee12ab3#python39 -c nu 
+alias python311 = nix shell nixpkgs/4ae2e647537bcdbb82265469442713d066675275#python311 -c nu 
+alias python312 = nix shell nixpkgs/d4f247e89f6e10120f911e2e2d2254a050d0f732#python3 -c nu 
