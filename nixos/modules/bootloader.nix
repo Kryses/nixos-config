@@ -1,8 +1,8 @@
 {
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 2;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" "nouveau" ];
+  boot.initrd.kernelModules = [ "nvidia" ];
   boot.kernelModules = [
         "nvidia"
         "nvidia_modeset"

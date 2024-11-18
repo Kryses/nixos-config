@@ -145,6 +145,7 @@ in
     pkgs.libsForQt5.qtstyleplugin-kvantum
     pkgs.libsForQt5.qt5ct
     pkgs.papirus-nord
+    pkgs.egl-wayland
   ];
 
   fonts.packages = with pkgs; [
