@@ -47,8 +47,6 @@
         "col.inactive_border" = "rgba(595959aa)";
 
         layout = "dwindle";
-
-        no_cursor_warps = false;
       };
 
       decoration = {
@@ -88,9 +86,9 @@
         preserve_split = true; # you probably want this
       };
 
-      master = {
-        new_is_master = true;
-      };
+      # master = {
+      #   new_is_master = true;
+      # };
 
       gestures = {
         workspace_swipe = true;
@@ -201,7 +199,7 @@
         '', Print, exec, grim -g "$(slurp)" - | swappy -f -''
 
         # Waybar
-        "$mainMod, B, exec, pkill -SIGUSR1 waybar"
+        "$mainMod, B, exec, zen"
         "$mainMod, W, exec, pkill -SIGUSR2 waybar"
 
         # Disable all effects

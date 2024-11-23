@@ -45,8 +45,9 @@ in
     pkgs.carapace
     pkgs.cargo
     pkgs.vit
-    (pkgs.python3.withPackages (ps: with ps; [ 
+    (pkgs.python311.withPackages (ps: with ps; [ 
       pbr
+      taskw
       notify-py
       pycairo
       pygobject3
@@ -54,6 +55,7 @@ in
       bugwarrior
     ]))
     # pkgs.CLI utils
+    pkgs.inotify-tools
     pkgs.tmuxinator
     pkgs.zoxide
     pkgs.neofetch
