@@ -50,7 +50,7 @@
       modules = [
         ./nixos/hosts/kryses-mobile-nixos/configuration.nix
         inputs.nixvim.nixosModules.nixvim
-        nixos-hardware.nixosModules.microsoft-surface-pro-intel
+        # nixos-hardware.nixosModules.microsoft-surface-pro-intel
       ];
     };
 
