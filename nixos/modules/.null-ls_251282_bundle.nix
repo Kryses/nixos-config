@@ -16,5 +16,6 @@
     ./appgate-sdp.nix
     ./gpg.nix
     ./samba.nix
+#    ./nixvim/nixvim.nix
   ];
 }

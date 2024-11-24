@@ -1,8 +1,8 @@
 { inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    ./packages.nix
-    ./modules/bundle.nix
+    ../../packages.nix
+    ../../modules/bundle.nix
   ];
 
   disabledModules = [
@@ -12,7 +12,7 @@
   services.openssh.enable = true;
   nixpkgs.overlays = [ inputs.polymc.overlay ];
 
-  networking.hostName = "kryses-nixos"; # Define your hostname.
+  networking.hostName = "kryses-mobile-nixos"; # Define your hostname.
   networking.extraHosts = ''
     192.168.1.231 ayon.work.local
   '';
