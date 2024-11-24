@@ -148,6 +148,7 @@ in
     pkgs.libsForQt5.qt5ct
     pkgs.papirus-nord
     pkgs.egl-wayland
+    pkgs.networkmanagerapplet
   ];
 
   fonts.packages = with pkgs; [
