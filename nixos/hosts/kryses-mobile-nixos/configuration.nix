@@ -8,6 +8,12 @@
   disabledModules = [
     ./modules/xserver.nix
   ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ]; 
+
   programs.nix-ld.enable = true;
   services.openssh.enable = true;
   nixpkgs.overlays = [ inputs.polymc.overlay ];
