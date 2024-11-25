@@ -112,7 +112,8 @@
       ];
       exec-once = [
         "swww init"
-        "swww img ~/wallpaper/51202139522_fbf4788f42_o.png"
+        "swww img ~/wallpaper/51202143407_13e1654e7a_o.png"
+        "nm-applet"
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
