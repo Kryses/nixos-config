@@ -48,6 +48,7 @@
   xfce,
   xorg,
 }:
+
 stdenv.mkDerivation rec {
   pname = "splashtop-business";
   version = "3.5.2.0";
@@ -60,7 +61,6 @@ stdenv.mkDerivation rec {
   dontConfigure = true;
   dontWrapGApps = true;
   dontWrapQtApps = true;
-
   nativeBuildInputs = [
     dpkg
     wrapGAppsHook

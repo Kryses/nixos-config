@@ -10,7 +10,7 @@ in
   };
   environment.systemPackages = [
     # Desktop apps
-    # (pkgs.callPackage ./packages/splashtop/default.nix {})
+    (pkgs.callPackage ./packages/splashtop/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
@@ -32,6 +32,7 @@ in
     pkgs.slack
     pkgs.remmina
     pkgs.spotify
+
 
     # pkgs.Coding stuff
     pkgs.gnumake

@@ -11,5 +11,6 @@
     ./ohmyposh.nix
     ./wms/hyprland.nix
     ./wms/waybar.nix
+    ./zoxide.nix
   ];
 }
