@@ -98,6 +98,5 @@ $env.NU_PLUGIN_DIRS = [
 
 # To load from a custom file you can use:
 echo "loading envs"
-source ($nu.default-config-dir | path join 'zoxide.nu')
 source ($nu.default-config-dir | path join 'aliases.nu')
 source ($nu.default-config-dir | path join 'oh-my-posh.nu')

@@ -2,7 +2,6 @@
 # Aliases
 # ------------------------------------------------------------
 
-alias cd = z
 alias df = cd "~/.dotfiles/bin/dotfiles"
 alias op = pass open --timer 10min
 alias gp = pass -c 
