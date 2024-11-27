@@ -149,6 +149,7 @@ in
     pkgs.papirus-nord
     pkgs.egl-wayland
     pkgs.networkmanagerapplet
+    pkgs.openvpn
   ];
 
   fonts.packages = with pkgs; [
