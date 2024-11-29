@@ -6,7 +6,11 @@
     settings = {
       "$mainMod" = "SUPER";
 
-      monitor = "DP-1,5120x1440@239.99,auto,1";
+      monitor = [
+        "DP-2,2560x1440@60,0x0,1"
+        "eDP-1,2880x1920@60,auto-right,1.2"
+        "DP-3,1920x1080@60,auto-left,1"
+      ];
 
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
@@ -17,7 +21,6 @@
         "XDG_SCREENSHOTS_DIR,~/wallpaper"
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "WLR_NO_HARDWARE_CURSORS=1"
       ];
 
       debug = {
@@ -30,7 +33,7 @@
         kb_variant = "lang";
         kb_options = "grp:caps_toggle";
 
-        follow_mouse = 0;
+        follow_mouse = 1;
 
         touchpad = {
           natural_scroll = true;

@@ -150,6 +150,9 @@ in
     pkgs.egl-wayland
     pkgs.networkmanagerapplet
     pkgs.openvpn
+    pkgs.networkmanager-openvpn
+    pkgs.docker
+    pkgs.blender
   ];
 
   fonts.packages = with pkgs; [

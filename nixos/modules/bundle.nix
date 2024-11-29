@@ -15,6 +15,5 @@
     ./gpg.nix
     ./samba.nix
     ./xserver.nix
-    ./ovpn.nix
   ];
 }

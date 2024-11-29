@@ -7,7 +7,7 @@
     users.kryses= {
       isNormalUser = true;
       description = "Kryses";
-      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
+      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" "docker"];
       packages = with pkgs; [];
       shell = pkgs.nushell;
     };
