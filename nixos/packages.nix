@@ -134,6 +134,7 @@ in
     pkgs.amdvlk
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
+    pkgs.elegant-sddm
 
     # pkgs.Screenshotting
     pkgs.grim

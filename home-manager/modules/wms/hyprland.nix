@@ -8,7 +8,7 @@
 
       monitor = [
         "DP-2,2560x1440@60,0x0,1"
-        "eDP-1,2880x1920@60,auto-right,1.2"
+        "eDP-1,2880x1920@60,auto-right,1.5"
         "DP-3,1920x1080@60,auto-left,1"
       ];
 

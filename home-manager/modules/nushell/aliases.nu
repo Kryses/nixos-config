@@ -59,6 +59,7 @@ alias upd = nix flake update $flake_dir
 alias upg = sudo nixos-rebuild switch --upgrade --flake $flake_dir
 
 alias hms = home-manager switch --impure --flake $flake_dir
+alias nn = nvim ~/nix
 
 alias conf = nvim $'($flake_dir)/nixos/configuration.nix'
 alias pkgs = nvim $'($flake_dir)/nixos/packages.nix'

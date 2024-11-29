@@ -2,6 +2,13 @@
   services.xserver = {
     enable = true;
     windowManager.herbstluftwm.enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "Elegant";
+      };
+    };
 
     # displayManager = {
     #   autoLogin.enable = true;
