@@ -135,7 +135,8 @@ in
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
     pkgs.elegant-sddm
-
+    pkgs.dwarf-fortress-packages.dwarf-fortress-full
+    pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
