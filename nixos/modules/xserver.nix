@@ -10,19 +10,11 @@
     #   };
     # };
 
-    # displayManager = {
-    #   autoLogin.enable = true;
-    #   autoLogin.user = "amper";
-    #   lightdm.enable = true;
-    # };
-
     xkb.layout = "us";
     xkb.variant = "";
 
 
     deviceSection = ''Option "TearFree" "True"'';
-    #displayManager.gdm.enable = true;
-    #desktopManager.gnome.enable = true;
   };
   
     services.libinput = {

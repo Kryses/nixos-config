@@ -14,6 +14,7 @@
     ./appgate-sdp.nix
     ./gpg.nix
     ./samba.nix
-    ./xserver.nix
+    ./greetd.nix
+    # ./xserver.nix
   ];
 }
