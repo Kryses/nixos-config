@@ -1,13 +1,13 @@
 {
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;
     settings = {
       global = {
         "follow symlinks" = "yes";
         "wide links" = "yes";
         "unix extentions" = "yes";
+        securityType = "user";
       };
       work = {
         "path" = "/home/kryses/work";
