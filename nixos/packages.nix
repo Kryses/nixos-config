@@ -149,6 +149,7 @@ in
     pkgs.libsForQt5.qt5ct
     pkgs.papirus-nord
     pkgs.egl-wayland
+    pkgs.chatgpt-cli
   ];
 
   fonts.packages = with pkgs; [

@@ -7,7 +7,7 @@ in {
     configFile.source = ./config.nu;
     envFile.source = ./env.nu;
     shellAliases = {
-      cd = "z";
+      # cd = "z";
     };
   };
   home.file."${configDir}/aliases.nu".source = ./aliases.nu;
