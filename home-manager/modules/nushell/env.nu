@@ -98,8 +98,6 @@ $env.NU_PLUGIN_DIRS = [
 
 # To load from a custom file you can use:
 echo "loading envs"
-$env.OPENAI_KEY = ^pass personal/open-ai-api
-$env.OPENAI_API_KEY = ^pass personal/open-ai-api
 source ($nu.default-config-dir | path join 'aliases.nu')
 source ($nu.default-config-dir | path join 'oh-my-posh.nu')
 source ($nu.default-config-dir | path join 'zoxide.nu')
