@@ -2,6 +2,13 @@
   services.xserver = {
     enable = true;
     windowManager.herbstluftwm.enable = true;
+    # displayManager = {
+    #   sddm = {
+    #     enable = true;
+    #     wayland.enable = true;
+    #     theme = "Elegant";
+    #   };
+    # };
 
     # displayManager = {
     #   autoLogin.enable = true;
@@ -9,19 +16,18 @@
     #   lightdm.enable = true;
     # };
 
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
 
-    libinput = {
-      enable = true;
-      mouse.accelProfile = "flat";
-      touchpad.accelProfile = "flat";
-    };
 
-    videoDrivers = [ "nvidia" "nvidia-dkms" ];
     deviceSection = ''Option "TearFree" "True"'';
     #displayManager.gdm.enable = true;
     #desktopManager.gnome.enable = true;
   };
   
+    services.libinput = {
+      enable = true;
+      mouse.accelProfile = "flat";
+      touchpad.accelProfile = "flat";
+    };
 }

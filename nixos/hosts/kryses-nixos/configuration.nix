@@ -1,12 +1,17 @@
 { inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
-    ./packages.nix
-    ./modules/bundle.nix
+    ../../packages.nix
+    ../../modules/bundle.nix
+    ../../hardware/nvidia.nix
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ]; 
   disabledModules = [
-    ./modules/xserver.nix
+    ../../modules/xserver.nix
   ];
   programs.nix-ld.enable = true;
   services.openssh.enable = true;
@@ -23,10 +28,7 @@
   };
 
   time.timeZone = "America/New_York"; # Set your time zone.
-
   i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enabling flakes
-
   system.stateVersion = "23.05"; # Don't change it bro
 }

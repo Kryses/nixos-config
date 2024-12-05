@@ -134,7 +134,9 @@ in
     pkgs.amdvlk
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
-
+    pkgs.elegant-sddm
+    pkgs.dwarf-fortress-packages.dwarf-fortress-full
+    pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
@@ -149,6 +151,11 @@ in
     pkgs.libsForQt5.qt5ct
     pkgs.papirus-nord
     pkgs.egl-wayland
+    pkgs.networkmanagerapplet
+    pkgs.openvpn
+    pkgs.networkmanager-openvpn
+    pkgs.docker
+    pkgs.blender
   ];
 
   fonts.packages = with pkgs; [

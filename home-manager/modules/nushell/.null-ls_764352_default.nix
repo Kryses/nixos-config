@@ -9,9 +9,4 @@ in {
   };
   home.file."${configDir}/aliases.nu".source = ./aliases.nu;
   home.file."${configDir}/oh-my-posh.nu".source = ./oh-my-posh.nu;
-  home.file."${configDir}/zoxide.nu".source = ./zoxide.nu;
-
-  home.sessionVariables = {
-    _ZO_DATA_DIR = "~/.local/share";
-  };
 }

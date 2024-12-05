@@ -6,7 +6,11 @@
     settings = {
       "$mainMod" = "SUPER";
 
-      monitor = "DP-1,5120x1440@239.99,auto,1";
+      monitor = [
+        "DP-2,2560x1440@60,0x0,1"
+        "eDP-1,2880x1920@60,auto-right,1.2"
+        "DP-3,1920x1080@60,auto-left,1"
+      ];
 
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
@@ -17,7 +21,6 @@
         "XDG_SCREENSHOTS_DIR,~/wallpaper"
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "WLR_NO_HARDWARE_CURSORS=1"
       ];
 
       debug = {
@@ -112,7 +115,8 @@
       ];
       exec-once = [
         "swww init"
-        "swww img ~/wallpaper/51202139522_fbf4788f42_o.png"
+        "swww img ~/wallpaper/51202143407_13e1654e7a_o.png"
+        "nm-applet"
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
