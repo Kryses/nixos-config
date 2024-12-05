@@ -1,5 +1,6 @@
 {
   imports = [
+    ./gpg.nix
     ./steam.nix
     ./sound.nix
     ./zram.nix
@@ -12,7 +13,6 @@
     ./trim.nix
     ./bluetooth.nix
     ./appgate-sdp.nix
-    ./gpg.nix
     ./samba.nix
     ./xserver.nix
   ];

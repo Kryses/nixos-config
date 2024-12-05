@@ -14,7 +14,6 @@ in
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
-    pkgs.telegram-desktop
     pkgs.kitty
     pkgs.obs-studio
     pkgs.rofi
@@ -24,7 +23,6 @@ in
     pkgs.discord-development
     pkgs.gparted
     pkgs.obsidian
-    pkgs.zoom-us
     pkgs.pcmanfm-qt
     pkgs.polymc
     pkgs.nushell
@@ -88,7 +86,7 @@ in
     pkgs.bluez-tools
     pkgs.tmux
     pkgs.pass
-    pkgs.pinentry-curses
+    pkgs.pinentry-all
     pkgs.gnupg
     pkgs.poetry
     # pkgs.GUI utils
@@ -157,6 +155,8 @@ in
     pkgs.docker
     pkgs.blender
     pkgs.chatgpt-cli
+    # pkgs.shell-gpt
+    # pkgs.chatgpt-shell-cli
   ];
 
   fonts.packages = with pkgs; [
