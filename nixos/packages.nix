@@ -156,6 +156,7 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
+    pkgs.chatgpt-cli
   ];
 
   fonts.packages = with pkgs; [

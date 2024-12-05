@@ -24,7 +24,7 @@ def notes [] {
 alias c = clear
 alias nf = neofetch
 alias pf = pfetch
-alias chatgpt = chatgpt --model gpt-4-0125-preview
+# alias chatgpt = chatgpt --model gpt-4-0125-preview
 alias shutdown = systemctl poweroff
 alias v = nvim
 alias dot = cd ~/dotfiles
