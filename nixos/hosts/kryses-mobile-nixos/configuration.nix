@@ -1,3 +1,4 @@
+# Version: "Pre Update Config"
 { inputs, pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix

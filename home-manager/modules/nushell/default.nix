@@ -1,4 +1,4 @@
-{config, pkgs, ... }:
+{config,  ... }:
 let configDir = "${config.xdg.configHome}/nushell";
 
 in {
