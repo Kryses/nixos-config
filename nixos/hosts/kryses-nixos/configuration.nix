@@ -26,9 +26,17 @@
     randomizedDelaySec = "14m";
     options = "--delete-older-than 10d";
   };
-
+  system.activationScripts = {
+    script.text = ''
+      install -d -m 755 /home/kryses/open-webui/data -o root -g root
+    '';
+   };
   time.timeZone = "America/New_York"; # Set your time zone.
   i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enabling flakes
   system.stateVersion = "23.05"; # Don't change it bro
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
 }

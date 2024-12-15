@@ -155,6 +155,10 @@ in
     pkgs.docker
     pkgs.blender
     pkgs.chatgpt-cli
+    pkgs.ollama-cuda
+    pkgs.open-webui
+    pkgs.oterm
+
     # pkgs.shell-gpt
     # pkgs.chatgpt-shell-cli
   ];
