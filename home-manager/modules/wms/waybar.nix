@@ -10,7 +10,7 @@
 
         modules-left = [ "hyprland/workspaces" "hyprland/language" "hyprland/submap" ];
         modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "custom/mem" "cpu" "backlight" "battery" "tray" ];
+        modules-right = [ "custom/github_notifications" "pulseaudio" "custom/mem" "cpu" "backlight" "battery" "tray" ];
 
         "hyprland/workspaces" = {
           disable-scroll = true;
@@ -22,8 +22,12 @@
           tooltip = false;
         };
 
-        "github/notifications" = {
+        "custom/github_notifications" = {
           format = "{}";
+          tooltip = true;
+          interval = 300;
+          exec = "$HOME/dotfiles/tmux/scripts/github_notifications.sh";
+          on-click = "xdg-open https://github.com/notifications";
         };
         "keyboard-state" = {
           #numlock = true;

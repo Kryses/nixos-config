@@ -158,9 +158,10 @@ in
     pkgs.ollama-cuda
     pkgs.open-webui
     pkgs.oterm
-
-    # pkgs.shell-gpt
-    # pkgs.chatgpt-shell-cli
+    pkgs.bat
+    pkgs.postman
+    pkgs.xfce.thunar
+    pkgs.xfce.thunar-volman
   ];
 
   fonts.packages = with pkgs; [

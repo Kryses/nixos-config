@@ -2,6 +2,7 @@
   imports = [
     ./nushell/default.nix
     ./cursor.nix
+    ./thunar.nix
     ./kitty.nix
     ./zoxide.nix
     ./tmux.nix

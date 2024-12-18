@@ -54,7 +54,7 @@ def cwork [] {
 
 let flake_dir = $"($env.HOME)/nix"
 
-alias rb = sudo nixos-rebuild switch --flake $flake_dir
+alias rb = sudo nixos-rebuild switch --impure --flake $flake_dir
 alias upd = nix flake update $flake_dir
 alias upg = sudo nixos-rebuild switch --upgrade --flake $flake_dir
 
