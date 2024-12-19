@@ -160,8 +160,6 @@ in
     pkgs.oterm
     pkgs.bat
     pkgs.postman
-    pkgs.xfce.thunar
-    pkgs.xfce.thunar-volman
   ];
 
   fonts.packages = with pkgs; [
