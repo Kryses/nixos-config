@@ -2,7 +2,6 @@
 # Aliases
 # ------------------------------------------------------------
 
-alias df = cd "~/.dotfiles/bin/dotfiles"
 alias op = pass open --timer 10min
 alias gp = pass -c 
 alias tw = timew
@@ -12,6 +11,7 @@ alias tws = tw summary
 alias twd = tw day
 alias tmux = tmux -2
 alias connect-pipeline = ssh -i (pass work/hl/aws-ssh)
+alias connect-staging = ssh -i (pass work/hl/aws-ssh)
 
 def notes [] {
     cd ~/krys-brain
@@ -54,7 +54,7 @@ def cwork [] {
 
 let flake_dir = $"($env.HOME)/nix"
 
-alias rb = sudo nixos-rebuild switch --flake $flake_dir
+alias rb = sudo nixos-rebuild switch --impure --flake $flake_dir
 alias upd = nix flake update $flake_dir
 alias upg = sudo nixos-rebuild switch --upgrade --flake $flake_dir
 
@@ -82,4 +82,6 @@ def cg [] {
     $env.OPENAI_API_KEY = ^pass personal/open-ai-api
     chatgpt
 }
+
+
 

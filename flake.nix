@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    zen-browser.url = "github:VCPYC/zen-browser-flake";
+    zen-browser.url = "github:omarcresp/zen-browser-flake";
     nixos-hardware.url = "github:nixos/nixos-hardware?rev=b493dfd4a8cf9552932179e56ff3b5819a9b8381";
     home-manager = {
       url = "github:nix-community/home-manager";

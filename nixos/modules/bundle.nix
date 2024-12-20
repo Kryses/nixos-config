@@ -1,6 +1,7 @@
 {
   imports = [
     ./gpg.nix
+    ./thunar.nix
     ./steam.nix
     ./sound.nix
     ./zram.nix
