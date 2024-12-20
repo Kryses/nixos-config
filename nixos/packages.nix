@@ -120,7 +120,6 @@ in
     pkgs.hyprland
     pkgs.seatd
     pkgs.xdg-desktop-portal-hyprland
-    pkgs.polybar
     pkgs.waybar
 
     # pkgs.Sound
@@ -155,8 +154,6 @@ in
     pkgs.docker
     pkgs.blender
     pkgs.chatgpt-cli
-    # pkgs.shell-gpt
-    # pkgs.chatgpt-shell-cli
   ];
 
   fonts.packages = with pkgs; [
