@@ -21,44 +21,4 @@
     ".gitignore_global".source = ~/dotfiles/.gitignore_global;
     ".gitconfig".source = ~/dotfiles/gitconfig;
   };
-  systemd.user.services.work-sync = {
-    Unit = {
-      Description = "WorkSync";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-    Service = {
-      Restart = "always";
-      WorkingDirectory = "/home/kryses/work/repos";
-      ExecStart = "${pkgs.writeShellScript "work-sync" ''
-
-      REMOTE_USER="kryses"
-      REMOTE_HOST="10.205.42.100"
-      REMOTE_PATH="/mnt/e/development"
-      MONITOR_DIR=./ayon-workspace
-      handle_change() {
-          local event=$1
-          local path=$2
-
-          echo "Detected $event for file: $filename"
-          remote_file_path=$(echo "$filename" | sed 's/\.\///')
-          file_parent=$(dirname "$filename")
-          remote_file_parent=$(dirname "$remote_file_path")
-          current_file_name=$(basename "$filename")
-          echo "Sending: $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH/$remote_file_path"
-          echo "remote_file_path: $remote_file_path, file_parent: $file_parent, remote_file_parent: $remote_file_parent, current_file_name: $current_file_name"
-          rsync -arvz --delete --include "$current_file_name" --exclude="*" "$file_parent" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH/$remote_file_parent$"
-
-      }
-      inotifywait -m -r --format '%e %w%f' --exclude '\.git/|\.kryses/|\.mypy_cache|__pycache__/|\./null-ls/.*/' -e modify -e create -e move -e delete ./ayon-workspace |
-      while read event filename; do
-        echo "Event: $event"
-        echo "filename: $filename"
-        handle_change "$event" "$filename"
-      done
-      ''}";
-
-    };
-  };
 }
