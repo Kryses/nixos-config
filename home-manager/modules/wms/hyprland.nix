@@ -208,6 +208,7 @@
 
         # Disable all effects
         "$mainMod Shift, G, exec, ~/.config/hypr/gamemode.sh "
+        "$mainMod Shift, L, exec, hyprlock "
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
