@@ -54,4 +54,5 @@
     };
     openFirewall = true;
   };
+  security.pam.services.hyprlock = {};
 }
