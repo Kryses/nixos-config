@@ -54,4 +54,9 @@
     };
     openFirewall = true;
   };
+  environment.systemPackages = [
+    pkgs.ollama-cuda
+    pkgs.open-webui
+    pkgs.oterm
+  ];
 }
