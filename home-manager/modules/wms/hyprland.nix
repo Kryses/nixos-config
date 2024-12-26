@@ -62,10 +62,10 @@
           new_optimizations = true;
         };
 
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        # drop_shadow = true;
+        # shadow_range = 4;
+        # shadow_render_power = 3;
+        # "col.shadow" = "rgba(1a1a1aee)";
       };
 
       animations = {
@@ -208,6 +208,7 @@
 
         # Disable all effects
         "$mainMod Shift, G, exec, ~/.config/hypr/gamemode.sh "
+        "$mainMod Alt Shift, L, exec, hyprlock "
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
