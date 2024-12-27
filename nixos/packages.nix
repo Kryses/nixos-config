@@ -160,6 +160,7 @@ in
     pkgs.oterm
     pkgs.bat
     pkgs.postman
+    pkgs.quickemu
   ];
 
   fonts.packages = with pkgs; [

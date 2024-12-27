@@ -113,6 +113,9 @@
         "float, ^(imv)$"
         "float, ^(mpv)$"
       ];
+      windowrulev2 = [
+        "tile, class:(Redot)"
+      ];
       exec-once = [
         "swww init"
         "swww img ~/wallpaper/51202143407_13e1654e7a_o.png"

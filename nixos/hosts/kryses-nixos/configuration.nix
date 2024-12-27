@@ -55,4 +55,5 @@
     openFirewall = true;
   };
   security.pam.services.hyprlock = {};
+  virtualisation.docker.enable = true;
 }
