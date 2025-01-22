@@ -113,6 +113,10 @@
         "float, ^(imv)$"
         "float, ^(mpv)$"
       ];
+      windowrulev2 = [
+        "tile, class:(Redot)"
+        "tile, class:(org.remmina.Remmina)"
+      ];
       exec-once = [
         "swww init"
         "swww img ~/wallpaper/51202143407_13e1654e7a_o.png"

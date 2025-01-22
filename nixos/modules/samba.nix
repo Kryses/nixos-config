@@ -28,6 +28,9 @@
     enable = true;
     openFirewall = true;
   };
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
+  networking.firewall = {
+    enable = true;
+    allowPing = true;
+    allowedTCPPorts = [ 8080 7860 8888];
+  };
 }

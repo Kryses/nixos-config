@@ -12,7 +12,4 @@
       shell = pkgs.nushell;
     };
   };
-
-  # Enable automatic login for the user.
-  services.getty.autologinUser = "kryses";
 }
