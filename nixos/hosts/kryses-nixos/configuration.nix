@@ -4,6 +4,7 @@
     ../../packages.nix
     ../../modules/bundle.nix
     ../../hardware/nvidia.nix
+    ../common/virualisation.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -15,7 +16,10 @@
   ];
   programs.nix-ld.enable = true;
   services.openssh.enable = true;
-  nixpkgs.overlays = [ inputs.polymc.overlay ];
+  nixpkgs.overlays = [
+    inputs.polymc.overlay
+    inputs.stable-diffusion-webui-nix.overlays.default
+  ];
 
   networking.hostName = "kryses-nixos"; # Define your hostname.
   networking.extraHosts = ''
@@ -30,6 +34,10 @@
   i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enabling flakes
   system.stateVersion = "23.05"; # Don't change it bro
+
+  nix.extraOptions = ''
+      trusted-users = root kryses
+  '';
   services.ollama = {
     enable = true;
     acceleration = "cuda";
@@ -38,22 +46,29 @@
     };
   };
   services.speechd.enable = true;
-  services.open-webui = {
+  security.pam.services.hyprlock = { };
+  environment.systemPackages = with pkgs; [
+    searxng
+  ];
+  services.searx = {
     enable = true;
-    package = pkgs.open-webui;
-    host = "0.0.0.0";
-    port = 3000;
-    environment = {
-      ANONYMIZED_TELEMETRY = "False";
-      DO_NOT_TRACK = "True";
-      SCARF_NO_ANALYTICS = "True";
-      TRANSFORMERS_CACHE = "${config.services.open-webui.stateDir}/cache";
-      OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
-      # Disable authentication
-      WEBUI_AUTH = "False";
+    settings = {
+      search = {
+        safe_search = 2;
+        autocomplete_min = 2;
+        autocomplete = "duckduckgo";
+        ban_time_on_fail = 5;
+        max_ban_time_on_fail = 120;
+        formats = [
+          "html"
+          "json"
+        ];
+      };
+      server = {
+        port = 8888;
+        bind_address = "0.0.0.0";
+        secret_key = "secret key";
+      };
     };
-    openFirewall = true;
   };
-  security.pam.services.hyprlock = {};
-  virtualisation.docker.enable = true;
 }

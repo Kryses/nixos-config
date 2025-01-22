@@ -13,5 +13,7 @@
     ./wms/hyprland.nix
     ./wms/waybar.nix
     ./hyprlock.nix
+    ./yazi.nix
+    # ./taskwarrior.nix
   ];
 }

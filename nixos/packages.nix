@@ -69,6 +69,11 @@ in
     pkgs.unzip
     pkgs.scrot
     pkgs.ffmpeg
+    pkgs.devenv
+
+
+
+
     pkgs.light
     pkgs.lux
     pkgs.mediainfo
@@ -152,15 +157,16 @@ in
     pkgs.networkmanagerapplet
     pkgs.openvpn
     pkgs.networkmanager-openvpn
-    pkgs.docker
     pkgs.blender
     pkgs.chatgpt-cli
     pkgs.ollama-cuda
-    pkgs.open-webui
     pkgs.oterm
     pkgs.bat
     pkgs.postman
-    pkgs.quickemu
+    pkgs.stable-diffusion-webui.forge.cuda
+    pkgs.ghostty
+    pkgs.lua51Packages.magick
+    pkgs.nice-dcv-client
   ];
 
   fonts.packages = with pkgs; [

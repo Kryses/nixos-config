@@ -21,4 +21,20 @@
     ".gitignore_global".source = ~/dotfiles/.gitignore_global;
     ".gitconfig".source = ~/dotfiles/gitconfig;
   };
+  systemd.user.services.stable-diffusion-web-ui = {
+    Unit = {
+      Description = "Stable Diffusion Web Ui";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      Restart = "always";
+      ExecStart = "${pkgs.writeShellScript "stable-diffusion-web-ui" ''
+      stable-diffusion-webui --api --share --listen
+
+      ''}";
+
+    };
+  };
 }

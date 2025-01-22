@@ -1,7 +1,6 @@
 {
   imports = [
     ./gpg.nix
-    ./thunar.nix
     ./steam.nix
     ./sound.nix
     ./zram.nix
@@ -16,5 +15,6 @@
     ./appgate-sdp.nix
     ./samba.nix
     ./xserver.nix
+    ./dolphin.nix
   ];
 }

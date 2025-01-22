@@ -115,6 +115,7 @@
       ];
       windowrulev2 = [
         "tile, class:(Redot)"
+        "tile, class:(org.remmina.Remmina)"
       ];
       exec-once = [
         "swww init"

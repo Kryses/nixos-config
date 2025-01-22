@@ -25,7 +25,7 @@ in
   programs.tmux = {
     enable = true;
     baseIndex = 1;
-    prefix = "C-Space";
+    prefix = "C-a";
     sensibleOnTop = true;
     terminal = "screen-256color";
     plugins = [
