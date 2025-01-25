@@ -11,10 +11,10 @@ in
   environment.systemPackages = [
     # Desktop apps
     (pkgs.callPackage ./packages/splashtop/default.nix {})
+    (pkgs.callPackage ./packages/redot/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
-    pkgs.kitty
     pkgs.obs-studio
     pkgs.rofi
     pkgs.wofi
@@ -70,10 +70,6 @@ in
     pkgs.scrot
     pkgs.ffmpeg
     pkgs.devenv
-
-
-
-
     pkgs.light
     pkgs.lux
     pkgs.mediainfo
@@ -162,8 +158,11 @@ in
     pkgs.postman
     pkgs.stable-diffusion-webui.forge.cuda
     pkgs.ghostty
-    pkgs.lua51Packages.magick
     pkgs.nice-dcv-client
+    pkgs.xorg.libxcb
+    pkgs.nixd
+    pkgs.deadnix
+    pkgs.newsboat
   ];
 
   fonts.packages = with pkgs; [

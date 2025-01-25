@@ -8,7 +8,7 @@
         position = "top";
         margin = "9 13 -10 18";
 
-        modules-left = [ "hyprland/workspaces" "hyprland/language" "hyprland/submap" ];
+        modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
         modules-center = [ "clock" ];
         modules-right = [ "custom/github_notifications" "pulseaudio" "custom/mem" "cpu" "backlight" "battery" "tray" ];
 
@@ -28,15 +28,6 @@
           interval = 300;
           exec = "$HOME/dotfiles/tmux/scripts/github_notifications.sh";
           on-click = "xdg-open https://github.com/notifications";
-        };
-        "keyboard-state" = {
-          #numlock = true;
-          capslock = true;
-          format = "{icon} ";
-          format-icons = {
-            locked = " ";
-            unlocked = "";
-          };
         };
 
         "clock" = {
