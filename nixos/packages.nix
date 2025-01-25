@@ -11,7 +11,6 @@ in
   environment.systemPackages = [
     # Desktop apps
     (pkgs.callPackage ./packages/splashtop/default.nix {})
-    (pkgs.callPackage ./packages/redot/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
@@ -156,10 +155,7 @@ in
     pkgs.chatgpt-cli
     pkgs.bat
     pkgs.postman
-    pkgs.stable-diffusion-webui.forge.cuda
     pkgs.ghostty
-    pkgs.nice-dcv-client
-    pkgs.xorg.libxcb
     pkgs.nixd
     pkgs.deadnix
     pkgs.newsboat
