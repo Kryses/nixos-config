@@ -29,9 +29,9 @@
       };
 
       input = {
-        kb_layout = "us,ru";
+        kb_layout = "us";
         kb_variant = "lang";
-        kb_options = "grp:caps_toggle";
+        kb_options = "";
 
         follow_mouse = 1;
 
@@ -46,7 +46,7 @@
         gaps_in = 5;
         gaps_out = 20;
         border_size = 3;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.active_border" = "rgba(573AC5ee) rgba(280077ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
 
         layout = "dwindle";
