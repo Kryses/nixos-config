@@ -165,8 +165,10 @@ in
     pkgs.postman
     pkgs.stable-diffusion-webui.forge.cuda
     pkgs.ghostty
-    pkgs.lua51Packages.magick
-    pkgs.nice-dcv-client
+    # pkgs.nice-dcv-client
+    pkgs.xorg.libxcb
+    pkgs.nixd
+    pkgs.deadnix
   ];
 
   fonts.packages = with pkgs; [
