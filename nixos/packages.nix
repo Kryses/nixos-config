@@ -6,12 +6,11 @@ in
 {
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
+    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" "openssl-1.1.1w"];
   };
   environment.systemPackages = [
     # Desktop apps
     (pkgs.callPackage ./packages/splashtop/default.nix {})
-    (pkgs.callPackage ./packages/redot/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
@@ -135,7 +134,7 @@ in
     pkgs.glaxnimate
     pkgs.elegant-sddm
     pkgs.dwarf-fortress-packages.dwarf-fortress-full
-    pkgs.cataclysm-dda-git
+    pkgs.cataclysm-dda
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
@@ -161,11 +160,13 @@ in
     pkgs.postman
     pkgs.stable-diffusion-webui.forge.cuda
     pkgs.ghostty
-    pkgs.nice-dcv-client
+    # pkgs.nice-dcv-client
     pkgs.xorg.libxcb
     pkgs.nixd
     pkgs.deadnix
     pkgs.newsboat
+    pkgs.quickemu
+    pkgs.devbox
   ];
 
   fonts.packages = with pkgs; [

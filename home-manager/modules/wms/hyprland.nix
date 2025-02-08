@@ -29,7 +29,7 @@
       };
 
       input = {
-        kb_layout = "us";
+        kb_layout = "us,ru";
         kb_variant = "lang";
         kb_options = "";
 
