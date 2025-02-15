@@ -6,14 +6,16 @@ in
 {
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" "openssl-1.1.1w"];
+    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
   };
   environment.systemPackages = [
     # Desktop apps
     (pkgs.callPackage ./packages/splashtop/default.nix {})
+    (pkgs.callPackage ./packages/ghostty/package.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
+    pkgs.kitty
     pkgs.obs-studio
     pkgs.rofi
     pkgs.wofi
@@ -68,7 +70,6 @@ in
     pkgs.unzip
     pkgs.scrot
     pkgs.ffmpeg
-    pkgs.devenv
     pkgs.light
     pkgs.lux
     pkgs.mediainfo
@@ -134,7 +135,7 @@ in
     pkgs.glaxnimate
     pkgs.elegant-sddm
     pkgs.dwarf-fortress-packages.dwarf-fortress-full
-    pkgs.cataclysm-dda
+    pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
@@ -152,33 +153,29 @@ in
     pkgs.networkmanagerapplet
     pkgs.openvpn
     pkgs.networkmanager-openvpn
+    pkgs.docker
     pkgs.blender
     pkgs.chatgpt-cli
     pkgs.ollama-cuda
+    pkgs.open-webui
     pkgs.oterm
     pkgs.bat
     pkgs.postman
-    pkgs.stable-diffusion-webui.forge.cuda
-    pkgs.ghostty
     # pkgs.nice-dcv-client
-    pkgs.xorg.libxcb
-    pkgs.nixd
-    pkgs.deadnix
-    pkgs.newsboat
-    pkgs.quickemu
-    pkgs.devbox
+    pkgs.devenv
   ];
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
     noto-fonts
     noto-fonts-emoji
     twemoji-color-font
     font-awesome
     powerline-fonts
     powerline-symbols
-    pkgs.nerd-fonts._0xproto
-    pkgs.nerd-fonts.droid-sans-mono
-    pkgs.nerd-fonts.symbols-only
+    (nerdfonts.override { fonts = [ 
+      "NerdFontsSymbolsOnly"
+      "0xProto"
+      "JetBrainsMono"
+    ]; })
   ];
 }
