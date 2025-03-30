@@ -17,5 +17,6 @@
     ./syncthing.nix
     ./wofi/wofi.nix
     # ./taskwarrior.nix
+    ./mako.nix
   ];
 }

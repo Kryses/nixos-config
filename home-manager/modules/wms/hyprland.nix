@@ -11,7 +11,6 @@
         "eDP-1,2880x1920@60,auto-down,1.2"
         "DP-3,1920x1080@60,auto-left,1"
       ];
-
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
@@ -49,7 +48,7 @@
         "col.active_border" = "rgba(573AC5ee) rgba(280077ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
 
-        layout = "dwindle";
+        layout = "master";
       };
 
       decoration = {
@@ -89,9 +88,12 @@
         preserve_split = true; # you probably want this
       };
 
-      # master = {
-      #   new_is_master = true;
-      # };
+      master = {
+        mfact = 0.55;
+        new_on_top = true;
+        orientation = "center";
+        allow_small_split = true;
+      };
 
       gestures = {
         workspace_swipe = true;
@@ -116,14 +118,18 @@
       windowrulev2 = [
         "tile, class:(Redot)"
         "tile, class:(org.remmina.Remmina)"
+        "fullscreenstate 0, class:(org.remmina.Remmina)"
+        "suppressevent maximize, class:(org.remmina.Remmina)"
+        "float, class:(org.remmina.Remmina), title:(Remmina Remote Desktop Client)"
         "float, class:(screenkey)"
+        "float, class:(org.pulseaudio.pavucontrol)"
         "float, title:^(Skyrim Special Edition)$"
         "minsize 2560 1440, title: ^(Skyrim Special Edition)$"
         "center, title: ^(Skyrim Special Edition)$"
       ];
       exec-once = [
         "swww init"
-        "swww img ~/wallpaper/51202143407_13e1654e7a_o.png"
+        # "swww img ~/wallpaper/51202143407_13e1654e7a_o.png"
         "nm-applet"
         "waybar"
         "wl-paste --type text --watch cliphist store"
@@ -222,6 +228,12 @@
         # Disable all effects
         "$mainMod Shift, G, exec, ~/.config/hypr/gamemode.sh "
         "$mainMod Alt Shift, L, exec, hyprlock "
+
+        "$mainMod SHIFT, SPACE,layoutmsg, swapwithmaster master"
+        "$mainMod CTRL, SPACE,layoutmsg, addmaster"
+        "$mainMod ALT, SPACE,layoutmsg, removemaster"
+        "$mainMod, SPACE,layoutmsg, cyclenext"
+        "$mainMod SHIFT, A, exec, pavucontrol"
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging

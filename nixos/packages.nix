@@ -155,10 +155,6 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
-    pkgs.chatgpt-cli
-    pkgs.ollama-cuda
-    pkgs.open-webui
-    pkgs.oterm
     pkgs.bat
     pkgs.postman
     pkgs.devenv
