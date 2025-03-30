@@ -122,7 +122,6 @@ in
     pkgs.hyprland
     pkgs.seatd
     pkgs.xdg-desktop-portal-hyprland
-    pkgs.polybar
     pkgs.waybar
 
     # pkgs.Sound
@@ -162,7 +161,6 @@ in
     pkgs.oterm
     pkgs.bat
     pkgs.postman
-    # pkgs.nice-dcv-client
     pkgs.devenv
     pkgs.protontricks
     pkgs.awscli2
@@ -177,6 +175,12 @@ in
     pkgs.wofi-emoji
     pkgs.imagemagick
     pkgs.libnotify
+    pkgs.bat
+    pkgs.postman
+    pkgs.ghostty
+    pkgs.nixd
+    pkgs.deadnix
+    pkgs.newsboat
   ];
 
   fonts.packages = with pkgs; [

@@ -7,8 +7,8 @@
       "$mainMod" = "SUPER";
 
       monitor = [
-        "DP-2,2560x1440@60,0x0,1"
-        "eDP-1,2880x1920@60,auto-right,1.2"
+        "DP-2,1920x108060,0x0,1"
+        "eDP-1,2880x1920@60,auto-down,1.2"
         "DP-3,1920x1080@60,auto-left,1"
       ];
 
