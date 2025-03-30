@@ -6,12 +6,13 @@ in
 {
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
+    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" "openssl-1.1.1w"];
   };
   environment.systemPackages = [
     # Desktop apps
     (pkgs.callPackage ./packages/splashtop/default.nix {})
     (pkgs.callPackage ./packages/ghostty/package.nix {})
+    (pkgs.callPackage ./packages/nice-dcv/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
@@ -163,6 +164,16 @@ in
     pkgs.postman
     # pkgs.nice-dcv-client
     pkgs.devenv
+    pkgs.protontricks
+    pkgs.awscli2
+    pkgs.aws-gate
+    pkgs.ssm-session-manager-plugin
+    pkgs.qmk
+    pkgs.qmk-udev-rules
+    pkgs.qmk_hid
+    pkgs.via
+    pkgs.vial
+    pkgs.discourse
   ];
 
   fonts.packages = with pkgs; [

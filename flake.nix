@@ -42,7 +42,6 @@
           inputs.nixvim.nixosModules.nixvim
         ];
       };
-
       nixosConfigurations.kryses-mobile-nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {
           pkgs-stable = import nixpkgs-stable {

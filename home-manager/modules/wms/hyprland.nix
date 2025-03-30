@@ -116,6 +116,10 @@
       windowrulev2 = [
         "tile, class:(Redot)"
         "tile, class:(org.remmina.Remmina)"
+        "float, class:(screenkey)"
+        "float, title:^(Skyrim Special Edition)$"
+        "minsize 2560 1440, title: ^(Skyrim Special Edition)$"
+        "center, title: ^(Skyrim Special Edition)$"
       ];
       exec-once = [
         "swww init"
@@ -156,6 +160,7 @@
         "$mainMod CTRL, K,    resizeactive,  0 -60"
         "$mainMod CTRL, J,  resizeactive,  0  60"
         "$mainMod, Z,  fullscreen, 1"
+        "$mainMod SHIFT, Z,  fullscreen"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
@@ -200,8 +205,8 @@
         ", XF86MonBrightnessUp, exec, brightnessctl set +5% "
 
         # Configuration files
-        ''$mainMod SHIFT, N, exec, alacritty -e sh -c "rb"''
-        ''$mainMod SHIFT, C, exec, alacritty -e sh -c "conf"''
+        ''$mainMod SHIFT, N, exec, nvim -e sh -c "rb"''
+        ''$mainMod SHIFT, C, exec, nvim -e sh -c "conf"''
        # ''$mainMod SHIFT, H, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/hyprland.nix"''
         ''$mainMod SHIFT, W, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/waybar.nix''
         '', Print, exec, grim -g "$(slurp)" - | swappy -f -''

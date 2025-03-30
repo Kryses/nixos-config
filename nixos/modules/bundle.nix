@@ -16,5 +16,7 @@
     ./samba.nix
     ./xserver.nix
     ./dolphin.nix
+    ./disk.nix
+    ./udev.nix
   ];
 }
