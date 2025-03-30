@@ -1,6 +1,6 @@
 {
-  programs.mako = {
+  services.mako = {
     enable = true;
-    defaultTimeout = 300;
+    defaultTimeout = 5000;
   };
 }
