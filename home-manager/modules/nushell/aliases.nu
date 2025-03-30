@@ -12,6 +12,7 @@ alias twd = tw day
 alias tmux = tmux -2
 alias connect-pipeline = ssh -i (pass work/hl/aws-ssh)
 alias connect-staging = ssh -i (pass work/hl/aws-ssh)
+alias connect-work = aws-gate session i-0a24b2f60ed405514 
 
 def notes [] {
     cd ~/krys-brain

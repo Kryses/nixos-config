@@ -1,5 +1,5 @@
 {
-  services.pulseaudio.enable = false;
+  # services.pulseaudio.enable = false;
   # sound.enable = true;
 
   # rtkit is optional but recommended

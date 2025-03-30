@@ -6,15 +6,17 @@ in
 {
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
+    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" "openssl-1.1.1w"];
   };
   environment.systemPackages = [
     # Desktop apps
     (pkgs.callPackage ./packages/splashtop/default.nix {})
-    (pkgs.callPackage ./packages/redot/default.nix {})
+    (pkgs.callPackage ./packages/ghostty/package.nix {})
+    (pkgs.callPackage ./packages/nice-dcv/default.nix {})
     inputs.zen-browser.packages."${system}".default
     pkgs.audacity
     pkgs.chromium
+    pkgs.kitty
     pkgs.obs-studio
     pkgs.rofi
     pkgs.wofi
@@ -69,7 +71,6 @@ in
     pkgs.unzip
     pkgs.scrot
     pkgs.ffmpeg
-    pkgs.devenv
     pkgs.light
     pkgs.lux
     pkgs.mediainfo
@@ -153,31 +154,42 @@ in
     pkgs.networkmanagerapplet
     pkgs.openvpn
     pkgs.networkmanager-openvpn
+    pkgs.docker
     pkgs.blender
     pkgs.chatgpt-cli
     pkgs.ollama-cuda
+    pkgs.open-webui
     pkgs.oterm
     pkgs.bat
     pkgs.postman
-    pkgs.stable-diffusion-webui.forge.cuda
-    pkgs.ghostty
-    pkgs.nice-dcv-client
-    pkgs.xorg.libxcb
-    pkgs.nixd
-    pkgs.deadnix
-    pkgs.newsboat
+    # pkgs.nice-dcv-client
+    pkgs.devenv
+    pkgs.protontricks
+    pkgs.awscli2
+    pkgs.aws-gate
+    pkgs.ssm-session-manager-plugin
+    pkgs.qmk
+    pkgs.qmk-udev-rules
+    pkgs.qmk_hid
+    pkgs.via
+    pkgs.vial
+    pkgs.wofi-pass
+    pkgs.wofi-emoji
+    pkgs.imagemagick
+    pkgs.libnotify
   ];
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
     noto-fonts
     noto-fonts-emoji
     twemoji-color-font
     font-awesome
     powerline-fonts
     powerline-symbols
-    pkgs.nerd-fonts._0xproto
-    pkgs.nerd-fonts.droid-sans-mono
-    pkgs.nerd-fonts.symbols-only
+    (nerdfonts.override { fonts = [ 
+      "NerdFontsSymbolsOnly"
+      "0xProto"
+      "JetBrainsMono"
+    ]; })
   ];
 }
