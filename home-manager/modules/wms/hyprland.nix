@@ -138,7 +138,7 @@
         "$mainMod, M, exit,"
         "$mainMod, E, exec, dolphin"
         "$mainMod, F, togglefloating,"
-        "ALT, Space, exec, wofi --show drun"
+        "ALT, Space, exec, wofi -i --show drun"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, S, togglesplit, # dwindle"
 
@@ -213,7 +213,11 @@
 
         # Waybar
         "$mainMod, B, exec, zen"
-        "$mainMod, W, exec, pkill -SIGUSR2 waybar"
+        "$mainMod, Y, exec, pkill -SIGUSR2 waybar"
+
+        "$mainMod, W, exec, ~/.config/wofi/wofi-wallpaper-selector.sh"
+        "$mainMod SHIFT, P, exec, wofi-pass"
+        "$mainMod SHIFT, E, exec, wofi-emoji"
 
         # Disable all effects
         "$mainMod Shift, G, exec, ~/.config/hypr/gamemode.sh "

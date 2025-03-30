@@ -173,7 +173,10 @@ in
     pkgs.qmk_hid
     pkgs.via
     pkgs.vial
-    pkgs.discourse
+    pkgs.wofi-pass
+    pkgs.wofi-emoji
+    pkgs.imagemagick
+    pkgs.libnotify
   ];
 
   fonts.packages = with pkgs; [
