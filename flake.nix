@@ -19,15 +19,36 @@
       url = "github:Janrupf/stable-diffusion-webui-nix/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprsplit = {
+      url = "github:shezdy/hyprsplit/53e417bce3b3aaf90ba2d86afd0c2a6d2cc3125e";
+      inputs.hyprland.follows = "hyprland";
+    };
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixos-hardware, ... }@inputs:
+  outputs = { 
+    self, 
+    nixpkgs, 
+    nixpkgs-stable, 
+    home-manager, 
+    nixos-hardware, 
+    hyprland-plugins,
+    hyprsplit,
+    split-monitor-workspaces,
+    ... }@inputs:
 
     let
       system = "x86_64-linux";
     in
     {
-
       # nixos - system hostname
       nixosConfigurations.kryses-nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -60,6 +81,9 @@
       homeConfigurations.kryses = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         modules = [ ./home-manager/home.nix ];
+        extraSpecialArgs = {inherit inputs;};
+
+
       };
     };
 }

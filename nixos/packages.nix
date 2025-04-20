@@ -120,6 +120,7 @@ in
     # pkgs.WMs and stuff
     pkgs.herbstluftwm
     pkgs.hyprland
+    pkgs.hyprlandPlugins.hyprsplit
     pkgs.seatd
     pkgs.xdg-desktop-portal-hyprland
     pkgs.waybar
@@ -155,6 +156,9 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
+    pkgs.ollama-cuda
+    pkgs.open-webui
+    pkgs.oterm
     pkgs.bat
     pkgs.postman
     pkgs.devenv
@@ -171,12 +175,8 @@ in
     pkgs.wofi-emoji
     pkgs.imagemagick
     pkgs.libnotify
-    pkgs.bat
-    pkgs.postman
-    pkgs.ghostty
     pkgs.nixd
-    pkgs.deadnix
-    pkgs.newsboat
+    pkgs.cmatrix
   ];
 
   fonts.packages = with pkgs; [

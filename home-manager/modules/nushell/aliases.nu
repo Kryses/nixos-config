@@ -44,6 +44,7 @@ alias gsp = git stash and git pull
 alias gcheck = git checkout
 alias gg = lazygit
 alias y = yazi
+alias cat = bat
 
 alias work = cd ~/work/repos
 alias ayon-workspace = cd ~/work/repos/ayon-workspace
