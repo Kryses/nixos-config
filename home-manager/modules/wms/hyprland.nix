@@ -1,5 +1,10 @@
+{ config, pkgs, lib, inputs, ...}:
 {
   wayland.windowManager.hyprland = {
+    plugins = [
+      # pkgs.hyprlandPlugins.hyprsplit
+      # pkgs.hyprlandPlugins.hyprspace
+    ];
     enable = true;
     xwayland.enable = true;
 
@@ -7,9 +12,8 @@
       "$mainMod" = "SUPER";
 
       monitor = [
-        "DP-2,1920x108060,0x0,1"
-        "eDP-1,2880x1920@60,auto-down,1.2"
-        "DP-3,1920x1080@60,auto-left,1"
+        "DP-1,5120x1440@60,0x0,1"
+        "DP-3,5120x1440@60,auto-up,1"
       ];
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
@@ -126,7 +130,28 @@
         "float, title:^(Skyrim Special Edition)$"
         "minsize 2560 1440, title: ^(Skyrim Special Edition)$"
         "center, title: ^(Skyrim Special Edition)$"
-        "opacity 0.95, class: (com.mitchellh.ghostty)"
+        "opacity 0.9, class: (com.mitchellh.ghostty)"
+        "workspace special:music, class: (Spotify)"
+        "workspace special:game, class: (steam)"
+        "workspace special:notes, class: (obsidian)"
+        "workspace special:slack, class: (Slack)"
+        "workspace special:slack, class: (discord)"
+      ];
+      workspace = [
+        "1, monitor:DP-1"
+        "2, monitor:DP-1"
+        "3, monitor:DP-1"
+        "4, monitor:DP-3"
+        "5, monitor:DP-3"
+        "6, monitor:DP-3"
+        "7, monitor:DP-3"
+        "8, monitor:DP-3"
+        "9, monitor:DP-3"
+        "10, monitor:DP-3"
+        "special:slack, on-created-empty:foot"
+        "special:music, on-created-empty:foot"
+        "special:game, on-created-empty:foot"
+        "special:notes, on-created-empty:foot"
       ];
       exec-once = [
         "swww init"
@@ -135,6 +160,9 @@
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "[workspace special:music silent] spotify"
+        "[workspace special:game silent] steam"
+        "[workspace special:notes silent] obsidian"
       ];
 
       bind = [
@@ -142,11 +170,13 @@
 
         "$mainMod, Return, exec, ghostty"
         "$mainMod, Q, killactive,"
-        "$mainMod, M, exit,"
+        # "$mainMod, M, exit,"
         "$mainMod, E, exec, dolphin"
         "$mainMod, F, togglefloating,"
+        "$mainMod, P, togglefloating,"
+        "$mainMod, P, pin,"
         "ALT, Space, exec, wofi -i --show drun"
-        "$mainMod, P, pseudo, # dwindle"
+        # "$mainMod, P, pseudo, # dwindle"
         "$mainMod, S, togglesplit, # dwindle"
 
         # Move focus with mainMod + arrow keys
@@ -160,6 +190,9 @@
         "$mainMod SHIFT, L, swapwindow, r"
         "$mainMod SHIFT, K,    swapwindow, u"
         "$mainMod SHIFT, J,  swapwindow, d"
+
+        "$mainMod SHIFT CTRL, J,  movecurrentworkspacetomonitor, DP-3"
+        "$mainMod SHIFT CTRL, K,  movecurrentworkspacetomonitor, DP-1"
 
         # Window resizing                     X  Y
         "$mainMod CTRL, H,  resizeactive, -60 0"
@@ -235,6 +268,19 @@
         "$mainMod ALT, SPACE,layoutmsg, removemaster"
         "$mainMod, SPACE,layoutmsg, cyclenext"
         "$mainMod SHIFT, A, exec, pavucontrol"
+
+
+        "$mainMod SHIFT, S, movetoworkspacesilent,special:slack"
+        "$mainMod, S, togglespecialworkspace,slack"
+
+        "$mainMod SHIFT, M, movetoworkspacesilent,special:music"
+        "$mainMod, M, togglespecialworkspace,music"
+        
+        "$mainMod SHIFT, G, movetoworkspacesilent,special:game"
+        "$mainMod, G, togglespecialworkspace,game"
+
+        "$mainMod SHIFT, N, movetoworkspacesilent,special:notes"
+        "$mainMod, N, togglespecialworkspace,notes"
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging

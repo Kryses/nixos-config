@@ -120,6 +120,7 @@ in
     # pkgs.WMs and stuff
     pkgs.herbstluftwm
     pkgs.hyprland
+    pkgs.hyprlandPlugins.hyprsplit
     pkgs.seatd
     pkgs.xdg-desktop-portal-hyprland
     pkgs.polybar
@@ -156,13 +157,11 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
-    pkgs.chatgpt-cli
     pkgs.ollama-cuda
     pkgs.open-webui
     pkgs.oterm
     pkgs.bat
     pkgs.postman
-    # pkgs.nice-dcv-client
     pkgs.devenv
     pkgs.protontricks
     pkgs.awscli2
@@ -177,6 +176,8 @@ in
     pkgs.wofi-emoji
     pkgs.imagemagick
     pkgs.libnotify
+    pkgs.nixd
+    pkgs.cmatrix
   ];
 
   fonts.packages = with pkgs; [

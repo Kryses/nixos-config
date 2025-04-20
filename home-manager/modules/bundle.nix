@@ -16,6 +16,7 @@
     ./yazi.nix
     ./syncthing.nix
     ./wofi/wofi.nix
+    ./mako.nix
     # ./taskwarrior.nix
   ];
 }
