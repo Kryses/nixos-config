@@ -18,5 +18,6 @@
     ./dolphin.nix
     ./disk.nix
     ./udev.nix
+    ./syncthing.nix
   ];
 }

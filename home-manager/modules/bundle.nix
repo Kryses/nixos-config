@@ -14,7 +14,7 @@
     ./wms/waybar.nix
     ./hyprlock.nix
     ./yazi.nix
-    ./syncthing.nix
+    # ./syncthing.nix
     ./wofi/wofi.nix
     ./mako.nix
     # ./taskwarrior.nix
