@@ -2,7 +2,7 @@
   description = "My system configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     zen-browser.url = "github:omarcresp/zen-browser-flake";
     nixos-hardware.url = "github:NixOS/nixos-hardware/2f893e185c850bcd6dbf4fbc0c61b1b90d23ff79";
@@ -40,9 +40,6 @@
     nixpkgs-stable, 
     home-manager, 
     nixos-hardware, 
-    hyprland-plugins,
-    hyprsplit,
-    split-monitor-workspaces,
     ... }@inputs:
 
     let

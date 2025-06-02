@@ -10,10 +10,11 @@ in
   };
   environment.systemPackages = [
     # Desktop apps
-    (pkgs.callPackage ./packages/splashtop/default.nix {})
-    (pkgs.callPackage ./packages/ghostty/package.nix {})
-    (pkgs.callPackage ./packages/nice-dcv/default.nix {})
+    # (pkgs.callPackage ./packages/splashtop/default.nix {})
+    # (pkgs.callPackage ./packages/ghostty/package.nix {})
+    # (pkgs.callPackage ./packages/nice-dcv/default.nix {})
     inputs.zen-browser.packages."${system}".default
+    pkgs.ghostty
     pkgs.audacity
     pkgs.chromium
     pkgs.kitty
@@ -21,12 +22,10 @@ in
     pkgs.rofi
     pkgs.wofi
     pkgs.mpv
-    pkgs.kdenlive
     pkgs.discord-development
     pkgs.gparted
     pkgs.obsidian
     pkgs.pcmanfm-qt
-    pkgs.polymc
     pkgs.nushell
     pkgs.appgate-sdp
     pkgs.slack
@@ -186,10 +185,8 @@ in
     font-awesome
     powerline-fonts
     powerline-symbols
-    (nerdfonts.override { fonts = [ 
-      "NerdFontsSymbolsOnly"
-      "0xProto"
-      "JetBrainsMono"
-    ]; })
+    nerd-fonts._0xproto
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
   ];
 }
