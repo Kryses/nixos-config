@@ -2,12 +2,11 @@
   description = "My system configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     zen-browser.url = "github:omarcresp/zen-browser-flake";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/2f893e185c850bcd6dbf4fbc0c61b1b90d23ff79";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
@@ -39,7 +38,6 @@
     nixpkgs, 
     nixpkgs-stable, 
     home-manager, 
-    nixos-hardware, 
     ... }@inputs:
 
     let
@@ -71,7 +69,6 @@
         modules = [
           ./nixos/hosts/kryses-mobile-nixos/configuration.nix
           inputs.nixvim.nixosModules.nixvim
-          nixos-hardware.nixosModules.microsoft-surface-pro-intel
         ];
       };
 

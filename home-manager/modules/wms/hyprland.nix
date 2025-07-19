@@ -32,11 +32,7 @@
       };
 
       input = {
-        kb_layout = "us,ru";
-        kb_variant = "lang";
-        kb_options = "";
-
-        follow_mouse = 1;
+       follow_mouse = 1;
 
         touchpad = {
           natural_scroll = true;
@@ -115,10 +111,6 @@
         disable_hyprland_logo = true;
       };
 
-      windowrule = [
-        "float, ^(imv)$"
-        "float, ^(mpv)$"
-      ];
       windowrulev2 = [
         "tile, class:(Redot)"
         "tile, class:(org.remmina.Remmina)"
@@ -127,15 +119,23 @@
         "float, class:(org.remmina.Remmina), title:(Remmina Remote Desktop Client)"
         "float, class:(screenkey)"
         "float, class:(org.pulseaudio.pavucontrol)"
+        "float, class:^(com.gabm.satty)$"
+        "fullscreenstate 0, class:(com.gabm.satty)"
         "float, title:^(Skyrim Special Edition)$"
-        "minsize 2560 1440, title: ^(Skyrim Special Edition)$"
+        "norounding, title:^(Skyrim Special Edition)$"
+        "noborder, title:^(Skyrim Special Edition)$"
+        "float, workspace:special:slack"
+        "minsize 3360 1440, title: ^(Skyrim Special Edition)$"
         "center, title: ^(Skyrim Special Edition)$"
         "opacity 0.9, class: (com.mitchellh.ghostty)"
         "workspace special:music, class: (Spotify)"
-        "workspace special:game, class: (steam)"
+        "workspace special:steam, class: (steam)"
         "workspace special:notes, class: (obsidian)"
         "workspace special:slack, class: (Slack)"
         "workspace special:slack, class: (discord)"
+        "workspace special:steam, class: ^(steam_app_.*)$"
+        "workspace special:game, title: ^(Skyrim Special Edition)$"
+        "workspace special:game, class: ^(worldbox)$"
       ];
       workspace = [
         "1, monitor:DP-1"
@@ -150,8 +150,9 @@
         "10, monitor:DP-3"
         "special:slack, on-created-empty:foot"
         "special:music, on-created-empty:foot"
-        "special:game, on-created-empty:foot"
+        "special:steam, on-created-empty:foot"
         "special:notes, on-created-empty:foot"
+        "special:game, on-created-empty:foot"
       ];
       exec-once = [
         "swww init"
@@ -161,7 +162,7 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "[workspace special:music silent] spotify"
-        "[workspace special:game silent] steam"
+        "[workspace special:steam silent] steam"
         "[workspace special:notes silent] obsidian"
       ];
 
@@ -171,7 +172,7 @@
         "$mainMod, Return, exec, ghostty"
         "$mainMod, Q, killactive,"
         # "$mainMod, M, exit,"
-        "$mainMod, E, exec, dolphin"
+        "$mainMod CTRL, E, exec, dolphin"
         "$mainMod, F, togglefloating,"
         "$mainMod, P, togglefloating,"
         "$mainMod, P, pin,"
@@ -248,19 +249,19 @@
         ''$mainMod SHIFT, N, exec, nvim -e sh -c "rb"''
         ''$mainMod SHIFT, C, exec, nvim -e sh -c "conf"''
        # ''$mainMod SHIFT, H, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/hyprland.nix"''
-        ''$mainMod SHIFT, W, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/waybar.nix''
-        '', Print, exec, grim -g "$(slurp)" - | swappy -f -''
+        # ''$mainMod SHIFT, B, exec, alacritty -e sh -c "nvim ~/nix/home-manager/modules/wms/waybar.nix''
+        '', Print, exec, ~/scripts/screenshot.sh''
 
         # Waybar
-        "$mainMod, B, exec, zen"
+        "$mainMod, U, exec, zen"
         "$mainMod, Y, exec, pkill -SIGUSR2 waybar"
 
-        "$mainMod, W, exec, ~/.config/wofi/wofi-wallpaper-selector.sh"
-        "$mainMod SHIFT, P, exec, wofi-pass"
-        "$mainMod SHIFT, E, exec, wofi-emoji"
+        "$mainMod, K, exec, ~/.config/wofi/wofi-wallpaper-selector.sh"
+        # "$mainMod SHIFT, P, exec, wofi-pass"
+        "$mainMod SHIFT, J, exec, wofi-emoji"
 
         # Disable all effects
-        "$mainMod Shift, G, exec, ~/.config/hypr/gamemode.sh "
+        # "$mainMod Shift, G, exec, ~/.config/hypr/gamemode.sh "
         "$mainMod Alt Shift, L, exec, hyprlock "
 
         "$mainMod SHIFT, SPACE,layoutmsg, swapwithmaster master"
@@ -270,17 +271,28 @@
         "$mainMod SHIFT, A, exec, pavucontrol"
 
 
-        "$mainMod SHIFT, S, movetoworkspacesilent,special:slack"
-        "$mainMod, S, togglespecialworkspace,slack"
-
-        "$mainMod SHIFT, M, movetoworkspacesilent,special:music"
-        "$mainMod, M, togglespecialworkspace,music"
+        "$mainMod SHIFT, R, movetoworkspacesilent,special:notes"
+        "$mainMod, R, togglespecialworkspace,notes"
         
-        "$mainMod SHIFT, G, movetoworkspacesilent,special:game"
-        "$mainMod, G, togglespecialworkspace,game"
+        "$mainMod SHIFT, T, movetoworkspacesilent,special:slack"
+        "$mainMod, T, togglespecialworkspace,slack"
 
-        "$mainMod SHIFT, N, movetoworkspacesilent,special:notes"
-        "$mainMod, N, togglespecialworkspace,notes"
+        "$mainMod SHIFT, G, movetoworkspacesilent,special:music"
+        "$mainMod, G, togglespecialworkspace,music"
+        
+
+        "$mainMod SHIFT, W, movetoworkspacesilent,special:steam"
+        "$mainMod, W, togglespecialworkspace,steam"
+        
+        "$mainMod SHIFT, B, movetoworkspacesilent,special:game"
+        "$mainMod, B, togglespecialworkspace,game"
+
+        # "$mainMod SHIFT, G, togglegroup"
+        # "$mainMod, G, changegroupactive"
+        # "$mainMod CTRL, G, moveintogroup"
+
+        "$mainMod, O, exec, hyprctl keyword general:layout dwindle"
+        "$mainMod Shift, O, exec, hyprctl keyword general:layout dwindle"
       ];
 
       # Move/resize windows with mainMod + LMB/RMB and dragging

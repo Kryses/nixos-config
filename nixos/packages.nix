@@ -14,11 +14,14 @@ in
     # (pkgs.callPackage ./packages/ghostty/package.nix {})
     # (pkgs.callPackage ./packages/nice-dcv/default.nix {})
     inputs.zen-browser.packages."${system}".default
+    pkgs.satty
     pkgs.ghostty
+    pkgs.luajitPackages.luarocks
     pkgs.audacity
     pkgs.chromium
     pkgs.kitty
     pkgs.obs-studio
+    pkgs.gimp
     pkgs.rofi
     pkgs.wofi
     pkgs.mpv
@@ -31,6 +34,7 @@ in
     pkgs.slack
     pkgs.remmina
     pkgs.spotify
+    pkgs.eza
 
 
     # pkgs.Coding stuff
@@ -176,6 +180,7 @@ in
     pkgs.libnotify
     pkgs.nixd
     pkgs.cmatrix
+    # pkgs.nice-dcv-client
   ];
 
   fonts.packages = with pkgs; [

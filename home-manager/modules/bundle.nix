@@ -1,6 +1,7 @@
 {
   imports = [
     ./nushell/default.nix
+    ./ohmyposh/ohmyposh.nix
     ./cursor.nix
     ./kitty.nix
     ./zoxide.nix
@@ -9,7 +10,6 @@
     ./htop.nix
     ./alacritty.nix
     ./qt.nix
-    ./ohmyposh.nix
     ./wms/hyprland.nix
     ./wms/waybar.nix
     ./hyprlock.nix
@@ -19,5 +19,6 @@
     ./mako.nix
     # ./taskwarrior.nix
     ./mako.nix
+    ./flameshot.nix
   ];
 }
