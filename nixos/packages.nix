@@ -14,7 +14,9 @@ in
     # (pkgs.callPackage ./packages/ghostty/package.nix {})
     # (pkgs.callPackage ./packages/nice-dcv/default.nix {})
     inputs.zen-browser.packages."${system}".default
+    pkgs.zellij
     pkgs.satty
+    pkgs.krita
     pkgs.ghostty
     pkgs.luajitPackages.luarocks
     pkgs.audacity
