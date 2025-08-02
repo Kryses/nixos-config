@@ -33,51 +33,35 @@
     };
   };
 
-  outputs = { 
-    self, 
-    nixpkgs, 
-    nixpkgs-stable, 
-    home-manager, 
-    ... }@inputs:
-
-    let
-      system = "x86_64-linux";
-    in
-    {
-      # nixos - system hostname
-      nixosConfigurations.kryses-nixos = nixpkgs.lib.nixosSystem {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixpkgs-stable,
+    home-manager,
+    ...
+  }: let
+    inherit (self) outputs;
+    system = "x86_64-linux";
+    mkSystem = modules:
+      nixpkgs.lib.nixosSystem {
+        inherit modules;
         specialArgs = {
+          inherit inputs outputs;
           pkgs-stable = import nixpkgs-stable {
-            inherit system;
             config.allowUnfree = true;
           };
-          inherit inputs system;
         };
-        modules = [
-          ./nixos/hosts/kryses-nixos/configuration.nix
-          inputs.nixvim.nixosModules.nixvim
-        ];
       };
-      nixosConfigurations.kryses-mobile-nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          pkgs-stable = import nixpkgs-stable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          inherit inputs system;
-        };
-        modules = [
-          ./nixos/hosts/kryses-mobile-nixos/configuration.nix
-          inputs.nixvim.nixosModules.nixvim
-        ];
-      };
-
-      homeConfigurations.kryses = home-manager.lib.homeManagerConfiguration {
+  in {
+    nixosConfigurations = {
+      kryses-nixos = mkSystem [./nixos/hosts/kryses-nixos];
+      kryses-mobile-nixos = mkSystem [./nixos/hosts/kryses-mobile-nixos];
+    };
+    homeConfigurations = {
+      kryses = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ ./home-manager/home.nix ];
-        extraSpecialArgs = {inherit inputs;};
-
-
+        modules = [./home-manager/home.nix];
       };
     };
+  };
 }

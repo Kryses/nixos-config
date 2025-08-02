@@ -2,7 +2,7 @@
   imports = [
     ./gpg.nix
     ./steam.nix
-    ./sound.nix
+    # ./sound.nix
     ./zram.nix
     ./env.nix
     ./user.nix

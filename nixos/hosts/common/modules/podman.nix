@@ -14,5 +14,5 @@
       defaultNetwork.settings.dns_enabled = true;
     };
   };
-  hardware.nvidia-container-toolkit.enable = true;
+
 }

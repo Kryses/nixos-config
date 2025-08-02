@@ -5,7 +5,6 @@
   inputs,
   ...
 }: {
-  wayland.windowManager.hyprland = {
     plugins = [
       # pkgs.hyprlandPlugins.hyprsplit
       # pkgs.hyprlandPlugins.hyprspace
@@ -304,5 +303,4 @@
         "$mainMod, mouse:273, resizewindow"
       ];
     };
-  };
 }

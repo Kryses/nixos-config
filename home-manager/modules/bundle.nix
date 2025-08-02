@@ -20,5 +20,6 @@
     # ./taskwarrior.nix
     ./mako.nix
     ./flameshot.nix
+    # ./nixcord.nix
   ];
 }
