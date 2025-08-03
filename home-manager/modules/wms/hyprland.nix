@@ -112,7 +112,7 @@
         animate_manual_resizes = true;
         animate_mouse_windowdragging = true;
         enable_swallow = true;
-        render_ahead_of_time = false;
+        # render_ahead_of_time = false;
         disable_hyprland_logo = true;
       };
 
@@ -160,8 +160,7 @@
         "special:game, on-created-empty:foot"
       ];
       exec-once = [
-        "swww init"
-        # "swww img ~/wallpaper/51202143407_13e1654e7a_o.png"
+        "swww-daemon -f xrgb"
         "nm-applet"
         "waybar"
         "wl-paste --type text --watch cliphist store"

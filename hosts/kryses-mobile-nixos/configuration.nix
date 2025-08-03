@@ -2,8 +2,8 @@
 { inputs, pkgs, ... }: {
   imports = [
     ./hardware.nix
-    ../../packages.nix
-    ../../modules/bundle.nix
+    ../../nixos/packages.nix
+    ../../nixos/modules/bundle.nix
   ];
 
   disabledModules = [

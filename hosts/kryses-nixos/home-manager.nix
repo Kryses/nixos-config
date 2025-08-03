@@ -1,7 +1,7 @@
 
 {lib, ...}: {
   imports = [
-    ../../../home-manager/home.nix
+    ../../home-manager/home.nix
   ];
 
   # wayland.windowManager.hyprland = {

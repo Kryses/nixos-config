@@ -1,4 +1,4 @@
-{inputs,  outputs, config, pkgs-stable, ...}:
+{inputs, outputs, config, ...}:
 {
   imports = [
     ../common
@@ -13,6 +13,7 @@
     ./configuration.nix
     ./hardware.nix
   ];
+
   home-manager = {
     extraSpecialArgs = {
       inherit inputs outputs;

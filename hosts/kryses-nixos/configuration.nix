@@ -1,9 +1,9 @@
 { inputs, pkgs, channels, config, ... }: {
   imports = [
     ./hardware.nix
-    ../../packages.nix
-    ../../modules/bundle.nix
-    ../../hardware/nvidia.nix
+    ../../nixos/packages.nix
+    ../../nixos/modules/bundle.nix
+    ../../nixos/hardware/nvidia.nix
   ];
 
   disabledModules = [

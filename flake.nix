@@ -2,11 +2,11 @@
   description = "My system configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    zen-browser.url = "github:omarcresp/zen-browser-flake";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    zen-browser.url = "https://flakehub.com/f/youwen5/zen-browser/0.1.204";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
@@ -46,7 +46,7 @@
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs home-manager nixpkgs system;
           pkgs-stable = import nixpkgs-stable {
             config.allowUnfree = true;
           };
@@ -54,14 +54,14 @@
       };
   in {
     nixosConfigurations = {
-      kryses-nixos = mkSystem [./nixos/hosts/kryses-nixos];
-      kryses-mobile-nixos = mkSystem [./nixos/hosts/kryses-mobile-nixos];
+      kryses-nixos = mkSystem [./hosts/kryses-nixos];
+      kryses-mobile-nixos = mkSystem [./hosts/kryses-mobile-nixos];
     };
-    homeConfigurations = {
-      kryses = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [./home-manager/home.nix];
-      };
-    };
+    # homeConfigurations = {
+    #   kryses = home-manager.lib.homeManagerConfiguration {
+    #     pkgs = nixpkgs.legacyPackages.${system};
+    #     modules = [./home-manager/home.nix];
+    #   };
+    # };
   };
 }

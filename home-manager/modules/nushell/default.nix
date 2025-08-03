@@ -11,7 +11,7 @@ in {
   home.sessionVariables = {
     _ZO_DATA_DIR = "~/.local/share";
   };
-  programs.carapace.enable = true;
+  # programs.carapace.enable = true;
   programs.nushell = {
     enable = true;
     plugins = with pkgs.nushellPlugins; [
