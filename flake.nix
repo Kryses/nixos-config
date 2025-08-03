@@ -57,11 +57,11 @@
       kryses-nixos = mkSystem [./hosts/kryses-nixos];
       kryses-mobile-nixos = mkSystem [./hosts/kryses-mobile-nixos];
     };
-    # homeConfigurations = {
-    #   kryses = home-manager.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages.${system};
-    #     modules = [./home-manager/home.nix];
-    #   };
-    # };
+    homeConfigurations = {
+      kryses = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [./home/common];
+      };
+    };
   };
 }
