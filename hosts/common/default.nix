@@ -14,12 +14,18 @@
   ];
   services.ntp.enable = true;
   time.timeZone = "America/New_York";
-  i18n.defaultLocale = "en_US.UTF-8"; # Select internationalisation properties.
   system.stateVersion = "23.05"; # Don't change it bro
 
   nix.extraOptions = ''
     trusted-users = root kryses
   '';
+
+  # config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   nix = {
     gc = {
