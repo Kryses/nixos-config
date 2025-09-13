@@ -13,7 +13,7 @@
 
   services.speechd.enable = true;
   security.pam.services.hyprlock = { };
-  environment.systemPackages = with pkgs; [
-    searxng
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   searxng
+  # ];
 }
