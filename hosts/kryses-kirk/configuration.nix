@@ -3,7 +3,7 @@
     ./hardware.nix
     ../../nixos/packages.nix
     ../../nixos/modules/bundle.nix
-    ../../nixos/hardware/nvidia.nix
+    ../../nixos/hardware/nvidia-open.nix
   ];
 
   disabledModules = [
