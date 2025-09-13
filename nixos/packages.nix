@@ -10,7 +10,7 @@ in
   };
   environment.systemPackages = [
     # pkgs.legacyPackages.${system}.python39
-    nixpkgs-python.packages.${system}."3.9.2"
+    # nixpkgs-python.packages.${system}."3.9.2"
     pkgs.zellij
     pkgs.satty
     pkgs.krita
