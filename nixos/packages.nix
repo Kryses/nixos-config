@@ -145,8 +145,8 @@ in
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
     pkgs.elegant-sddm
-    # pkgs.dwarf-fortress-packages.dwarf-fortress-full
-    # pkgs.cataclysm-dda-git
+    pkgs.dwarf-fortress-packages.dwarf-fortress-full
+    pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
@@ -166,7 +166,7 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
-    # pkgs.ollama-cuda
+    pkgs.ollama-cuda
     pkgs.open-webui
     pkgs.oterm
     pkgs.bat
