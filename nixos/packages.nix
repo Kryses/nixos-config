@@ -188,6 +188,7 @@ in
     pkgs.nixd
     pkgs.cmatrix
     pkgs.pyenv
+    pkgs.tcl
     # pkgs.nice-dcv-client
   ];
 
