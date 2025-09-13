@@ -157,8 +157,8 @@ in
     # pkgs.Other
     pkgs.home-manager
     pkgs.spice-vdagent
-    # pkgs.libsForQt5.qtstyleplugin-kvantum
-    # pkgs.libsForQt5.qt5ct
+    pkgs.libsForQt5.qtstyleplugin-kvantum
+    pkgs.libsForQt5.qt5ct
     pkgs.papirus-nord
     pkgs.egl-wayland
     pkgs.networkmanagerapplet
