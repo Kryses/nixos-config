@@ -39,6 +39,7 @@ in
     pkgs.sox
     pkgs.below
     pkgs.posting
+    pkgs.libTomMath
     inputs.compose2nix.packages.x86_64-linux.default
 
 
@@ -54,7 +55,7 @@ in
     pkgs.carapace
     pkgs.cargo
     pkgs.vit
-    (pkgs.python311.withPackages (ps: with ps; [ 
+    (pkgs.python310.withPackages (ps: with ps; [ 
       pbr
       taskw
       notify-py
