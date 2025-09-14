@@ -55,13 +55,13 @@ in
     pkgs.cargo
     pkgs.vit
     (pkgs.python310.withPackages (ps: with ps; [ 
-      pbr
-      taskw
-      notify-py
-      pycairo
-      pygobject3
+      # pbr
+      # taskw
+      # notify-py
+      # pycairo
+      # pygobject3
       requests 
-      bugwarrior
+      # bugwarrior
       pyside6
     ]))
     # pkgs.CLI utils
