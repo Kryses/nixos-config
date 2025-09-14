@@ -12,7 +12,7 @@
   programs.nix-ld.enable = true;
   services.openssh.enable = true;
 
-  networking.interfaces.enp132s0.ipv4.addresses = [{
+  networking.interfaces.enp4s0.ipv4.addresses = [{
     address = "192.168.1.200";
     prefixLength = 24;
   }];
