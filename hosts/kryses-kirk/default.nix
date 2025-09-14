@@ -24,5 +24,4 @@
     users.kryses = import ./home-manager.nix;
 
   };
-  networking.hostName = "kryses-kirk";
 }
