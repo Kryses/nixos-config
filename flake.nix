@@ -5,13 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     flake-compat.url = "github:edolstra/flake-compat";
-    nixpkgs-python = {
-      url = "github:pinarruiz/nixpkgs-python";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.url = "github:edolstra/flake-compat";
-      };
-    };
     zen-browser.url = "https://flakehub.com/f/youwen5/zen-browser/0.1.204";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -49,8 +42,8 @@
     self,
     nixpkgs,
     nixpkgs-stable,
-    nixpkgs-python,
     home-manager,
+    zen-browser,
     ...
   }: let
     inherit (self) outputs;
@@ -59,7 +52,7 @@
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {
-          inherit inputs outputs home-manager nixpkgs system nixpkgs-python;
+          inherit inputs outputs home-manager nixpkgs system zen-browser;
           pkgs-stable = import nixpkgs-stable {
             config.allowUnfree = true;
           };
