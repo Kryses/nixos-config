@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, nixpkgs, nixpkgs-python, inputs, ... }:
 let
   system = "x86_64-linux";
 in
@@ -9,11 +9,9 @@ in
     permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" "openssl-1.1.1w"];
   };
   environment.systemPackages = [
-    # Desktop apps
-    # (pkgs.callPackage ./packages/splashtop/default.nix {})
-    # (pkgs.callPackage ./packages/ghostty/package.nix {})
-    # (pkgs.callPackage ./packages/nice-dcv/default.nix {})
-    inputs.zen-browser.packages."${system}".default
+    # pkgs.legacyPackages.${system}.python39
+    # nixpkgs-python.packages.${system}."3.9.2"
+    inputs.zen-browser.packages.x86_64-linux.default
     pkgs.zellij
     pkgs.satty
     pkgs.krita
@@ -21,7 +19,6 @@ in
     pkgs.luajitPackages.luarocks
     pkgs.audacity
     pkgs.chromium
-    pkgs.kitty
     pkgs.obs-studio
     pkgs.gimp
     pkgs.rofi
@@ -36,14 +33,21 @@ in
     pkgs.slack
     pkgs.remmina
     pkgs.spotify
-    pkgs.eza
+    pkgs.godotPackages_4_3.godot
+    pkgs.deadnix
+    pkgs.statix
+    pkgs.termdown
+    pkgs.sox
+    pkgs.below
+    pkgs.posting
+    inputs.compose2nix.packages.x86_64-linux.default
 
 
     # pkgs.Coding stuff
     pkgs.gnumake
     pkgs.gcc
     pkgs.nodejs
-    pkgs.python
+    # pkgs.python
     pkgs.neovim
     pkgs.telescope
     pkgs.ripgrep
@@ -51,14 +55,15 @@ in
     pkgs.carapace
     pkgs.cargo
     pkgs.vit
-    (pkgs.python311.withPackages (ps: with ps; [ 
-      pbr
-      taskw
-      notify-py
-      pycairo
-      pygobject3
-      requests 
-      bugwarrior
+    (pkgs.python310.withPackages (ps: with ps; [ 
+      # pbr
+      # taskw
+      # notify-py
+      # pycairo
+      # pygobject3
+      # requests 
+      # bugwarrior
+      # pyside6
     ]))
     # pkgs.CLI utils
     pkgs.inotify-tools
@@ -107,6 +112,7 @@ in
     pkgs.timewarrior
     pkgs.gh
     pkgs.jq
+    pkgs.firefoxpwa
 
 
     #Python
@@ -140,8 +146,8 @@ in
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
     pkgs.elegant-sddm
-    pkgs.dwarf-fortress-packages.dwarf-fortress-full
-    pkgs.cataclysm-dda-git
+    #pkgs.dwarf-fortress-packages.dwarf-fortress-full 
+    #pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
@@ -161,8 +167,8 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
-    pkgs.ollama-cuda
-    pkgs.open-webui
+    #pkgs.ollama-cuda
+    #pkgs.open-webui
     pkgs.oterm
     pkgs.bat
     pkgs.postman
@@ -182,6 +188,8 @@ in
     pkgs.libnotify
     pkgs.nixd
     pkgs.cmatrix
+    pkgs.pyenv
+    pkgs.tcl
     # pkgs.nice-dcv-client
   ];
 

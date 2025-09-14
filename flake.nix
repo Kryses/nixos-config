@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    flake-compat.url = "github:edolstra/flake-compat";
     zen-browser.url = "https://flakehub.com/f/youwen5/zen-browser/0.1.204";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -13,7 +14,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    polymc.url = "github:PolyMC/PolyMC";
     stable-diffusion-webui-nix = {
       url = "github:Janrupf/stable-diffusion-webui-nix/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +31,11 @@
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
+    impermanence.url = "github:nix-community/impermanence";
+    nix-spicetify.url = "github:the-argus/spicetify-nix";
+    nix-spicetify.inputs.nixpkgs.follows = "nixpkgs";
+    compose2nix.url = "github:aksiksi/compose2nix";
+    compose2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -38,6 +43,7 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
+    zen-browser,
     ...
   }: let
     inherit (self) outputs;
@@ -46,7 +52,7 @@
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {
-          inherit inputs outputs home-manager nixpkgs system;
+          inherit inputs outputs home-manager nixpkgs system zen-browser;
           pkgs-stable = import nixpkgs-stable {
             config.allowUnfree = true;
           };
@@ -56,6 +62,7 @@
     nixosConfigurations = {
       kryses-nixos = mkSystem [./hosts/kryses-nixos];
       kryses-mobile-nixos = mkSystem [./hosts/kryses-mobile-nixos];
+      kryses-kirk = mkSystem [./hosts/kryses-kirk];
     };
     homeConfigurations = {
       kryses = home-manager.lib.homeManagerConfiguration {
