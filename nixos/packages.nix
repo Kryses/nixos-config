@@ -39,7 +39,6 @@ in
     pkgs.sox
     pkgs.below
     pkgs.posting
-    pkgs.libTomMath
     inputs.compose2nix.packages.x86_64-linux.default
 
 
