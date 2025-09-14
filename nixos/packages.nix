@@ -54,7 +54,7 @@ in
     pkgs.carapace
     pkgs.cargo
     pkgs.vit
-    (pkgs.python310.withPackages (ps: with ps; [ 
+    (pkgs.python310Full.withPackages (ps: with ps; [ 
       # pbr
       # taskw
       # notify-py
