@@ -11,6 +11,7 @@ in
   environment.systemPackages = [
     # pkgs.legacyPackages.${system}.python39
     # nixpkgs-python.packages.${system}."3.9.2"
+    inputs.zen-browser.packages.x86_64-linux.default
     pkgs.zellij
     pkgs.satty
     pkgs.krita
@@ -60,9 +61,9 @@ in
       # notify-py
       # pycairo
       # pygobject3
-      requests 
+      # requests 
       # bugwarrior
-      pyside6
+      # pyside6
     ]))
     # pkgs.CLI utils
     pkgs.inotify-tools
@@ -145,8 +146,8 @@ in
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
     pkgs.elegant-sddm
-    pkgs.dwarf-fortress-packages.dwarf-fortress-full
-    pkgs.cataclysm-dda-git
+    #pkgs.dwarf-fortress-packages.dwarf-fortress-full 
+    #pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
@@ -166,8 +167,8 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
-    pkgs.ollama-cuda
-    pkgs.open-webui
+    #pkgs.ollama-cuda
+    #pkgs.open-webui
     pkgs.oterm
     pkgs.bat
     pkgs.postman

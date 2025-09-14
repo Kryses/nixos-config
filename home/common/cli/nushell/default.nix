@@ -69,8 +69,8 @@ in {
       test-build = "sudo nixos-rebuild test --impure --flake ~/nix";
 
       start-timer = "nu ~/scripts/run_timer.nu";
-      switch-home = "home-manager switch --impure --flake ~/nix";
-      switch-build = "sudo nixos-rebuild switch --impure --flake ~/nix";
+      switch-home = "home-manager switch --impure --flake ~/documents/nixos/nix";
+      switch-build = "sudo nixos-rebuild switch --impure --flake ~/documents/nixos/nix";
       update-build = "nix flake update ~/nix";
     };
     environmentVariables = {
