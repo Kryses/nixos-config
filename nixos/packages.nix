@@ -42,6 +42,7 @@ in
     pkgs.below
     pkgs.posting
     inputs.compose2nix.packages.x86_64-linux.default
+    pkgs.qt6Packages.qtwayland
 
 
     # pkgs.Coding stuff
