@@ -26,6 +26,7 @@
       allowUnfree = true;
     };
   };
+  home-manager.backupFileExtension = "backup";
 
   nix = {
     gc = {
