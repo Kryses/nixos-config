@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   programs.waybar = {
     enable = true;
     settings = {
@@ -8,9 +7,9 @@
         position = "top";
         margin = "9 13 -10 18";
 
-        modules-left = [ "hyprland/workspaces" "hyprland/submap" ];
-        modules-center = [ "clock" ];
-        modules-right = [ "custom/github_notifications" "pulseaudio" "custom/mem" "cpu" "backlight" "battery" "tray" ];
+        modules-left = ["hyprland/workspaces" "hyprland/submap"];
+        modules-center = ["clock"];
+        modules-right = ["custom/github_notifications" "pulseaudio" "custom/mem" "cpu" "backlight" "battery" "tray"];
 
         "hyprland/workspaces" = {
           disable-scroll = true;
@@ -60,7 +59,7 @@
             phone = "";
             portable = "";
             car = "";
-            default = [ "" "" "" ];
+            default = ["" "" ""];
           };
           on-click = "pavucontrol";
           min-length = 13;
@@ -85,14 +84,14 @@
           critical-threshold = 80;
           # format-critical = "{temperatureC}°C {icon}";
           format = "{temperatureC}°C {icon}";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = ["" "" "" "" ""];
           tooltip = false;
         };
 
         "backlight" = {
           device = "intel_backlight";
           format = "{percent}% {icon}";
-          format-icons = [ "" ];
+          format-icons = [""];
           min-length = 7;
         };
 
@@ -105,15 +104,16 @@
           format-charging = "{capacity}% ";
           format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
-          format-icons = [ "" "" "" "" "" "" "" "" "" "" ];
+          format-icons = ["" "" "" "" "" "" "" "" "" ""];
           on-update = "$HOME/.config/waybar/scripts/check_battery.sh";
         };
 
         tray = {
           icon-size = 16;
           spacing = 0;
+          expand = true;
+          show-passive-items = true;
         };
-
       };
     };
     style = builtins.readFile ./waybar-style.css;
