@@ -63,6 +63,7 @@
       kryses-nixos = mkSystem [./hosts/kryses-nixos];
       kryses-mobile-nixos = mkSystem [./hosts/kryses-mobile-nixos];
       kryses-kirk = mkSystem [./hosts/kryses-kirk];
+      kryses-tyr = mkSystem [./hosts/kryses-tyr];
     };
     homeConfigurations = {
       kryses = home-manager.lib.homeManagerConfiguration {

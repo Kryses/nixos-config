@@ -17,7 +17,7 @@
       "$mainMod" = "SUPER";
 
       monitor =[
-          "DP-1,5120x1440@60,0x0,1"
+          "eDP-1,1920x1200@60,0x0,0.83"
           "DP-3,5120x1440@60,auto-up,1"
         ];
       env = [
@@ -149,16 +149,10 @@
         "workspace special:game, class: ^(worldbox)$"
       ];
       workspace = [
-        "1, monitor:DP-1"
-        "2, monitor:DP-1"
-        "3, monitor:DP-1"
-        "4, monitor:DP-1"
-        "5, monitor:DP-3"
-        "6, monitor:DP-3"
-        "7, monitor:DP-3"
-        "8, monitor:DP-3"
-        "9, monitor:DP-3"
-        "10, monitor:DP-3"
+        "1, monitor:eDP-1"
+        "2, monitor:eDP-1"
+        "3, monitor:eDP-1"
+        "4, monitor:eDP-1"
         "special:slack, on-created-empty:foot"
         "special:music, on-created-empty:foot"
         "special:steam, on-created-empty:foot"
