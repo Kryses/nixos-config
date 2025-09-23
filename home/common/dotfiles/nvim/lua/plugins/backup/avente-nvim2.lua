@@ -3,9 +3,7 @@ return {
   "yetone/avante.nvim",
   build = vim.fn.has "win32" == 1 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     or "make",
-  event = "VeryLazy",
-  lazy = false,
-  version = false, -- set this if you want to always pull the latest change
+  event = "User AstroFile", -- load on file open because Avante manages it's own bindings
   cmd = {
     "AvanteAsk",
     "AvanteBuild",
@@ -27,16 +25,6 @@ return {
     { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
   },
   opts = {
-    provider = "ollama",
-    use_absolute_path = true,
-    auto_suggestions_provider = "ollama",
-    disable_tools = false,
-    providers = {
-      ollama = {
-        endpoint = "http://kryses.local.ai:11434",
-        model = "qwen3-coder:latest",
-      }
-    },
     mappings = {
       ask = prefix .. "<CR>",
       edit = prefix .. "e",
@@ -79,6 +67,19 @@ return {
                 avante = { module = "blink-cmp-avante", name = "Avante" },
               },
             },
+          },
+        },
+      },
+    },
+    { -- if copilot.lua is available, default to copilot provider
+      "zbirenbaum/copilot.lua",
+      optional = true,
+      specs = {
+        {
+          "yetone/avante.nvim",
+          opts = {
+            provider = "copilot",
+            auto_suggestions_provider = "copilot",
           },
         },
       },
