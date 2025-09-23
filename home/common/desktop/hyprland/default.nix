@@ -17,8 +17,8 @@
       "$mainMod" = "SUPER";
 
       monitor =[
-          "eDP-1,1920x1200@60,0x0,0.83"
-          "DP-3,5120x1440@60,auto-up,1"
+          "eDP-1,1920x1200@60,0x0,1"
+          # "DP-3,5120x1440@60,auto-up,1"
         ];
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"

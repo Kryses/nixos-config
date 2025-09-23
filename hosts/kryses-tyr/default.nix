@@ -4,14 +4,6 @@
     ../common
     ../common/modules/audio.nix
     ../common/modules/bluetooth.nix
-    # ../common/modules/opentabletdriver.nix
-    # ../common/modules/nvidia.nix
-    ../common/modules/nvidia-open.nix
-    #../common/modules/ollama.nix
-    # ../common/modules/searx.nix
-    #../common/modules/podman.nix
-    # ../common/modules/gamemode.nix
-    # ../common/modules/ayon
     ./configuration.nix
     ./hardware.nix
   ];
