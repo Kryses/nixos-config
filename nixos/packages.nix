@@ -12,6 +12,7 @@ in
     # pkgs.legacyPackages.${system}.python39
     # nixpkgs-python.packages.${system}."3.9.2"
     inputs.zen-browser.packages.x86_64-linux.default
+    pkgs.btop
     pkgs.zellij
     pkgs.satty
     pkgs.krita

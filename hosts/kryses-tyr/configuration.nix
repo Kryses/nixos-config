@@ -20,6 +20,9 @@
     defaultGateway = "192.168.1.1";
   };
   
+  networking.hosts = {
+    "192.168.1.201" = ["kryses.local.ai"];
+  };
   # environment.systemPackages = with pkgs; [
   #   searxng
   # ];
