@@ -33,8 +33,15 @@ return {
     disable_tools = false,
     providers = {
       ollama = {
+        -- __inherited_from = "openai",
         endpoint = "http://kryses.local.ai:11434",
         model = "qwen3-coder:latest",
+        -- mode = "legacy",
+        legacy = true,
+        disable_tools = true,
+        extra_request_body = {
+          stream = true
+        }
       }
     },
     mappings = {
