@@ -21,7 +21,7 @@ in
     pkgs.audacity
     pkgs.chromium
     pkgs.obs-studio
-    pkgs.gimp
+    pkgs.git
     pkgs.rofi
     pkgs.wofi
     pkgs.mpv
@@ -149,7 +149,7 @@ in
     pkgs.glaxnimate
     pkgs.elegant-sddm
     #pkgs.dwarf-fortress-packages.dwarf-fortress-full 
-    #pkgs.cataclysm-dda-git
+    pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
     pkgs.grimblast
