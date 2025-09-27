@@ -2,7 +2,7 @@
   home.file = {
     ".config/satty".source = ./satty;
     ".config/yazi".source = ./yazi;
-    ".config/zellij".source = ./zellij;
+    # ".config/zellij".source = ./zellij;
     ".config/nvim/lua".source = ./nvim/lua;
     ".config/nvim/init.lua".source = ./nvim/init.lua;
     ".config/nvim/neovim.yml".source = ./nvim/neovim.yml;

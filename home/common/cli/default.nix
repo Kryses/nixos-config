@@ -7,5 +7,6 @@
     ./btop
     ./zoxide
     ./yazi
+    ./zellij
   ];
 }
