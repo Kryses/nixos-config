@@ -70,7 +70,7 @@ in {
             keycode = "char_l";
             mode = "vi_insert";
             event = {
-              send = "HistoryHintComplete";
+              send = "HistoryHintWordComplete";
             };
           }
         ];
@@ -85,12 +85,10 @@ in {
       cleanup = "sudo nix-collect-garbage --delete-older-than 1d";
       listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
       l = "eza -lF --time-style=long-iso --icons";
-      test-build = "sudo nixos-rebuild test --impure --flake ~/nix";
-
+      test-build = "sudo nixos-rebuild test --impure --flake ~/documents/nixos/nix";
       start-timer = "nu ~/scripts/run_timer.nu";
-      switch-home = "home-manager switch --impure --flake ~/documents/nixos/nix";
       switch-build = "sudo nixos-rebuild switch --impure --flake ~/documents/nixos/nix";
-      update-build = "nix flake update ~/nix";
+      update-build = "nix flake update ~/documents/nixos/nix";
     };
     environmentVariables = {
         PROMPT_INDICATOR_VI_INSERT = "  ";
