@@ -24,8 +24,6 @@
         "XCURSOR_SIZE,36"
         "QT_QPA_PLATFORM,wayland"
         "XDG_SCREENSHOTS_DIR,~/wallpaper"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       ];
 
       debug = {
