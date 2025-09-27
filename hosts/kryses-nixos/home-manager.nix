@@ -4,19 +4,18 @@
     ../../home/common
   ];
 
-  # wayland.windowManager.hyprland = {
-  #   settings.input = {
-  #     sensitivity = lib.mkForce 0.3;
-  #   };
-  # };
-  #
-  # monitors = [
-  #   {
-  #     name = "eDP-1";
-  #     width = 3072;
-  #     height = 1920;
-  #     x = 0;
-  #     scale = 1.5;
-  #   }
-  # ];
+  wayland.windowManager.hyprland.settings = {
+    monitor =[
+        "DP-1,5120x1440@60,auto,1"
+        "DP-3,5120x1440@60,auto-up,1"
+    ];
+    env = [
+      "XDG_CURRENT_DESKTOP,Hyprland"
+      "XDG_SESSION_TYPE,wayland"
+      "XDG_SESSION_DESKTOP,Hyprland"
+      "XCURSOR_SIZE,36"
+      "QT_QPA_PLATFORM,wayland"
+      "XDG_SCREENSHOTS_DIR,~/wallpaper"
+    ];
+  };
 }
