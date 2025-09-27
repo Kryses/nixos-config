@@ -39,7 +39,6 @@ in
     pkgs.statix
     pkgs.termdown
     pkgs.sox
-    pkgs.below
     pkgs.posting
     inputs.compose2nix.packages.x86_64-linux.default
     pkgs.qt6Packages.qtwayland
@@ -49,7 +48,6 @@ in
     pkgs.gnumake
     pkgs.gcc
     pkgs.nodejs
-    # pkgs.python
     pkgs.neovim
     pkgs.telescope
     pkgs.ripgrep
@@ -114,18 +112,8 @@ in
     pkgs.timewarrior
     pkgs.gh
     pkgs.jq
-    pkgs.firefoxpwa
 
 
-    #Python
-
-
-    # pkgs.Xorg stuff
-    #pkgs.xterm
-    #pkgs.xclip
-    #pkgs.xorg.xbacklight
-
-    # pkgs.Wayland stuff
     pkgs.xwayland
     pkgs.wl-clipboard
     pkgs.cliphist
@@ -147,8 +135,7 @@ in
     pkgs.amdvlk
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
-    pkgs.elegant-sddm
-    #pkgs.dwarf-fortress-packages.dwarf-fortress-full 
+    pkgs.dwarf-fortress-packages.dwarf-fortress-full 
     pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
@@ -169,8 +156,6 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
-    #pkgs.ollama-cuda
-    #pkgs.open-webui
     pkgs.oterm
     pkgs.bat
     pkgs.postman
@@ -192,7 +177,6 @@ in
     pkgs.cmatrix
     pkgs.pyenv
     pkgs.tcl
-    # pkgs.nice-dcv-client
   ];
 
   fonts.packages = with pkgs; [

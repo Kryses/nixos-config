@@ -84,7 +84,6 @@ in {
       c = "clear";
       cleanup = "sudo nix-collect-garbage --delete-older-than 1d";
       listgen = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-      l = "eza -lF --time-style=long-iso --icons";
       test-build = "sudo nixos-rebuild test --impure --flake ~/documents/nixos/nix";
       start-timer = "nu ~/scripts/run_timer.nu";
       switch-build = "sudo nixos-rebuild switch --impure --flake ~/documents/nixos/nix";
