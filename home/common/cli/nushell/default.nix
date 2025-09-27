@@ -11,7 +11,6 @@ in {
   home.sessionVariables = {
     _ZO_DATA_DIR = "~/.local/share";
   };
-  # programs.carapace.enable = true;
   programs.nushell = {
     enable = true;
     plugins = with pkgs.nushellPlugins; [
@@ -55,6 +54,26 @@ in {
             };
           }
         ];
+        keybindings = [
+          {
+            name = "accept";
+            modifier = "control";
+            keycode = "char_l";
+            mode = "vi_insert";
+            event = {
+              send = "HistoryHintComplete";
+            };
+          }
+          {
+            name = "accept_word";
+            modifier = "control_shift";
+            keycode = "char_l";
+            mode = "vi_insert";
+            event = {
+              send = "HistoryHintComplete";
+            };
+          }
+        ];
       }; 
     in ''
       $env.config = ${conf};
@@ -88,5 +107,7 @@ in {
 
   };
   
+  programs.carapace.enable = true;
+  programs.carapace.enableNushellIntegration = true;
 
 }

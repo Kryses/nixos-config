@@ -4,7 +4,7 @@
     ./nushell
     ./ohmyposh
     ./htop
-    # ./btop
+    ./btop
     ./zoxide
     ./yazi
   ];
