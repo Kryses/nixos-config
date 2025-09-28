@@ -28,6 +28,17 @@
   };
   home-manager.backupFileExtension = "backup";
 
+  networking = {
+    nameservers = [ 
+      "1.1.1.1" 
+      "8.8.8.8" 
+      "192.168.1.80"
+
+    ];
+    defaultGateway = "192.168.1.1";
+  };
+  networking.networkmanager.insertNameservers = ["192.168.1.80"];
+
   nix = {
     gc = {
       automatic = true;
