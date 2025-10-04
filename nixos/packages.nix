@@ -121,7 +121,7 @@ in
     # pkgs.WMs and stuff
     pkgs.herbstluftwm
     pkgs.hyprland
-    pkgs.hyprlandPlugins.hyprsplit
+    # pkgs.hyprlandPlugins.hyprsplit
     pkgs.seatd
     pkgs.xdg-desktop-portal-hyprland
     pkgs.waybar
@@ -132,7 +132,6 @@ in
     pkgs.pamixer
     pkgs.pavucontrol
     # pkgs.GPU stuff 
-    pkgs.amdvlk
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
     pkgs.dwarf-fortress-packages.dwarf-fortress-full 

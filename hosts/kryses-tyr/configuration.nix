@@ -17,7 +17,7 @@
   networking = {
     hostName = "kryses-tyr";
     nameservers = ["1.1.1.1" "8.8.8.8"];
-    defaultGateway = "192.168.1.1";
+    # defaultGateway = "192.168.1.1";
   };
   
   networking.hosts = {
