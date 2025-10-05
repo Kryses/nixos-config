@@ -176,6 +176,7 @@ in
     pkgs.cmatrix
     pkgs.pyenv
     pkgs.tcl
+    pkgs.bibletime
   ];
 
   fonts.packages = with pkgs; [

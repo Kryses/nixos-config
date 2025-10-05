@@ -6,6 +6,8 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     flake-compat.url = "github:edolstra/flake-compat";
     zen-browser.url = "https://flakehub.com/f/youwen5/zen-browser/0.1.204";
+    stylix.url = "github:nix-community/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,10 +23,6 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit/53e417bce3b3aaf90ba2d86afd0c2a6d2cc3125e";
       inputs.hyprland.follows = "hyprland";
     };
     split-monitor-workspaces = {
@@ -44,6 +42,7 @@
     nixpkgs-stable,
     home-manager,
     zen-browser,
+    stylix,
     ...
   }: let
     inherit (self) outputs;
@@ -52,7 +51,7 @@
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {
-          inherit inputs outputs home-manager nixpkgs system zen-browser;
+          inherit inputs outputs home-manager nixpkgs system zen-browser stylix;
           pkgs-stable = import nixpkgs-stable {
             config.allowUnfree = true;
           };
