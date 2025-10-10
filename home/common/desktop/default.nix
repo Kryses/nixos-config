@@ -9,5 +9,6 @@
     ./mako
     ./cursor
     ./qt
+    # ./gtk
   ];
 }
