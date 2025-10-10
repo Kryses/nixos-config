@@ -7,8 +7,8 @@
         position = "top";
         margin = "9 13 -10 18";
 
-        modules-left = ["hyprland/workspaces" "hyprland/submap"];
-        modules-center = ["clock"];
+        modules-left = ["hyprland/workspaces" "hyprland/submap" "custom/daily-verse" ];
+        modules-center = [ "clock" ];
         modules-right = ["custom/github_notifications" "pulseaudio" "custom/mem" "cpu" "backlight" "battery" "tray"];
 
         "hyprland/workspaces" = {
@@ -25,8 +25,15 @@
           format = "{}";
           tooltip = true;
           interval = 300;
-          exec = "$HOME/dotfiles/tmux/scripts/github_notifications.sh";
+          exec = ./custom/github_notifications.sh;
           on-click = "xdg-open https://github.com/notifications";
+        };
+        "custom/daily-verse" = {
+          format = "{}";
+          tooltip = true;
+          max-length = 25;
+          interval = 1800;
+          exec = ./custom/daily-verse.sh;
         };
 
         "clock" = {
