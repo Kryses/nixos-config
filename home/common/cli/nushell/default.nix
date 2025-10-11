@@ -88,6 +88,7 @@ in {
       start-timer = "nu ~/scripts/run_timer.nu";
       switch-build = "sudo nixos-rebuild switch --impure --flake ~/documents/nixos/nix";
       update-build = "nix flake update ~/documents/nixos/nix";
+      mount_work = "nix flake update ~/documents/nixos/nix";
     };
     environmentVariables = {
         PROMPT_INDICATOR_VI_INSERT = "  ";
