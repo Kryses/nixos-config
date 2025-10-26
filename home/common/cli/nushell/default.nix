@@ -89,6 +89,9 @@ in {
       switch-build = "sudo nixos-rebuild switch --impure --flake ~/documents/nixos/nix";
       update-build = "nix flake update ~/documents/nixos/nix";
       mount_work = "nix flake update ~/documents/nixos/nix";
+      ta = "task add";
+      tt = "task next";
+      ttu = "taskwarrior-tui";
     };
     environmentVariables = {
         PROMPT_INDICATOR_VI_INSERT = "  ";
