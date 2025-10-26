@@ -1,4 +1,4 @@
-{pkgs, environment, ...}:
+{pkgs, ...}:
 {
   home.packages = [
     pkgs.taskwarrior-tui
@@ -34,10 +34,12 @@
 
       urgency = {
         user = {
-          tags = {
+          tag = {
             blocked.coefficient = -1;
             halon.coefficient = 0.75;
             home.coefficient = 0.0;
+            home.safety.coefficient = 1.0;
+            waiting.coefficient = -10.0;
           };
           project = {
             ai_server_build.coefficient = 0.75;
@@ -107,6 +109,14 @@
         next = {
           labels = "Id,Description,Active,󰖡,󰘃,Project,,󱑈,󱫌,due,,Reviewed";
           columns = "id,description.count,start.age,size,priority,project,tags.count,scheduled.countdown,due.countdown,due,urgency,reviewed";
+          sort = "urgency-";
+          filter = "( +PENDING or +WAITING ) -UNTIL -DELETED -BLOCKED -waiting";
+        };
+        waiting = {
+          labels = "Id,Description,Active,󰖡,󰘃,Project,,󱑈,󱫌,due,,Reviewed";
+          columns = "id,description.count,start.age,size,priority,project,tags.count,scheduled.countdown,due.countdown,due,urgency,reviewed";
+          sort = "urgency-";
+          filter = "-DELETED +waiting";
         };
         side = {
           labels = "Id,(P),Description,urg";

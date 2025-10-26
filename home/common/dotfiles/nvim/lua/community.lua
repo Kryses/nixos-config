@@ -22,7 +22,7 @@ return {
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.terraform" },
-  { import = "astrocommunity.snippet.mini-snippets" },
+  -- { import = "astrocommunity.snippet.mini-snippets" },
   -- { import = "astrocommunity.workflow.bad-practices-nvim" }
   { import = "astrocommunity.motion.harpoon" },
   { import = "astrocommunity.terminal-integration.vim-tmux-navigator" },
