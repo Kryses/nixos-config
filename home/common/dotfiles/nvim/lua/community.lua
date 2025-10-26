@@ -22,8 +22,8 @@ return {
   { import = "astrocommunity.pack.nix" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.terraform" },
-  { import = "astrocommunity.snippet.mini-snippets" },
-  -- { import = "astrocommunity.workflow.bad-practices-nvim" },
+  -- { import = "astrocommunity.snippet.mini-snippets" },
+  -- { import = "astrocommunity.workflow.bad-practices-nvim" }
   { import = "astrocommunity.motion.harpoon" },
   { import = "astrocommunity.terminal-integration.vim-tmux-navigator" },
   { import = "astrocommunity.terminal-integration.vim-tmux-yank" },
@@ -34,7 +34,7 @@ return {
   { import = "astrocommunity.motion.mini-bracketed" },
   { import = "astrocommunity.editing-support.mini-operators" },
   { import = "astrocommunity.editing-support.auto-save-nvim" },
-  { import = "astrocommunity.completion.avante-nvim" },
+
 
   -- import/override with your plugins folder
 }

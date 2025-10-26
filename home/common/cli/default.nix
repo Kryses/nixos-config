@@ -7,5 +7,6 @@
     ./zoxide
     ./yazi
     ./zellij
+    ./task
   ];
 }

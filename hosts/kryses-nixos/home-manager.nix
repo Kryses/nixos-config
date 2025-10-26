@@ -7,7 +7,7 @@
   wayland.windowManager.hyprland.settings = {
     monitor =[
         "DP-1,5120x1440@60,auto,1"
-        "DP-3,5120x1440@60,auto-up,1"
+        "DP-2,5120x1440@60,auto-up,1"
     ];
     env = [
       "XDG_CURRENT_DESKTOP,Hyprland"

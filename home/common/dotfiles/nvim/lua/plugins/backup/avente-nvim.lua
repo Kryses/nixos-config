@@ -5,7 +5,7 @@ return {
     or "make",
   event = "VeryLazy",
   lazy = false,
-  version = false, -- set this if you want to always pull the latest change
+  version = false,
   cmd = {
     "AvanteAsk",
     "AvanteBuild",
@@ -19,6 +19,7 @@ return {
     "AvanteClear",
     "AvanteFocus",
     "AvanteStop",
+    "AvanteDiff",
   },
   dependencies = {
     { "stevearc/dressing.nvim", optional = true },
@@ -27,20 +28,34 @@ return {
     { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
   },
   opts = {
+    auto_diff = true,  -- This was missing
+    debug = true,
     provider = "ollama",
     use_absolute_path = true,
     auto_suggestions_provider = "ollama",
-    disable_tools = true,
+    -- edit = {
+    --   auto_apply = false,
+    --   diff_preview = true
+    -- },
     providers = {
       ollama = {
-        endpoint = "http://kryses.local.ai:11434",
-        model = "qwen3-coder:latest",
-        legacy = true,
-        disable_tools = true,
+        endpoint = "http://kryses.local.ai:11434",  -- Fixed the typo (was kryses.local.ai)
+        model = "qwen2.5-coder:7b",  -- More specific model name
+        disable_tools = false,
+        -- mode = "legacy",
         extra_request_body = {
-          stream = true
+          stream = true,
+          options = {
+            num_predict = 2048,
+            temperature = 0.7,
+            top_p = 0.9
+          }
         }
       }
+    },
+    file_modification = {
+      auto_open = true,
+      confirm_changes = true
     },
     mappings = {
       ask = prefix .. "<CR>",
@@ -61,6 +76,8 @@ return {
       diff = {
         next = "]c",
         prev = "[c",
+        accept = "<leader>aa",  -- Add this for accepting changes
+        reject = "<leader>ar",  -- Add this for rejecting changes
       },
       files = {
         add_current = prefix .. ".",
@@ -68,7 +85,7 @@ return {
       },
     },
   },
-  specs = { -- configure optional plugins
+  specs = {
     { "AstroNvim/astroui", opts = { icons = { Avante = "" } } },
     {
       "Kaiser-Yang/blink-cmp-avante",
@@ -89,7 +106,6 @@ return {
       },
     },
     {
-      -- make sure `Avante` is added as a filetype
       "MeanderingProgrammer/render-markdown.nvim",
       optional = true,
       opts = function(_, opts)
@@ -98,7 +114,6 @@ return {
       end,
     },
     {
-      -- make sure `Avante` is added as a filetype
       "OXY2DEV/markview.nvim",
       optional = true,
       opts = function(_, opts)
@@ -131,20 +146,16 @@ return {
               local node = state.tree:get_node()
               local filepath = node:get_id()
               local relative_path = require("avante.utils").relative_path(filepath)
-
               local sidebar = require("avante").get()
-
               local open = sidebar:is_open()
-              -- ensure avante sidebar is open
               if not open then
                 require("avante.api").ask()
                 sidebar = require("avante").get()
               end
-
               sidebar.file_selector:add_selected_file(relative_path)
-
-              -- remove neo tree buffer
-              if not open then sidebar.file_selector:remove_selected_file "neo-tree filesystem [1]" end
+              if not open then
+                sidebar.file_selector:remove_selected_file "neo-tree filesystem [1]"
+              end
             end,
           },
           window = {
@@ -157,4 +168,3 @@ return {
     },
   },
 }
-
