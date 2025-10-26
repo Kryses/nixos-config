@@ -28,7 +28,7 @@ in
     pkgs.discord-development
     pkgs.gparted
     pkgs.obsidian
-    pkgs.pcmanfm-qt
+    # pkgs.pcmanfm-qt
     pkgs.nushell
     pkgs.appgate-sdp
     pkgs.slack

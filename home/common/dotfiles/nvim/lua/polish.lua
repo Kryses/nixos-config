@@ -1,18 +1,34 @@
--- This will run last in the setup process and is a good place to configure
--- things like custom filetypes. This just pure lua so anything that doesn't
--- fit in the normal config locations above can go here
-
--- Set up custom filetypes
--- vim.filetype.add {
---   extension = {
---     foo = "fooscript",
---   },
---   filename = {
---     ["Foofile"] = "fooscript",
---   },
---   pattern = {
---     ["~/%.config/foo/.*"] = "fooscript",
---   },
--- }
--- vim.opt.mousemodel = "extend";
-
+require("codecompanion").setup {
+  adapters = {
+    ollama = function()
+      return require("codecompanion.adapters").extend("ollama", {
+        env = {
+          url = "http://kryses.local.ai:11434",
+        },
+        headers = {
+          ["Content-Type"] = "application/json",
+        },
+        parameters = {
+          sync = true,
+        },
+      })
+    end,
+  },
+  strategies = {
+    chat = {
+      adaptor = "ollama",
+    },
+    inline = {
+      adaptor = {
+        name = "ollama",
+        model = "qwen2.5-code:7b", -- Changed from qwen2.5-coder:7b
+      },
+    },
+    cmd = {
+      adaptor = {
+        name = "ollama",
+        model = "qwen2.5-code:7b", -- Changed from qwen2.5-coder:7b
+      },
+    },
+  },
+}

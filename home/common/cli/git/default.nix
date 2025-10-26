@@ -1,7 +1,11 @@
 {
   programs.git = {
     enable = true;
-    userName  = "kryses";
-    userEmail = "thechad802@gmail.com";
+    settings = {
+      user = {
+        name  = "kryses";
+        email = "thechad802@gmail.com";
+      };
+    };
   };
 }
