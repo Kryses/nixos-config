@@ -32,7 +32,7 @@
           format = "{}";
           tooltip = true;
           max-length = 25;
-          interval = 1800;
+          interval = 120;
           exec = ./custom/daily-verse.sh;
         };
 
