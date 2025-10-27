@@ -90,8 +90,13 @@ in {
       update-build = "nix flake update ~/documents/nixos/nix";
       mount_work = "nix flake update ~/documents/nixos/nix";
       ta = "task add";
+      ts = "task start";
+      tss = "task stop";
       tt = "task next";
       ttu = "taskwarrior-tui";
+      tw = "timew";
+      twd = "timew day";
+      tws = "timew summary";
     };
     environmentVariables = {
         PROMPT_INDICATOR_VI_INSERT = "  ";
