@@ -23,13 +23,14 @@
       search.case.sensative = "no";
       active.indicator = "🕑";
 
-      context.WK = "+work";
-      context.HOME = "project:home";
-      context.INBOX = "project:inbox";
+      context.work = "+work";
+      context.home = "+home";
+      context.inbox = "project:inbox";
 
       alias.punt = "modify wait:1d";
       alias.someday = "wait:someday";
       alias.work = "+halon";
+      alias.tracked = "+jira";
       alias.home = "+home";
 
       urgency = {
@@ -55,7 +56,7 @@
         };
         priority = {
           values = "F,H,M,L";
-          F.coefficient = 10;
+          F.coefficient = 10.0;
         };
         size = {
           values = "XXS,XS,S,M,L,XL,XXL";
