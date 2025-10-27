@@ -9,6 +9,7 @@
     ./boot.nix
     ./openssh.nix
     ./greetd.nix
+    ./modules/gtk-theme.nix
     inputs.home-manager.nixosModules.home-manager
 
   ];
