@@ -88,11 +88,12 @@ in {
       start-timer = "nu ~/scripts/run_timer.nu";
       switch-build = "sudo nixos-rebuild switch --impure --flake ~/documents/nixos/nix";
       update-build = "nix flake update ~/documents/nixos/nix";
-      mount_work = "nix flake update ~/documents/nixos/nix";
       ta = "task add";
       ts = "task start";
+      tm = "task modify";
+      td = "task done";
       tss = "task stop";
-      tt = "task next";
+      tt = toString ./scripts/task_report.nu;
       ttu = "taskwarrior-tui";
       tw = "timew";
       twd = "timew day";

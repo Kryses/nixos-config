@@ -33,6 +33,10 @@
       alias.tracked = "+jira";
       alias.home = "+home";
 
+      alias.p = "project";
+      alias.pr = "priority";
+      alias.s = "size";
+
       urgency = {
         user = {
           tag = {
