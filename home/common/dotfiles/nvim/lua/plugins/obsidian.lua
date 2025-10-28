@@ -2,7 +2,7 @@ return {
   "obsidian-nvim/obsidian.nvim",
 
   event = { "BufReadPre  */krys-brain/*.md" },
-
+  lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
