@@ -43,13 +43,19 @@
             blocked.coefficient = -1;
             halon.coefficient = 0.75;
             home.coefficient = 0.0;
-            home.safety.coefficient = 1.0;
+            computer.coefficient = 0.1;
+            safety.coefficient = 1.0;
+            cleaning.coefficient = 2.0;
+            support.coefficient = 0.75;
             waiting.coefficient = -10.0;
+            family.coefficient = 0.75;
+            personal.coefficient = 0.1;
+            meeting.coefficient = 1.0;
           };
           project = {
-            ai_server_build.coefficient = 0.75;
-            proxmox_server_build.coefficient = 0.65;
-            desktop_computer_build.coefficient = 0.5;
+            ai_server.coefficient = 0.75;
+            proxmox_server.coefficient = 0.65;
+            desktop_computer.coefficient = 0.5;
           };
         };
       };
@@ -103,7 +109,7 @@
           columns = "id,tags,description";
           description = "Inbox";
           filter = "project:inbox -WAITING status:pending limit:page";
-          labels = "ID,Tags,Description";
+          labels = "ID,Tags,Descripation";
         };
         _reviewed = {
           description = "Tasksh review report.  Adjust the filter to your needs.";
@@ -115,13 +121,25 @@
           labels = "Id,Description,Active,󰖡,󰘃,Project,,󱑈,󱫌,due,,Reviewed";
           columns = "id,description.count,start.age,size,priority,project,tags.count,scheduled.countdown,due.countdown,due,urgency,reviewed";
           sort = "urgency-";
-          filter = "( +PENDING or +WAITING ) -UNTIL -DELETED -BLOCKED -waiting";
+          filter = "( +PENDING ) -WAITING -DELETED -BLOCKED -waiting";
+        };
+        home = {
+          labels = "Id,Description,Active,󰖡,󰘃,Project,,󱑈,󱫌,due,,Reviewed";
+          columns = "id,description.count,start.age,size,priority,project,tags.count,scheduled.countdown,due.countdown,due,urgency,reviewed";
+          sort = "urgency-";
+          filter = "( +PENDING ) -WAITING -DELETED -BLOCKED -waiting +home";
+        };
+        work = {
+          labels = "Id,Description,Active,󰖡,󰘃,Project,,󱑈,󱫌,due,,Reviewed";
+          columns = "id,description.count,start.age,size,priority,project,tags.count,scheduled.countdown,due.countdown,due,urgency,reviewed";
+          sort = "urgency-";
+          filter = "( +PENDING ) -WAITING -DELETED -BLOCKED -waiting +halon";
         };
         waiting = {
           labels = "Id,Description,Active,󰖡,󰘃,Project,,󱑈,󱫌,due,,Reviewed";
           columns = "id,description.count,start.age,size,priority,project,tags.count,scheduled.countdown,due.countdown,due,urgency,reviewed";
           sort = "urgency-";
-          filter = "-DELETED +waiting";
+          filter = "-DELETED (+waiting or +WAITING)";
         };
         side = {
           labels = "Id,(P),Description,urg";
