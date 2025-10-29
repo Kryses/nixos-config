@@ -2,12 +2,6 @@
 let configDir = "${config.xdg.configHome}/nushell";
 
 in {
-  # # home.file."${configDir}/aliases.nu".source = ./aliases.nu;
-  # home.file."${configDir}/oh-my-posh.nu".source = ./oh-my-posh.nu;
-  # home.file."${configDir}/env.nu".source = ./env.nu;
-  # # home.file."${configDir}/zoxide.nu".source = ./zoxide.nu;
-  # home.file."${configDir}/omp-kryses.toml".source = ./omp-kryses.toml;
-
   home.sessionVariables = {
     _ZO_DATA_DIR = "~/.local/share";
   };
@@ -88,11 +82,12 @@ in {
       start-timer = "nu ~/scripts/run_timer.nu";
       switch-build = "sudo nixos-rebuild switch --impure --flake ~/documents/nixos/nix";
       update-build = "nix flake update ~/documents/nixos/nix";
-      mount_work = "nix flake update ~/documents/nixos/nix";
       ta = "task add";
       ts = "task start";
+      tm = "task modify";
+      td = "task done";
       tss = "task stop";
-      tt = "task next";
+      tt = toString ./scripts/task_report.nu;
       ttu = "taskwarrior-tui";
       tw = "timew";
       twd = "timew day";
@@ -117,3 +112,5 @@ in {
   programs.carapace.enableNushellIntegration = true;
 
 }
+# for $x in (task project:ai_server_build +PENDING export | from json | select id) {if $.id != 0 {tm $x.id project:ai_server}
+ 

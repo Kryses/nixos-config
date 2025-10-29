@@ -7,7 +7,9 @@
     ../common/modules/nvidia.nix
     ../common/modules/podman.nix
     ../common/modules/gamemode.nix
-    ../common/modules/ayon
+    ../common/modules/ollama.nix
+    ../common/modules/podman.nix
+    ../common/modules/open-webui-container.nix
     ./configuration.nix
     ./hardware.nix
   ];
