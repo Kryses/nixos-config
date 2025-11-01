@@ -6,6 +6,7 @@
   ];
   programs.taskwarrior = {
     enable = true;
+    package = pkgs.taskwarrior3;
     config = {
       data.location = "~/.task";
       hooks.location = ./hooks;
