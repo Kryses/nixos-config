@@ -16,7 +16,6 @@
     settings = {
       "$mainMod" = "SUPER";
 
-
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
@@ -147,10 +146,16 @@
         "workspace special:game, class: ^(worldbox)$"
       ];
       workspace = [
-        "1, monitor:eDP-1"
-        "2, monitor:eDP-1"
-        "3, monitor:eDP-1"
-        "4, monitor:eDP-1"
+        "1, monitor:DP-1"
+        "2, monitor:DP-1"
+        "3, monitor:DP-1"
+        "4, monitor:DP-1"
+        "5, monitor:DP-1"
+        "6, monitor:DP-2"
+        "7, monitor:DP-2"
+        "8, monitor:DP-2"
+        "9, monitor:DP-2"
+        "10, monitor:DP-2"
         "special:slack, on-created-empty:foot"
         "special:music, on-created-empty:foot"
         "special:steam, on-created-empty:foot"
@@ -194,7 +199,7 @@
         "$mainMod SHIFT, K,    swapwindow, u"
         "$mainMod SHIFT, J,  swapwindow, d"
 
-        "$mainMod SHIFT CTRL, J,  movecurrentworkspacetomonitor, DP-3"
+        "$mainMod SHIFT CTRL, J,  movecurrentworkspacetomonitor, DP-2"
         "$mainMod SHIFT CTRL, K,  movecurrentworkspacetomonitor, DP-1"
 
         # Window resizing                     X  Y
@@ -258,7 +263,8 @@
         "$mainMod, U, exec, zen"
         "$mainMod, Y, exec, pkill -SIGUSR2 waybar"
 
-        "$mainMod, K, exec, ~/.config/wofi/wofi-wallpaper-selector.sh"
+        "$mainMod, O, exec, ~/.config/wofi/wofi-wallpaper-selector.sh"
+
         # "$mainMod SHIFT, P, exec, wofi-pass"
         "$mainMod SHIFT, J, exec, wofi-emoji"
 
