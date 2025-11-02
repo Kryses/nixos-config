@@ -3,7 +3,6 @@
     ./hardware.nix
     ../../nixos/packages.nix
     ../../nixos/modules/bundle.nix
-    ../../nixos/hardware/nvidia.nix
   ];
 
   disabledModules = [
@@ -13,7 +12,7 @@
   services.openssh.enable = true;
 
   networking = {
-    hostName = "kryses-nixos";
+    hostName = "kryses-brokkr";
     # usePredictableInterfaceNames = false;
     # interfaces.eth1.ipv4.addresses = [{
     #   address = "192.168.1.200";
