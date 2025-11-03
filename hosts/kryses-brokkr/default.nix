@@ -4,7 +4,7 @@
     ../common
     ../common/modules/audio.nix
     ../common/modules/bluetooth.nix
-    ../common/modules/nvidia-open.nix
+    # ../common/modules/nvidia-open.nix
     ../common/modules/podman.nix
     ../common/modules/gamemode.nix
     ../common/modules/ollama.nix
@@ -12,6 +12,8 @@
     ../common/modules/open-webui-container.nix
     ./configuration.nix
     ./hardware.nix
+    ../common/modules/libvirt.nix
+    ./vfio.nix
   ];
 
   home-manager = {

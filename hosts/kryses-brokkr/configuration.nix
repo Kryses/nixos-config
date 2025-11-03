@@ -11,6 +11,14 @@
   programs.nix-ld.enable = true;
   services.openssh.enable = true;
 
+  # hardware.nvidia.prime = {
+  #   sync.enable = true;
+  #   nvidiaBusId = "PCI:4:0:0";
+  #   intelBusId = "PCI:0:2:0";
+  # };
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0775 kryses root qemu-libvirtd -"
+  ];
   networking = {
     hostName = "kryses-brokkr";
     # usePredictableInterfaceNames = false;

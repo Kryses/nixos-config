@@ -29,6 +29,10 @@
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
+
+    nixos-vfio.url = "github:j-brn/nixos-vfio";
+    nixos-vfio.inputs.nixpkgs.follows = "nixpkgs";
+
     impermanence.url = "github:nix-community/impermanence";
     nix-spicetify.url = "github:the-argus/spicetify-nix";
     nix-spicetify.inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +47,7 @@
     home-manager,
     zen-browser,
     stylix,
+    nixos-vfio,
     ...
   }: let
     inherit (self) outputs;
@@ -51,7 +56,7 @@
       nixpkgs.lib.nixosSystem {
         inherit modules;
         specialArgs = {
-          inherit inputs outputs home-manager nixpkgs system zen-browser stylix;
+          inherit inputs outputs home-manager nixpkgs system zen-browser stylix nixos-vfio;
           pkgs-stable = import nixpkgs-stable {
             config.allowUnfree = true;
           };

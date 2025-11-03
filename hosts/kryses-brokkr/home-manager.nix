@@ -4,6 +4,29 @@
     ../../home/common
   ];
 
+  programs.looking-glass-client = {
+      enable = true;
+      settings = {
+      app = {
+        allowDMA = true;
+        shmFile = "/dev/shm/looking-glass";
+      };
+      win = {
+        fullScreen = true;
+        showFPS = true;
+        jitRender = true;
+      };
+      spice = {
+        enable = true;
+        audio = true;
+      };
+      input = {
+        rawMouse = true;
+        escapeKey = 62;
+      };
+      };
+    };
+
   wayland.windowManager.hyprland.settings = {
     monitor =[
         "DP-1,5120x1440@60,auto,1"
