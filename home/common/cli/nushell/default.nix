@@ -2,6 +2,13 @@
 let configDir = "${config.xdg.configHome}/nushell";
 
 in {
+  # # home.file."${configDir}/aliases.nu".source = ./aliases.nu;
+  # home.file."${configDir}/oh-my-posh.nu".source = ./oh-my-posh.nu;
+  # home.file."${configDir}/env.nu".source = ./env.nu;
+  # # home.file."${configDir}/zoxide.nu".source = ./zoxide.nu;
+  # home.file."${configDir}/omp-kryses.toml".source = ./omp-kryses.toml;
+  home.file."${configDir}/nushell/scripts".source = ./scripts;
+
   home.sessionVariables = {
     _ZO_DATA_DIR = "~/.local/share";
   };
@@ -87,7 +94,7 @@ in {
       tm = "task modify";
       td = "task done";
       tss = "task stop";
-      tt = toString ./scripts/task_report.nu;
+      tt = "${configDir}/nushell/scripts/task_report.nu";
       ttu = "taskwarrior-tui";
       tw = "timew";
       twd = "timew day";
