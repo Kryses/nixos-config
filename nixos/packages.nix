@@ -135,7 +135,7 @@ in
     # pkgs.GPU stuff 
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
-    pkgs.dwarf-fortress-packages.dwarf-fortress-full 
+    # pkgs.dwarf-fortress-packages.dwarf-fortress-full 
     pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
