@@ -9,12 +9,14 @@
       settings = {
       app = {
         allowDMA = true;
-        shmFile = "/dev/shm/looking-glass";
+        shmFile = "/dev/kvmfr0";
+        capture = "nvfbc";
       };
       win = {
-        fullScreen = true;
-        showFPS = true;
+        fullScreen = false;
+        showFPS = false;
         jitRender = true;
+        backend = "x11";
       };
       spice = {
         enable = true;
@@ -22,7 +24,6 @@
       };
       input = {
         rawMouse = true;
-        escapeKey = 62;
       };
       };
     };

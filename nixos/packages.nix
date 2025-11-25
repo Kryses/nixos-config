@@ -13,6 +13,7 @@ in
     # nixpkgs-python.packages.${system}."3.9.2"
     inputs.zen-browser.packages.x86_64-linux.default
     # pkgs.tasksh
+    pkgs.firefoxpwa
     pkgs.btop
     pkgs.zellij
     pkgs.satty
@@ -135,6 +136,7 @@ in
     # pkgs.GPU stuff 
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
+    pkgs.pciutils
     # pkgs.dwarf-fortress-packages.dwarf-fortress-full 
     pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
@@ -143,6 +145,7 @@ in
     pkgs.slurp
     pkgs.flameshot
     pkgs.swappy
+    pkgs.protonvpn-gui
 
     # pkgs.Other
     pkgs.home-manager

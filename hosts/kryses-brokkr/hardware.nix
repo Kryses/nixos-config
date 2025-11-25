@@ -2,57 +2,16 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
-let
-  devices = [
-    "10de:2702"
-    "10de:22bb"
-  ];
 
-in
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ 
-      "xhci_pci" 
-      "ahci" 
-      "nvme" 
-      "usbhid" 
-      "usb_storage" 
-      "sd_mod" 
-      "vfio-pci" 
-      "vfio" 
-      "vfio_iommu_type1"
-    ];
-  boot.extraModprobeConfig = ''
-      softdep nvidia pre: vfio-pci
-      softdep drm pre: vfio-pci
-      softdep nouveau pre: vfio-pci
-    '';
-  boot.kernelParams = [
-    "intel_iommu=on"
-    "iommu=pt"
-    "vfio-pci.ids=${lib.concatStringsSep "," devices}"
-    "modprobe.blacklist=ast"
-  ];
-  boot.blacklistedKernelModules = [
-    "nouveau"
-    "nvidia"
-    "nvidia_drm"
-    "nvidia_modeset"
-    "i2c_nvidia_gpu"
-];
-  boot.initrd.preDeviceCommands = ''
-  DEVS="0000:01:00.0 0000:01:00.1"
-  for DEV in $DEVS; do
-    echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
-  done
-  modprobe -i vfio-pci
-'';
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.kvmfr ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/NIXROOT";

@@ -9,6 +9,8 @@
       allow_images = true;
       insensitive= true;
       width = "20%";
+      key_up = "Ctrl-p";
+      key_down = "Ctrl-n";
     };
     style = builtins.readFile ./style.css;
   };
