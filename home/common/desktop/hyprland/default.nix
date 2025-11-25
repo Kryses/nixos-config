@@ -139,6 +139,8 @@
         "size 2000 1340, class: (obsidian)"
         "opacity 0.65, class: (obsidian)"
 
+        "nofocus, class: (steam)"
+        "nofocus, class: ^(steam_app_.*)$"
         "workspace special:slack, class: (Slack)"
         "workspace special:slack, class: (discord)"
         "workspace special:steam, class: ^(steam_app_.*)$"

@@ -13,6 +13,7 @@ in
     # nixpkgs-python.packages.${system}."3.9.2"
     inputs.zen-browser.packages.x86_64-linux.default
     # pkgs.tasksh
+    pkgs.firefoxpwa
     pkgs.btop
     pkgs.zellij
     pkgs.satty
@@ -135,7 +136,8 @@ in
     # pkgs.GPU stuff 
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
-    pkgs.dwarf-fortress-packages.dwarf-fortress-full 
+    pkgs.pciutils
+    # pkgs.dwarf-fortress-packages.dwarf-fortress-full 
     pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
@@ -143,6 +145,7 @@ in
     pkgs.slurp
     pkgs.flameshot
     pkgs.swappy
+    pkgs.protonvpn-gui
 
     # pkgs.Other
     pkgs.home-manager
@@ -182,7 +185,7 @@ in
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     twemoji-color-font
     font-awesome
     powerline-fonts
