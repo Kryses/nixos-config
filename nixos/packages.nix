@@ -108,6 +108,7 @@ in
     pkgs.imv
     pkgs.dmenu
     pkgs.screenkey
+    pkgs.nmap
     pkgs.mako
     pkgs.gromit-mpx
     pkgs.taskwarrior3
