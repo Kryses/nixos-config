@@ -188,7 +188,7 @@
         "$mainMod, S, togglesplit, # dwindle"
 
         # Move focus with mainMod + arrow keys
-        "ALT, Tab,  cyclenext"
+        "$mainMod, Tab,  cyclenext"
         "$mainMod, Space,  focuscurrentorlast"
         "$mainMod, H,  movefocus, l"
         "$mainMod, L, movefocus, r"
