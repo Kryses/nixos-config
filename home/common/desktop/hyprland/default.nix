@@ -9,249 +9,258 @@
       source = ./which-key/which-key.sh;
       executable = true;
     };
+    "${config.xdg.configHome}/hypr/scripts/exit-current-special.sh" = {
+      source = ./scripts/exit-current-special.sh;
+      executable = true;
+    };
   };
 
   wayland.windowManager.hyprland = {
     extraConfig = ''
-            plugin {
-              hyprhook {
-                onSubmap = ${config.xdg.configHome}/hypr/scripts/which-key.sh
-              }
-            }
+                  plugin {
+                    hyprhook {
+                      onSubmap = ${config.xdg.configHome}/hypr/scripts/which-key.sh
+                    }
+                  }
+
+                  ########################################
+                  # MASTER MODE: central modal dispatcher
+                  ########################################
+                  # Enter with: SUPER + Space (see main bind list)
+                  # Keys (left-hand only):
+                  #   a -> Application mode
+                  #   s -> System mode
+                  #   d -> Workspace mode
+                  #   f -> Window-Manager (WM) mode
+                  #   Esc/Enter -> cancel
+
+                  submap = Master
+
+                  bindd = ,a, Enter Application mode, submap, Application
+                  bindd = ,s, Enter System mode, submap, System
+                  bindd = ,d, Enter Workspace mode, submap, Workspaces
+                  # bindd = ,f, Enter Window Manager mode, submap, Window-Manager
+                  bindd = ,f, Enter Window Manager mode, exec, sh -c 'hyprctl --batch "keyword general:col.active_border rgba(fab387ee) rgba(cba6f7ee) 45deg; keyword general:col.inactive_border rgba(45475aaa)" ; hyprctl dispatch submap Window-Manager'
+                  bindd = ,g, Enter Scratchpad mode, submap, Scratchpad
+
+                  bindd = ,escape, Exit Master mode, submap, reset
+                  bindd = ,return, Exit Master mode, submap, reset
+
+                  ########################################
+                  # WM MODE: focus, move, resize, layout
+                  ########################################
+                  # Entered via Master: f
+                  # Inside:
+                  #   h/j/k/l       -> move focus
+                  #   Shift+h/j/k/l -> move windows
+                  #   Alt+h/j/k/l   -> resize
+                  #   s             -> toggle split
+                  #   p             -> pseudotile
+                  #   f             -> fullscreen
+                  #   m             -> swap with master
+                  #   n             -> add master
+                  #   d             -> remove master
+                  #   r             -> cycle layout
+                  #   Esc/Enter     -> exit
+
+                  submap = Window-Manager
+
+                  # Focus
+                  bindd = ,h, Focus window left, movefocus, l
+                  bindd = ,l, Focus window right, movefocus, r
+                  bindd = ,k, Focus window up, movefocus, u
+                  bindd = ,j, Focus window down, movefocus, d
+
+                  # Move windows
+                  bindd = SHIFT,h, Move window left, swapwindow, l
+                  bindd = SHIFT,l, Move window right, swapwindow, r
+                  bindd = SHIFT,k, Move window up, swapwindow, u
+                  bindd = SHIFT,j, Move window down, swapwindow, d
+
+                  # Resize windows
+                  bindd = ALT,h, Resize window shrink horizontal, resizeactive, -60 0
+                  bindd = ALT,l, Resize window grow horizontal, resizeactive,  60 0
+                  bindd = ALT,k, Resize window shrink vertical, resizeactive,  0 -60
+                  bindd = ALT,j, Resize window grow vertical, resizeactive,  0  60
+
+                  # Layout controls
+                  bindd = ,s, Toggle split, togglesplit
+                  bindd = ,p, Toggle pseudotile, pseudo
+                  bindd = ,f, Toggle fullscreen, fullscreen, 1
+                  bindd = ,m, Swap with master, layoutmsg, swapwithmaster master
+                  bindd = ,n, Add master, layoutmsg, addmaster
+                  bindd = ,d, Remove master, layoutmsg, removemaster
+                  bindd = ,r, Cycle layout, layoutmsg, cycle
+
+                  # Exit WM mode (Esc)
+                  bindd = ,escape, Exit Window Manager mode, exec, sh -c 'hyprctl --batch "keyword general:col.active_border rgba(573AC5ee) rgba(280077ee) 45deg; keyword general:col.inactive_border rgba(595959aa)" ; hyprctl dispatch submap reset'
+
+                  # Exit WM mode (Enter)
+                  bindd = ,return, Exit Window Manager mode, exec, sh -c 'hyprctl --batch "keyword general:col.active_border rgba(573AC5ee) rgba(280077ee) 45deg; keyword general:col.inactive_border rgba(595959aa)" ; hyprctl dispatch submap reset'
+
+
+                  ########################################
+                  # WORKSPACE MODE
+                  ########################################
+                  # Entered via Master: d
+                  # Inside:
+                  #   h/j/k/l       -> prev/next workspace
+                  #   Shift+h/j/k/l -> move window to prev/next
+                  #   1–0           -> jump to workspace
+                  #   Shift+1–0     -> move window to workspace
+                  #   Esc/Enter     -> exit
+
+                  submap = Workspaces
+
+                  # Previous / next workspace
+                  bindd = ,h, Previous workspace, workspace, e-1
+                  bindd = ,l, Next workspace, workspace, e+1
+                  bindd = ,j, Next workspace, workspace, e+1
+                  bindd = ,k, Previous workspace, workspace, e-1
+
+                  # Move current window to prev/next
+                  bindd = SHIFT,h, Move window to previous workspace, movetoworkspace, e-1
+                  bindd = SHIFT,l, Move window to next workspace, movetoworkspace, e+1
+
+                  # Direct numeric workspace jump
+                  bindd = ,1, Switch to workspace 1, workspace, 1
+                  bindd = ,2, Switch to workspace 2, workspace, 2
+                  bindd = ,3, Switch to workspace 3, workspace, 3
+                  bindd = ,4, Switch to workspace 4, workspace, 4
+                  bindd = ,5, Switch to workspace 5, workspace, 5
+                  bindd = ,6, Switch to workspace 6, workspace, 6
+                  bindd = ,7, Switch to workspace 7, workspace, 7
+                  bindd = ,8, Switch to workspace 8, workspace, 8
+                  bindd = ,9, Switch to workspace 9, workspace, 9
+                  bindd = ,0, Switch to workspace 10, workspace, 10
+
+                  # Move active window to workspace N
+                  bindd = SHIFT,1, Move window to workspace 1, movetoworkspace, 1
+                  bindd = SHIFT,2, Move window to workspace 2, movetoworkspace, 2
+                  bindd = SHIFT,3, Move window to workspace 3, movetoworkspace, 3
+                  bindd = SHIFT,4, Move window to workspace 4, movetoworkspace, 4
+                  bindd = SHIFT,5, Move window to workspace 5, movetoworkspace, 5
+                  bindd = SHIFT,6, Move window to workspace 6, movetoworkspace, 6
+                  bindd = SHIFT,7, Move window to workspace 7, movetoworkspace, 7
+                  bindd = SHIFT,8, Move window to workspace 8, movetoworkspace, 8
+                  bindd = SHIFT,9, Move window to workspace 9, movetoworkspace, 9
+                  bindd = SHIFT,0, Move window to workspace 10, movetoworkspace, 10
+
+                  # Exit workspace mode
+                  bindd = ,escape, Exit Workspace mode, submap, reset
+                  bindd = ,return, Exit Workspace mode, submap, reset
+
+
+                  ########################################
+                  # APP LAUNCHER MODE (auto exit)
+                  ########################################
+                  # Entered via Master: a
+                  # Inside:
+                  #   b -> browser (zen in your case)
+                  #   t -> terminal
+                  #   f -> file manager
+                  #   o -> obsidian
+                  #   m -> spotify/music
+                  #   s -> slack
+                  #   d -> discord
+                  #   w -> wofi app launcher
+                  # Any of these will exit back to normal mode automatically
+                  # Esc/Enter still works as manual exit
+
+                  submap = Application
+
+                  bindd = ,a, Audio Settings, exec, sh -c 'pavucontrol & hyprctl dispatch submap reset'
+                  bindd = ,r, Remmina (Remote Desktop), exec, sh -c 'remmina & hyprctl dispatch submap reset'
+                  bindd = ,b, Launch browser Zen, exec, sh -c 'zen & hyprctl dispatch submap reset'
+                  bindd = ,t, Launch terminal Ghostty, exec, sh -c 'ghostty & hyprctl dispatch submap reset'
+                  bindd = ,f, Launch file manager Dolphin, exec, sh -c 'dolphin & hyprctl dispatch submap reset'
+                  bindd = ,o, Launch Obsidian notes, exec, sh -c 'obsidian & hyprctl dispatch submap reset'
+                  bindd = ,m, Launch Spotify music, exec, sh -c 'spotify & hyprctl dispatch submap reset'
+                  bindd = ,s, Launch Slack, exec, sh -c 'slack & hyprctl dispatch submap reset'
+                  bindd = ,d, Launch Discord, exec, sh -c 'discord & hyprctl dispatch submap reset'
+                  bindd = ,w, Launch Wofi app menu, exec, sh -c 'wofi --show drun & hyprctl dispatch submap reset'
+
+                  # backup exits
+                  bindd = ,escape, Exit Application mode, submap, reset
+                  bindd = ,return, Exit Application mode, submap, reset
+
+
+                  ########################################
+                  # SYSTEM MODE
+                  ########################################
+                  # Entered via Master: s
+                  # Inside:
+                  #   u -> volume up
+                  #   d -> volume down
+                  #   m -> mute
+                  #   b -> brightness down
+                  #   B -> brightness up (Shift+b)
+                  #   l -> lock
+                  #   p -> power menu / shutdown
+                  #   Esc/Enter -> exit
+
+                  submap = System
+
+                  bindd = ,u, Volume up five, exec, pamixer -i 5
+                  bindd = ,d, Volume down five, exec, pamixer -d 5
+                  bindd = ,m, Toggle mute, exec, pamixer -t
+
+                  bindd = ,b, Brightness down five, exec, brightnessctl set 5%-
+                  bindd = SHIFT,b, Brightness up five, exec, brightnessctl set +5%
+
+                  bindd = ,l, Lock session, exec, hyprlock
+
+                  # adjust this to your actual power menu if you have one
+                  bindd = ,p, Power off system, exec, systemctl poweroff
+
+                  bindd = ,escape, Exit System mode, submap, reset
+                  bindd = ,return, Exit System mode, submap, reset
+
 
             ########################################
-            # MASTER MODE: central modal dispatcher
+            # SCRATCHPAD MODE
             ########################################
-            # Enter with: SUPER + Space (see main bind list)
-            # Keys (left-hand only):
-            #   a -> Application mode
-            #   s -> System mode
-            #   d -> Workspace mode
-            #   f -> Window-Manager (WM) mode
-            #   Esc/Enter -> cancel
-
-            submap = Master
-
-            bindd = ,a, Enter Application mode, submap, Application
-            bindd = ,s, Enter System mode, submap, System
-            bindd = ,d, Enter Workspace mode, submap, Workspaces
-            bindd = ,f, Enter Window Manager mode, submap, Window-Manager
-            bindd = ,g, Enter Scratchpad mode, submap, Scratchpad
-
-            bindd = ,escape, Exit Master mode, submap, reset
-            bindd = ,return, Exit Master mode, submap, reset
-
-            ########################################
-            # WM MODE: focus, move, resize, layout
-            ########################################
-            # Entered via Master: f
+            # Entered via Master: g
             # Inside:
-            #   h/j/k/l       -> move focus
-            #   Shift+h/j/k/l -> move windows
-            #   Alt+h/j/k/l   -> resize
-            #   s             -> toggle split
-            #   p             -> pseudotile
-            #   f             -> fullscreen
-            #   m             -> swap with master
-            #   n             -> add master
-            #   d             -> remove master
-            #   r             -> cycle layout
-            #   Esc/Enter     -> exit
+            #   n -> toggle notes    (special:notes)
+            #   s -> toggle slack    (special:slack)
+            #   m -> toggle music    (special:music)
+            #   e -> toggle steam    (special:steam)
+            #   g -> toggle game     (special:game)
+            #   t -> toggle term     (special:term)
+            #
+            #   Shift+key moves the active window INTO that special workspace:
+            #   Shift+n/s/m/e/g/t
+            #
+            #   Esc/Enter -> exit back to normal
 
-            submap = Window-Manager
+            submap = Scratchpad
 
-            # Focus
-            bindd = ,h, Focus window left, movefocus, l
-            bindd = ,l, Focus window right, movefocus, r
-            bindd = ,k, Focus window up, movefocus, u
-            bindd = ,j, Focus window down, movefocus, d
+            # Toggle special workspaces + exit mode
+            bindd = ,n, Toggle notes scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace notes; hyprctl dispatch submap reset'
+            bindd = ,s, Toggle slack scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace slack; hyprctl dispatch submap reset'
+            bindd = ,m, Toggle music scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace music; hyprctl dispatch submap reset'
+            bindd = ,e, Toggle steam scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace steam; hyprctl dispatch submap reset'
+            bindd = ,g, Toggle game scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace game; hyprctl dispatch submap reset'
+            bindd = ,t, Toggle term scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace term; hyprctl dispatch submap reset'
 
-            # Move windows
-            bindd = SHIFT,h, Move window left, swapwindow, l
-            bindd = SHIFT,l, Move window right, swapwindow, r
-            bindd = SHIFT,k, Move window up, swapwindow, u
-            bindd = SHIFT,j, Move window down, swapwindow, d
+            # Move active window to special workspace (silent) + exit mode
+            bindd = SHIFT,n, Send window to notes scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:notes; hyprctl dispatch submap reset'
+            bindd = SHIFT,s, Send window to slack scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:slack; hyprctl dispatch submap reset'
+            bindd = SHIFT,m, Send window to music scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:music; hyprctl dispatch submap reset'
+            bindd = SHIFT,e, Send window to steam scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:steam; hyprctl dispatch submap reset'
+            bindd = SHIFT,g, Send window to game scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:game; hyprctl dispatch submap reset'
+            bindd = SHIFT,t, Send window to term scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:term; hyprctl dispatch submap reset'
 
-            # Resize windows
-            bindd = ALT,h, Resize window shrink horizontal, resizeactive, -60 0
-            bindd = ALT,l, Resize window grow horizontal, resizeactive,  60 0
-            bindd = ALT,k, Resize window shrink vertical, resizeactive,  0 -60
-            bindd = ALT,j, Resize window grow vertical, resizeactive,  0  60
-
-            # Layout controls
-            bindd = ,s, Toggle split, togglesplit
-            bindd = ,p, Toggle pseudotile, pseudo
-            bindd = ,f, Toggle fullscreen, fullscreen, 1
-            bindd = ,m, Swap with master, layoutmsg, swapwithmaster master
-            bindd = ,n, Add master, layoutmsg, addmaster
-            bindd = ,d, Remove master, layoutmsg, removemaster
-            bindd = ,r, Cycle layout, layoutmsg, cycle
-
-            # Exit WM mode
-            bindd = ,escape, Exit Window Manager mode, submap, reset
-            bindd = ,return, Exit Window Manager mode, submap, reset
+            # (Optional) you can keep these as backup exits if you like:
+            bindd = ,escape, Exit Scratchpad mode, submap, reset
+            bindd = ,return, Exit Scratchpad mode, submap, reset
 
 
-            ########################################
-            # WORKSPACE MODE
-            ########################################
-            # Entered via Master: d
-            # Inside:
-            #   h/j/k/l       -> prev/next workspace
-            #   Shift+h/j/k/l -> move window to prev/next
-            #   1–0           -> jump to workspace
-            #   Shift+1–0     -> move window to workspace
-            #   Esc/Enter     -> exit
-
-            submap = Workspaces
-
-            # Previous / next workspace
-            bindd = ,h, Previous workspace, workspace, e-1
-            bindd = ,l, Next workspace, workspace, e+1
-            bindd = ,j, Next workspace, workspace, e+1
-            bindd = ,k, Previous workspace, workspace, e-1
-
-            # Move current window to prev/next
-            bindd = SHIFT,h, Move window to previous workspace, movetoworkspace, e-1
-            bindd = SHIFT,l, Move window to next workspace, movetoworkspace, e+1
-
-            # Direct numeric workspace jump
-            bindd = ,1, Switch to workspace 1, workspace, 1
-            bindd = ,2, Switch to workspace 2, workspace, 2
-            bindd = ,3, Switch to workspace 3, workspace, 3
-            bindd = ,4, Switch to workspace 4, workspace, 4
-            bindd = ,5, Switch to workspace 5, workspace, 5
-            bindd = ,6, Switch to workspace 6, workspace, 6
-            bindd = ,7, Switch to workspace 7, workspace, 7
-            bindd = ,8, Switch to workspace 8, workspace, 8
-            bindd = ,9, Switch to workspace 9, workspace, 9
-            bindd = ,0, Switch to workspace 10, workspace, 10
-
-            # Move active window to workspace N
-            bindd = SHIFT,1, Move window to workspace 1, movetoworkspace, 1
-            bindd = SHIFT,2, Move window to workspace 2, movetoworkspace, 2
-            bindd = SHIFT,3, Move window to workspace 3, movetoworkspace, 3
-            bindd = SHIFT,4, Move window to workspace 4, movetoworkspace, 4
-            bindd = SHIFT,5, Move window to workspace 5, movetoworkspace, 5
-            bindd = SHIFT,6, Move window to workspace 6, movetoworkspace, 6
-            bindd = SHIFT,7, Move window to workspace 7, movetoworkspace, 7
-            bindd = SHIFT,8, Move window to workspace 8, movetoworkspace, 8
-            bindd = SHIFT,9, Move window to workspace 9, movetoworkspace, 9
-            bindd = SHIFT,0, Move window to workspace 10, movetoworkspace, 10
-
-            # Exit workspace mode
-            bindd = ,escape, Exit Workspace mode, submap, reset
-            bindd = ,return, Exit Workspace mode, submap, reset
-
-
-            ########################################
-            # APP LAUNCHER MODE (auto exit)
-            ########################################
-            # Entered via Master: a
-            # Inside:
-            #   b -> browser (zen in your case)
-            #   t -> terminal
-            #   f -> file manager
-            #   o -> obsidian
-            #   m -> spotify/music
-            #   s -> slack
-            #   d -> discord
-            #   w -> wofi app launcher
-            # Any of these will exit back to normal mode automatically
-            # Esc/Enter still works as manual exit
-
-            submap = Application
-
-            bindd = ,b, Launch browser Zen, exec, sh -c 'zen & hyprctl dispatch submap reset'
-            bindd = ,t, Launch terminal Ghostty, exec, sh -c 'ghostty & hyprctl dispatch submap reset'
-            bindd = ,f, Launch file manager Dolphin, exec, sh -c 'dolphin & hyprctl dispatch submap reset'
-            bindd = ,o, Launch Obsidian notes, exec, sh -c 'obsidian & hyprctl dispatch submap reset'
-            bindd = ,m, Launch Spotify music, exec, sh -c 'spotify & hyprctl dispatch submap reset'
-            bindd = ,s, Launch Slack, exec, sh -c 'slack & hyprctl dispatch submap reset'
-            bindd = ,d, Launch Discord, exec, sh -c 'discord & hyprctl dispatch submap reset'
-            bindd = ,w, Launch Wofi app menu, exec, sh -c 'wofi --show drun & hyprctl dispatch submap reset'
-
-            # backup exits
-            bindd = ,escape, Exit Application mode, submap, reset
-            bindd = ,return, Exit Application mode, submap, reset
-
-
-            ########################################
-            # SYSTEM MODE
-            ########################################
-            # Entered via Master: s
-            # Inside:
-            #   u -> volume up
-            #   d -> volume down
-            #   m -> mute
-            #   b -> brightness down
-            #   B -> brightness up (Shift+b)
-            #   l -> lock
-            #   p -> power menu / shutdown
-            #   Esc/Enter -> exit
-
-            submap = System
-
-            bindd = ,u, Volume up five, exec, pamixer -i 5
-            bindd = ,d, Volume down five, exec, pamixer -d 5
-            bindd = ,m, Toggle mute, exec, pamixer -t
-
-            bindd = ,b, Brightness down five, exec, brightnessctl set 5%-
-            bindd = SHIFT,b, Brightness up five, exec, brightnessctl set +5%
-
-            bindd = ,l, Lock session, exec, hyprlock
-
-            # adjust this to your actual power menu if you have one
-            bindd = ,p, Power off system, exec, systemctl poweroff
-
-            bindd = ,escape, Exit System mode, submap, reset
-            bindd = ,return, Exit System mode, submap, reset
-
-
-      ########################################
-      # SCRATCHPAD MODE
-      ########################################
-      # Entered via Master: g
-      # Inside:
-      #   n -> toggle notes    (special:notes)
-      #   s -> toggle slack    (special:slack)
-      #   m -> toggle music    (special:music)
-      #   e -> toggle steam    (special:steam)
-      #   g -> toggle game     (special:game)
-      #   t -> toggle term     (special:term)
-      #
-      #   Shift+key moves the active window INTO that special workspace:
-      #   Shift+n/s/m/e/g/t
-      #
-      #   Esc/Enter -> exit back to normal
-
-      submap = Scratchpad
-
-      # Toggle special workspaces + exit mode
-      bindd = ,n, Toggle notes scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace notes; hyprctl dispatch submap reset'
-      bindd = ,s, Toggle slack scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace slack; hyprctl dispatch submap reset'
-      bindd = ,m, Toggle music scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace music; hyprctl dispatch submap reset'
-      bindd = ,e, Toggle steam scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace steam; hyprctl dispatch submap reset'
-      bindd = ,g, Toggle game scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace game; hyprctl dispatch submap reset'
-      bindd = ,t, Toggle term scratchpad, exec, sh -c 'hyprctl dispatch togglespecialworkspace term; hyprctl dispatch submap reset'
-
-      # Move active window to special workspace (silent) + exit mode
-      bindd = SHIFT,n, Send window to notes scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:notes; hyprctl dispatch submap reset'
-      bindd = SHIFT,s, Send window to slack scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:slack; hyprctl dispatch submap reset'
-      bindd = SHIFT,m, Send window to music scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:music; hyprctl dispatch submap reset'
-      bindd = SHIFT,e, Send window to steam scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:steam; hyprctl dispatch submap reset'
-      bindd = SHIFT,g, Send window to game scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:game; hyprctl dispatch submap reset'
-      bindd = SHIFT,t, Send window to term scratchpad, exec, sh -c 'hyprctl dispatch movetoworkspacesilent special:term; hyprctl dispatch submap reset'
-
-      # (Optional) you can keep these as backup exits if you like:
-      bindd = ,escape, Exit Scratchpad mode, submap, reset
-      bindd = ,return, Exit Scratchpad mode, submap, reset
-
-
-            ########################################
-            # DEFAULT BACK TO NORMAL
-            ########################################
-            submap = reset
+                  ########################################
+                  # DEFAULT BACK TO NORMAL
+                  ########################################
+                  submap = reset
     '';
     package =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -413,7 +422,7 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "[workspace special:music silent] spotify"
-        "[workspace special:steam silent] steam"
+        "[workspace special:steam silent] stea"
         "[workspace special:notes silent] obsidian"
         "eww -c ~/.config/eww-which-key daemon"
         "hyprctl plugin load ${
@@ -422,6 +431,7 @@
       ];
 
       bind = [
+        "$mainMod, X, exec, ${./scripts/exit-current-special.sh}"
         "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
         "$mainMod, Return, exec, ghostty"
         "$mainMod, slash, exec, ${./wofi-window-switch.sh}"
