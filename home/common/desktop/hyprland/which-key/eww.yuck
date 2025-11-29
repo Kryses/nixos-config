@@ -22,7 +22,10 @@
             :spacing 15
             :orientation "h"
             :space-evenly false
+
+            ;; KEY COLUMN
             (box
+              :class "layout-key-column"        ;; NEW
               :orientation "v"
               :spacing 7
               (for entry in entrys
@@ -38,20 +41,26 @@
                 )
               )
             )
+
+            ;; ARROW COLUMN
             (box
+              :class "layout-arrow-column"      ;; NEW
               :orientation "v"
               :spacing 7
               (for entry in entrys
-                (box
+                (box :class "layout-arrow"      ;; NEW
                   (label :text " ")
                 )
               )
             )
+
+            ;; DESCRIPTION / SUBMAP COLUMN
             (box
+              :class "layout-desc-column"       ;; NEW
               :orientation "v"
               :spacing 7
               (for entry in entrys
-                (box :class  { entry.dispatcher == "submap" ? "layout-submap" : "layout-desc" }
+                (box :class { entry.dispatcher == "submap" ? "layout-submap" : "layout-desc" }
                   (label 
                     :text "${entry.description}"
                     :xalign 0

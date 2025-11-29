@@ -1,34 +1,70 @@
-$surface-subtext: #7f849c;
-$surface-base: #1e1e2e;
-$surface-peach: #fac6a7;
-$surface-mauve: #cba6f7;
-$surface-blue: #89b4fa;
+// ─────────────────────────────────────────────
+// Tokyo Night Dark Palette
+// ─────────────────────────────────────────────
+$tn-bg-dark:      #1a1b26;
+$tn-bg:           #1f2335;
+$tn-bg-highlight: #292e42;
 
+$tn-fg:        #c0caf5;
+$tn-blue:      #7aa2f7;
+$tn-magenta:   #bb9af7;
+$tn-purple:    #9d7cd8;
+$tn-cyan:      #7dcfff;
+$tn-orange:    #ff9e64;
+$tn-yellow:    #e0af68;
+$tn-comment:   #565f89;
+
+// Transparency levels
+$alpha-bg:     0.70;
+$alpha-border: 0.85;
+
+// ─────────────────────────────────────────────
+// Base reset
+// ─────────────────────────────────────────────
 * {
   all: unset;
-}
-
-.layout-box {
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 1em;
-  background-repeat: no-repeat;
-  background-size: auto;
-  color: rgba($surface-subtext, 1);
-  background-color: rgba($surface-base, 1);
-  border: 2px solid rgba($surface-mauve, 0.8);
-  border-radius: 5px;
 }
 
+// ─────────────────────────────────────────────
+// Layout Box (the outer container)
+// ─────────────────────────────────────────────
+// Glassy, soft-blur background.
+// Eww supports backdrop-filter via GTK → this works:
+.layout-box {
+  background-color: rgba($tn-bg-dark, $alpha-bg);
+  color: rgba($tn-fg, 1);
+  border: 2px solid rgba($tn-magenta, $alpha-border);
+  border-radius: 8px;
+
+  // Shadow to float above Windows
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+  // Smooth edges & neon glow effect
+  padding: 10px 14px;
+}
+
+// ─────────────────────────────────────────────
+// Key (the literal keyboard key shown)
+// ─────────────────────────────────────────────
 .layout-key {
-  color: rgba($surface-blue, 1);
+  color: $tn-blue;
+  font-weight: 700;
 }
 
+// ─────────────────────────────────────────────
+// Submap names
+// ─────────────────────────────────────────────
 .layout-submap {
-  color: rgba($surface-mauve, 1);
+  color: $tn-purple;
+  font-weight: 600;
 }
 
+// ─────────────────────────────────────────────
+// Descriptions
+// ─────────────────────────────────────────────
 .layout-desc {
-  font-size: 1em;
-  color: rgba($surface-peach, 1);
+  color: $tn-yellow;
+  opacity: 0.9;
 }
 
