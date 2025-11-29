@@ -47,7 +47,9 @@ done
 
 openWidget() {
   binds=$(hyprctl binds -j | jq -c '[ .[] | select(.submap | . == "'"$1"'") ]')
-  deleted=$(echo "$binds" | jq -c '[ .[] | select(.arg | contains("reset") | not ) ]')
+  deleted=$(echo "$binds" | jq -c '[ .[]
+  | select( ( .dispatcher == "submap" and (.arg | contains("reset")) ) | not )
+  ]')
   columns=$(echo "$deleted" | jq 'length / 4' | jq -c 'round')
   if [[ $2 != "" ]]; then
     columns=$(echo "$deleted" | jq 'length / '"$2"'' | jq -c 'round')
@@ -87,4 +89,3 @@ if [[ $submap == "" ]]; then
 else
   openWidget "$submap"
 fi
-
