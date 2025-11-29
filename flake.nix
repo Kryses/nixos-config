@@ -25,6 +25,9 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+    hyprhook.url = "github:Hyprhook/Hyprhook";
+    hyprhook.inputs.hyprland.follows = "hyprland";
+
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";

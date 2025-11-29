@@ -433,6 +433,36 @@
         "type": "github"
       }
     },
+    "hyprhook": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ],
+        "nixpkgs": [
+          "hyprhook",
+          "hyprland",
+          "nixpkgs"
+        ],
+        "systems": [
+          "hyprhook",
+          "hyprland",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762797068,
+        "narHash": "sha256-2RqK7R4Cm6mnjnOtUs86W9hL5Sm+/mOqfX7Jd+RspNw=",
+        "owner": "Hyprhook",
+        "repo": "Hyprhook",
+        "rev": "ee26626f5e1be75f2a0855804954c4505fcb3e58",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Hyprhook",
+        "repo": "Hyprhook",
+        "type": "github"
+      }
+    },
     "hyprland": {
       "inputs": {
         "aquamarine": "aquamarine",
@@ -1058,6 +1088,7 @@
         "compose2nix": "compose2nix",
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
+        "hyprhook": "hyprhook",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "impermanence": "impermanence",
