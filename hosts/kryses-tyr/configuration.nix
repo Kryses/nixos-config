@@ -18,7 +18,7 @@
 
     # These will go into /etc/resolv.conf when we let Nix manage DNS
     nameservers = [
-      # "192.168.1.80"
+      "192.168.1.80"
       "8.8.8.8"
       "1.1.1.1"
     ];

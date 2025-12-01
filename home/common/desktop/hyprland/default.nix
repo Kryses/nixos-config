@@ -358,9 +358,7 @@
         enable_swallow = true;
         disable_hyprland_logo = true;
       };
-      layerrule = [
-        "match:namespace Which Key, blur on"
-      ];
+      layerrule = [ "match:namespace Which Key, blur on" ];
       windowrule = [
         # --- Remmina -------------------------------------------------
         # Main Remmina window: float the "Remote Desktop Client" dialog
@@ -396,6 +394,7 @@
         "match:class discord, workspace special:slack"
         "match:title ^(Skyrim Special Edition)$, workspace special:game"
         "match:class ^(worldbox)$, workspace special:game"
+        "workspace special:slack, match:class ^chrome-app\.v2\.gather\.town__app_halon-.*-Default$"
       ];
 
       workspace = [
