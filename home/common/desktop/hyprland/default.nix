@@ -321,13 +321,17 @@
         enabled = true;
 
         bezier =
-          [ "winOut, 0.10, 0.90, 0.15, 1.00" "softIO, 0.25, 0.80, 0.20, 1.00" ];
+          [ 
+            "winOut, 0.10, 0.90, 0.15, 1.00" 
+            "softIO, 0.25, 0.80, 0.20, 1.00" 
+            "gatherBounce, 0.1, 0.9, 0.1, 1.1"
+          ];
 
         animation = [
           "windows,     1, 6,  winOut,  popin 80%"
           "windowsOut,  1, 5,  winOut,  popin 80%"
           "border,      1, 8,  softIO"
-          "borderangle, 1, 8,  softIO"
+          "borderangle, 1, 8,  gatherBounce, loop"
           "fade,        1, 5,  softIO"
           "workspaces,  1, 4,  softIO, slide"
         ];
@@ -394,7 +398,15 @@
         "match:class discord, workspace special:slack"
         "match:title ^(Skyrim Special Edition)$, workspace special:game"
         "match:class ^(worldbox)$, workspace special:game"
-        "workspace special:slack, match:class ^chrome-app\.v2\.gather\.town__app_halon-.*-Default$"
+        # 1) Spawn Gather on special:slack using initialTitle
+        "match:initial_title app\\.v2\\.gather\\.town_/app/halon-61af8bed-9d91-4e9f-9f54-eddb8cc02782, workspace special:slack"
+
+        # 2) Styling rules (all using runtime title)
+        "match:title ^Halon \\\\| Gather$, border_color rgba(88ccffff) rgba(cc88ffff) 45deg rgba(20222aff) rgba(10121aff) 225deg"
+        "match:title ^Halon \\\\| Gather$, border_size 4"
+        "match:title ^Halon \\\\| Gather$, rounding 18"
+        "match:title ^Halon \\\\| Gather$, opacity 1.0 0.85"
+        "match:title ^Halon \\\\| Gather$, animation popin 80%"
       ];
 
       workspace = [
