@@ -9,6 +9,7 @@
     ./mako
     ./cursor
     ./qt
-    # ./gtk
+    ./gtk
+    ./deconf
   ];
 }

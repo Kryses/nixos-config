@@ -13,15 +13,25 @@
 
   services.speechd.enable = true;
   security.pam.services.hyprlock = { };
-
   networking = {
     hostName = "kryses-tyr";
-    nameservers = ["1.1.1.1" "8.8.8.8"];
-    # defaultGateway = "192.168.1.1";
-  };
-  
-  networking.hosts = {
-    "192.168.1.201" = ["kryses.local.ai"];
+
+    # These will go into /etc/resolv.conf when we let Nix manage DNS
+    nameservers = [
+      "192.168.1.80"
+      "8.8.8.8"
+      "1.1.1.1"
+    ];
+
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        networkmanager-openvpn
+      ];
+
+      # Important: tell NM not to manage resolv.conf and not to use DHCP DNS
+      dns = "none";
+    };
   };
   # environment.systemPackages = with pkgs; [
   #   searxng

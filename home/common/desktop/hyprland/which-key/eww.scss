@@ -1,0 +1,70 @@
+// ─────────────────────────────────────────────
+// Tokyo Night Dark Palette
+// ─────────────────────────────────────────────
+$tn-bg-dark:      #1a1b26;
+$tn-bg:           #1f2335;
+$tn-bg-highlight: #292e42;
+
+$tn-fg:        #c0caf5;
+$tn-blue:      #7aa2f7;
+$tn-magenta:   #bb9af7;
+$tn-purple:    #9d7cd8;
+$tn-cyan:      #7dcfff;
+$tn-orange:    #ff9e64;
+$tn-yellow:    #e0af68;
+$tn-comment:   #565f89;
+
+// Transparency levels
+$alpha-bg:     0.70;
+$alpha-border: 0.85;
+
+// ─────────────────────────────────────────────
+// Base reset
+// ─────────────────────────────────────────────
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+// ─────────────────────────────────────────────
+// Layout Box (the outer container)
+// ─────────────────────────────────────────────
+// Glassy, soft-blur background.
+// Eww supports backdrop-filter via GTK → this works:
+.layout-box {
+  background-color: rgba($tn-bg-dark, $alpha-bg);
+  color: rgba($tn-fg, 1);
+  border: 2px solid rgba($tn-magenta, $alpha-border);
+  border-radius: 8px;
+
+  // Shadow to float above Windows
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+  // Smooth edges & neon glow effect
+  padding: 10px 14px;
+}
+
+// ─────────────────────────────────────────────
+// Key (the literal keyboard key shown)
+// ─────────────────────────────────────────────
+.layout-key {
+  color: $tn-blue;
+  font-weight: 700;
+}
+
+// ─────────────────────────────────────────────
+// Submap names
+// ─────────────────────────────────────────────
+.layout-submap {
+  color: $tn-purple;
+  font-weight: 600;
+}
+
+// ─────────────────────────────────────────────
+// Descriptions
+// ─────────────────────────────────────────────
+.layout-desc {
+  color: $tn-yellow;
+  opacity: 0.9;
+}
+

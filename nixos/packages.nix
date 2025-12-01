@@ -1,14 +1,19 @@
 { pkgs, nixpkgs, nixpkgs-python, inputs, ... }:
 let
   system = "x86_64-linux";
-in
 
+  # Our custom Gather Town package
+  gather-town = pkgs.callPackage ../hosts/common/packages/tools/gather-town { };
+in
 {
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" "openssl-1.1.1w"];
   };
+
   environment.systemPackages = [
+    gather-town
+
     # pkgs.legacyPackages.${system}.python39
     # nixpkgs-python.packages.${system}."3.9.2"
     inputs.zen-browser.packages.x86_64-linux.default
@@ -44,7 +49,6 @@ in
     pkgs.posting
     inputs.compose2nix.packages.x86_64-linux.default
     pkgs.qt6Packages.qtwayland
-
 
     # pkgs.Coding stuff
     pkgs.gnumake
@@ -108,13 +112,13 @@ in
     pkgs.imv
     pkgs.dmenu
     pkgs.screenkey
+    pkgs.nmap
     pkgs.mako
     pkgs.gromit-mpx
     pkgs.taskwarrior3
     pkgs.timewarrior
     pkgs.gh
     pkgs.jq
-
 
     pkgs.xwayland
     pkgs.wl-clipboard
@@ -195,3 +199,4 @@ in
     nerd-fonts.symbols-only
   ];
 }
+

@@ -1,7 +1,6 @@
 * {
   border: none;
   border-radius: 0;
-  /* `otf-font-awesome` is required to be installed for icons */
   font-family: JetBrains Mono;
   font-weight: bold;
   min-height: 20px;
@@ -35,13 +34,11 @@ window#waybar.hidden {
   font-size: 12px;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
   transition: none;
   box-shadow: inherit;
   text-shadow: inherit;
   border-radius: inherit;
-  background: rgba(56, 60, 74, 0.5);
   background: rgba(124, 129, 140, 0.5);
 }
 
@@ -137,6 +134,7 @@ window#waybar.hidden {
   color: #ffffff;
   background: rgba(56, 60, 74, 0.5);
 }
+
 #custom-github_notifications {
   margin-right: 8px;
   padding-left: 16px;
@@ -156,6 +154,28 @@ window#waybar.hidden {
   color: #ffffff;
   background: rgba(56, 60, 74, 0.5);
 }
+
+/* Daily verse pill hover */
+#custom-daily-verse:hover {
+  background: rgba(124, 129, 140, 0.8);
+  color: #ffffff;
+}
+
+/* Tooltip styling (correct Waybar selector) */
+tooltip {
+  background: rgba(56, 60, 74, 0.95);
+  border-radius: 8px;
+  border: 1px solid rgba(148, 226, 213, 0.9);
+  padding: 4px 6px;
+}
+
+tooltip label {
+  padding: 4px 6px;
+  color: #ffffff;
+  font-family: JetBrains Mono;
+  font-size: 18px;
+}
+
 #cpu {
   margin-right: 8px;
   padding-left: 16px;
@@ -235,3 +255,4 @@ window#waybar.hidden {
     color: #000000;
   }
 }
+

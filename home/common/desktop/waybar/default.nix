@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   programs.waybar = {
     enable = true;
     settings = {
@@ -7,13 +7,20 @@
         position = "top";
         margin = "9 13 -10 18";
 
-        modules-left = ["hyprland/workspaces" "hyprland/submap" "custom/daily-verse" ];
+        modules-left =
+          [ "hyprland/workspaces" "hyprland/submap" "custom/daily-verse" ];
         modules-center = [ "clock" ];
-        modules-right = ["custom/github_notifications" "pulseaudio" "custom/mem" "cpu" "backlight" "battery" "tray"];
+        modules-right = [
+          "custom/github_notifications"
+          "pulseaudio"
+          "custom/mem"
+          "cpu"
+          "backlight"
+          "battery"
+          "tray"
+        ];
 
-        "hyprland/workspaces" = {
-          disable-scroll = true;
-        };
+        "hyprland/workspaces" = { disable-scroll = true; };
 
         "hyprland/language" = {
           format-en = "US";
@@ -29,16 +36,29 @@
           on-click = "xdg-open https://github.com/notifications";
         };
         "custom/daily-verse" = {
-          format = "{}";
-          tooltip = true;
-          max-length = 25;
-          interval = 120;
           exec = ./custom/daily-verse.sh;
-        };
+          interval = 120;
 
+          return-type = "json";
+
+          # OLD-SCHOOL JSON mode:
+          # "{}" means "use the 'text' field from JSON"
+          format = "{}";
+
+          # Waybar will automatically use the JSON 'tooltip' field
+          # when tooltip = true.
+          tooltip = true;
+
+          # Allow Pango markup in tooltip
+          markup = true;
+
+          max-length = 25;
+        };
         "clock" = {
           # timezone = "America/New_York";
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          tooltip-format = ''
+            <big>{:%Y %B}</big>
+            <tt><small>{calendar}</small></tt>'';
           format = "{:%a; %d %b, %I:%M %p}";
         };
 
@@ -66,7 +86,7 @@
             phone = "";
             portable = "";
             car = "";
-            default = ["" "" ""];
+            default = [ "" "" "" ];
           };
           on-click = "pavucontrol";
           min-length = 13;
@@ -91,14 +111,14 @@
           critical-threshold = 80;
           # format-critical = "{temperatureC}°C {icon}";
           format = "{temperatureC}°C {icon}";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [ "" "" "" "" "" ];
           tooltip = false;
         };
 
         "backlight" = {
           device = "intel_backlight";
           format = "{percent}% {icon}";
-          format-icons = [""];
+          format-icons = [ "" ];
           min-length = 7;
         };
 
@@ -111,7 +131,7 @@
           format-charging = "{capacity}% ";
           format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
-          format-icons = ["" "" "" "" "" "" "" "" "" ""];
+          format-icons = [ "" "" "" "" "" "" "" "" "" "" ];
           on-update = "$HOME/.config/waybar/scripts/check_battery.sh";
         };
 
