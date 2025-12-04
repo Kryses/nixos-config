@@ -342,7 +342,7 @@
           "borderangle, 1, 8,  softIO, loop"
           "fade,        1, 5,  softIO"
           "workspaces,  1, 4,  softIO, slide"
-          "specialWorkspace, 1, 6, default, fade"
+          "specialWorkspace, 1, 6, default, slide"
         ];
       };
 
@@ -407,7 +407,7 @@
         "match:class zen, match:workspace special:zen, float on, center on, size (monitor_w)*0.9 (monitor_h)*0.9, opacity 0.65"
 
         # ChatGPT floating drawer (nofocus REMOVED)
-        "match:class ^chrome-chat\\.openai\\.com__-Default$, float on, size (monitor_w)*0.25 (monitor_h)*0.92, move (monitor_w)*0.01 (monitor_h)*0.03, opacity 0.78"
+        "match:class ^chrome-chat\\.openai\\.com__-Default$, float on, size (monitor_w)*0.25 (monitor_h)*0.92, move (monitor_w)*0.01 (monitor_h)*0.04, opacity 0.85"
 
         # Slack / Discord / game routing
         "match:class Slack, workspace special:slack"
@@ -457,6 +457,7 @@
         "hyprctl plugin load ${
           inputs.hyprhook.packages.${pkgs.system}.hyprhook
         }/lib/libHyprhook.so"
+        "chatgpt"
       ];
 
       bind = [
