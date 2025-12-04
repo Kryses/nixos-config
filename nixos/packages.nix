@@ -4,6 +4,8 @@ let
 
   # Our custom Gather Town package
   gather-town = pkgs.callPackage ../hosts/common/packages/tools/gather-town { };
+  jira = pkgs.callPackage ../hosts/common/packages/tools/jira { };
+  chatgpt = pkgs.callPackage ../hosts/common/packages/tools/chatgpt { };
 in
 {
   nixpkgs.config = {
@@ -12,7 +14,9 @@ in
   };
 
   environment.systemPackages = [
+    chatgpt
     gather-town
+    jira
 
     # pkgs.legacyPackages.${system}.python39
     # nixpkgs-python.packages.${system}."3.9.2"
