@@ -185,6 +185,7 @@ in
     pkgs.pyenv
     pkgs.tcl
     pkgs.bibletime
+    pkgs.lazyssh
   ];
 
   fonts.packages = with pkgs; [
