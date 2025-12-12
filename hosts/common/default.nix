@@ -56,22 +56,32 @@
   ];
 
   # Mount the SMB share at /mnt/mirmir
-  fileSystems."/mnt/mimir" = {
-    device = "//192.168.1.203/Mimir";
-    fsType = "cifs";
+fileSystems."/mnt/mimir" = {
+  device = "//192.168.1.203/Mimir";
+  fsType = "cifs";
+  options = [
+    "credentials=/etc/nixos/smb-mimir-credentials"
+    "vers=3.1.1"
 
-    # Adjust uid/gid to match your user if different
-    options = [
-      "credentials=/etc/nixos/smb-mimir-credentials"
-      "uid=1000"
-      "gid=100"
-      "iocharset=utf8"
-      "file_mode=0644"
-      "dir_mode=0755"
-      "x-systemd.automount"
-      "noauto"
-      "nofail"
-    ];
-  };
+    # make ownership consistent
+    "uid=1000"
+    "gid=1000"
+    "forceuid"
+    "forcegid"
+
+    # stop the Linux client from blocking directory reads
+    "noperm"
+
+    # sane presentation
+    "file_mode=0664"
+    "dir_mode=2775"
+
+    "iocharset=utf8"
+    "x-systemd.automount"
+    "noauto"
+    "nofail"
+  ];
+};
+
 }
 
