@@ -190,6 +190,12 @@ in
     pkgs.tcl
     pkgs.bibletime
     pkgs.lazyssh
+    pkgs.handbrake
+    pkgs.dvdbackup
+    pkgs.regionset
+    pkgs.makemkv
+    pkgs.vlc
+
   ];
 
   fonts.packages = with pkgs; [
