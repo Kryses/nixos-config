@@ -496,8 +496,8 @@
         "$mainMod SHIFT, R, submap, Dev"
 
         # Scratchpads (special:)
-        "$mainMod, Q, togglespecialworkspace,notes"
-        "$mainMod CTRL, Q, movetoworkspacesilent,special:notes"
+        "$mainMod, N, togglespecialworkspace,notes"
+        "$mainMod CNRL, N, movetoworkspacesilent,special:notes"
         "$mainMod, W, togglespecialworkspace,slack"
         "$mainMod CTRL, W, movetoworkspacesilent,special:slack"
         "$mainMod, E, togglespecialworkspace,music"
