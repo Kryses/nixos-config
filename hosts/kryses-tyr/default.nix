@@ -4,8 +4,11 @@
     ../common
     ../common/modules/audio.nix
     ../common/modules/bluetooth.nix
+    ../common/modules/podman.nix
+    ../common/modules/arm.nix
     ./configuration.nix
     ./hardware.nix
+
   ];
 
   home-manager = {
