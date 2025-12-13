@@ -195,6 +195,7 @@ in
     pkgs.regionset
     pkgs.makemkv
     pkgs.vlc
+    pkgs.lsscsi
 
   ];
 
