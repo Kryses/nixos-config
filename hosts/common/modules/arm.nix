@@ -35,7 +35,7 @@
       ];
 
       ports = [
-        "8080:8080"
+        "8090:8080"
       ];
 
       extraOptions = [
@@ -45,6 +45,7 @@
 
         # Optical drive
         "--device=/dev/sr0:/dev/sr0"
+        "--device=/dev/sr1:/dev/sr1"
 
         # Required for ARM to control the drive
         "--privileged"
