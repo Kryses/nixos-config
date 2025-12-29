@@ -196,6 +196,11 @@ in
     pkgs.makemkv
     pkgs.vlc
     pkgs.lsscsi
+    pkgs.cloudflare-warp
+    pkgs.prismlauncher
+    pkgs.ftb-app
+    pkgs.netcat
+    pkgs.arp-scan
 
   ];
 
