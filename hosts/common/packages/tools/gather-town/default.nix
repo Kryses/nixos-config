@@ -25,7 +25,10 @@ pkgs.stdenv.mkDerivation {
 exec ${pkgs.chromium}/bin/chromium \
   --user-data-dir="\$HOME/.config/${windowClass}" \
   --class="${windowClass}" \
-  --app="${gatherUrl}"
+  --app="${gatherUrl}" \
+  --ozone-platform-hint=auto \
+  --ozone-platform=wayland \
+  --ozone-platform=wayland
 EOF
     chmod +x $out/bin/gather-town
 
