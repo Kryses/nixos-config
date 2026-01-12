@@ -1,29 +1,30 @@
 {
-  users.groups.arm = {
-    gid = 1001;
-  };
-   users.users.arm = {
+  users.groups.arm = { gid = 1001; };
+
+  users.users.arm = {
     isNormalUser = true;
     uid = 1001;
     group = "arm";
     home = "/home/arm";
     createHome = true;
-
-    # Optional but useful
     description = "Automatic Ripping Machine";
+    extraGroups = [ "media" ];
   };
-  users.groups.media = { };
 
-  users.users.arm.extraGroups = [ "media" ];
+  users.groups.media = { };
   users.users.kryses.extraGroups = [ "media" ];
 
   virtualisation.oci-containers.containers = {
     arm-rippers = {
       image = "docker.io/automaticrippingmachine/automatic-ripping-machine:latest";
 
+      # You said: service should always be running
+      autoStart = true;
+
       environment = {
-        "ARM_UID" = "1001";
-        "ARM_GID" = "1001";
+        ARM_UID = "1001";
+        ARM_GID = "1001";
+        TZ = "America/New_York";
       };
 
       volumes = [
@@ -34,9 +35,8 @@
         "/home/arm/config:/etc/arm/config"
       ];
 
-      ports = [
-        "8090:8080"
-      ];
+      # With bridge networking, this works exactly as expected:
+      ports = [ "8090:8080" ];
 
       extraOptions = [
         "--pull=newer"
@@ -45,14 +45,10 @@
 
         # Optical drive
         "--device=/dev/sr0:/dev/sr0"
-        "--device=/dev/sr1:/dev/sr1"
 
-        # Required for ARM to control the drive
+        # Keep this for now since ARM often expects it for tray + sg/ioctl
         "--privileged"
-
-        # "--restart=always"
       ];
     };
   };
 }
-
