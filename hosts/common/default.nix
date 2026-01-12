@@ -6,6 +6,7 @@
     ./openssh.nix
     ./greetd.nix
     ./modules/gtk-theme.nix
+    ./modules/disk-services.nix
     inputs.home-manager.nixosModules.home-manager
   ];
 
