@@ -17,6 +17,9 @@ in
     chatgpt
     gather-town
     jira
+    pkgs.android-tools
+    pkgs.jmtpfs
+    pkgs.mtpfs
 
     # pkgs.legacyPackages.${system}.python39
     # nixpkgs-python.packages.${system}."3.9.2"
