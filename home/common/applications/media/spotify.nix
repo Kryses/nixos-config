@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  spicePkgs = inputs.nix-spicetify.packages.${pkgs.system}.default;
+  spicePkgs = inputs.nix-spicetify.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
   imports = [inputs.nix-spicetify.homeManagerModule];
 
