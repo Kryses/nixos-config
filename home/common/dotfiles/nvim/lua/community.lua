@@ -34,7 +34,7 @@ return {
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.motion.mini-bracketed" },
   { import = "astrocommunity.editing-support.mini-operators" },
-  { import = "astrocommunity.editing-support.auto-save-nvim" },
+  -- { import = "astrocommunity.editing-support.auto-save-nvim" },
   { import = "astrocommunity.workflow.precognition-nvim" },
 
 

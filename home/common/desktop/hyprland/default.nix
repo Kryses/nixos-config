@@ -280,7 +280,7 @@
 
     package =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    plugins = [ inputs.hyprhook.packages.${pkgs.system}.hyprhook ];
+    plugins = [ inputs.hyprhook.packages.${pkgs.stdenv.hostPlatform.system}.hyprhook ];
     enable = true;
     xwayland.enable = true;
 
@@ -455,7 +455,7 @@
         "[workspace special:notes silent] obsidian"
         "eww -c ~/.config/eww-which-key daemon"
         "hyprctl plugin load ${
-          inputs.hyprhook.packages.${pkgs.system}.hyprhook
+          inputs.hyprhook.packages.${pkgs.stdenv.hostPlatform.system}.hyprhook
         }/lib/libHyprhook.so"
         "chatgpt"
       ];
