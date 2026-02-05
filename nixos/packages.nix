@@ -200,6 +200,7 @@ in
     pkgs.prismlauncher
     pkgs.ftb-app
     pkgs.netcat
+    pkgs.claude-code
     pkgs.arp-scan
 
   ];
