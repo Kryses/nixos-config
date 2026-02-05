@@ -19,7 +19,6 @@ in
     jira
     pkgs.android-tools
     pkgs.jmtpfs
-    pkgs.mtpfs
 
     # pkgs.legacyPackages.${system}.python39
     # nixpkgs-python.packages.${system}."3.9.2"
@@ -132,7 +131,6 @@ in
     pkgs.cliphist
 
     # pkgs.WMs and stuff
-    pkgs.herbstluftwm
     pkgs.hyprland
     # pkgs.hyprlandPlugins.hyprsplit
     pkgs.seatd
@@ -170,7 +168,6 @@ in
     pkgs.networkmanager-openvpn
     pkgs.docker
     pkgs.blender
-    pkgs.oterm
     pkgs.bat
     pkgs.postman
     pkgs.devenv
@@ -203,6 +200,7 @@ in
     pkgs.prismlauncher
     pkgs.ftb-app
     pkgs.netcat
+    pkgs.claude-code
     pkgs.arp-scan
 
   ];
