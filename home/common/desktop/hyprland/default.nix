@@ -147,6 +147,7 @@
       bindd = ALT,j, Resize window grow vertical, resizeactive,  0  60
       bindd = ,s, Toggle split, togglesplit
       bindd = ,p, Toggle pseudotile, pseudo
+      bindd = ,t, Toggle floating, togglefloating
       bindd = ,f, Toggle fullscreen, fullscreen, 1
       bindd = ,m, Swap with master, layoutmsg, swapwithmaster master
       bindd = ,n, Add master, layoutmsg, addmaster

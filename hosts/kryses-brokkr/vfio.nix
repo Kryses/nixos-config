@@ -59,16 +59,26 @@ in
     "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
   ];
 
+  # Load VFIO modules early in initrd so they can claim devices before nvidia
+  boot.initrd.kernelModules = [
+    "vfio"
+    "vfio_iommu_type1"
+    "vfio_pci"
+  ];
+
   boot.kernelModules = [
     "vfio"
     "vfio_iommu_type1"
     "vfio_pci"
-    "vfio_virqfd"
   ];
 
-  # Don’t rewrite vfio-pci’s install line anymore
+  # Ensure vfio-pci loads before nvidia and claims the passthrough GPU
   boot.extraModprobeConfig = ''
     options kvmfr static_size_mb=128
+    softdep nvidia pre: vfio-pci
+    softdep nvidia_modeset pre: vfio-pci
+    softdep nvidia_uvm pre: vfio-pci
+    softdep nvidia_drm pre: vfio-pci
   '';
 
   # Put the script into the initrd root as /vfio-pci-override.sh
