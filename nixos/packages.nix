@@ -6,6 +6,20 @@ let
   gather-town = pkgs.callPackage ../hosts/common/packages/tools/gather-town { };
   jira = pkgs.callPackage ../hosts/common/packages/tools/jira { };
   chatgpt = pkgs.callPackage ../hosts/common/packages/tools/chatgpt { };
+
+  # Wrap prismlauncher to force XWayland for Minecraft (native Wayland GLFW fails on NVIDIA)
+  prismlauncher-xwayland = pkgs.symlinkJoin {
+    name = "prismlauncher";
+    paths = [ pkgs.prismlauncher ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/prismlauncher \
+        --set QT_QPA_PLATFORM xcb \
+        --set __NV_PRIME_RENDER_OFFLOAD 1 \
+        --set __GLX_VENDOR_LIBRARY_NAME nvidia \
+        --set __EGL_VENDOR_LIBRARY_FILENAMES /run/opengl-driver/share/glvnd/egl_vendor.d/10_nvidia.json
+    '';
+  };
 in
 {
   nixpkgs.config = {
@@ -67,21 +81,10 @@ in
     pkgs.carapace
     pkgs.cargo
     pkgs.vit
-    (pkgs.python310.withPackages (ps: with ps; [ 
-      # pbr
-      # taskw
-      # notify-py
-      # pycairo
-      # pygobject3
-      # requests 
-      # bugwarrior
-      # pyside6
-    ]))
     # pkgs.CLI utils
     pkgs.inotify-tools
     pkgs.tmuxinator
     pkgs.zoxide
-    pkgs.neofetch
     pkgs.file
     pkgs.tree
     pkgs.wget
@@ -93,7 +96,6 @@ in
     pkgs.unzip
     pkgs.scrot
     pkgs.ffmpeg
-    pkgs.light
     pkgs.lux
     pkgs.mediainfo
     pkgs.yazi
@@ -197,7 +199,7 @@ in
     pkgs.vlc
     pkgs.lsscsi
     pkgs.cloudflare-warp
-    pkgs.prismlauncher
+    prismlauncher-xwayland
     pkgs.ftb-app
     pkgs.netcat
     pkgs.claude-code

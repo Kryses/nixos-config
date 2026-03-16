@@ -145,7 +145,7 @@
       bindd = ALT,l, Resize window grow horizontal, resizeactive,  60 0
       bindd = ALT,k, Resize window shrink vertical, resizeactive,  0 -60
       bindd = ALT,j, Resize window grow vertical, resizeactive,  0  60
-      bindd = ,s, Toggle split, togglesplit
+      bindd = ,s, Toggle split, layoutmsg, togglesplit
       bindd = ,p, Toggle pseudotile, pseudo
       bindd = ,t, Toggle floating, togglefloating
       bindd = ,f, Toggle fullscreen, fullscreen, 1
@@ -409,6 +409,9 @@
 
         # ChatGPT floating drawer (nofocus REMOVED)
         "match:class ^chrome-chat\\.openai\\.com__-Default$, float on, size (monitor_w)*0.25 (monitor_h)*0.92, move (monitor_w)*0.01 (monitor_h)*0.04, opacity 0.85"
+
+        # Minecraft - force opaque rendering (prevents transparency on NVIDIA/Wayland)
+        "match:title ^(Minecraft.*)$, opacity 1.0 override 1.0 override"
 
         # Slack / Discord / game routing
         "match:class Slack, workspace special:slack"
