@@ -8,7 +8,7 @@
         margin = "9 13 -10 18";
 
         modules-left =
-          [ "hyprland/workspaces" "hyprland/submap" "custom/daily-verse" ];
+          [ "hyprland/workspaces" "hyprland/submap" "custom/daily-verse" "custom/weather" ];
         modules-center = [ "clock" ];
         modules-right = [
           "custom/github_notifications"
@@ -63,11 +63,11 @@
         };
 
         "custom/weather" = {
+          exec = ./custom/weather.sh;
+          return-type = "json";
           format = "{}";
           tooltip = true;
-          interval = 1800;
-          exec = "$HOME/.config/waybar/scripts/wttr.py";
-          return-type = "json";
+          interval = 900;
         };
 
         "pulseaudio" = {
