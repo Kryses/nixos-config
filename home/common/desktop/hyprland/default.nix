@@ -373,7 +373,10 @@
         disable_hyprland_logo = true;
       };
 
-      layerrule = [ "match:namespace Which Key, blur on" ];
+      layerrule = [
+        "match:namespace Which Key, blur on"
+        "match:namespace waybar, blur on"
+      ];
 
       windowrule = [
         # Remmina
