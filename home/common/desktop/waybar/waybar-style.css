@@ -252,10 +252,6 @@ tooltip label {
   padding: 14px 24px;
 }
 
-/* Weather tooltip — wider card */
-#custom-weather tooltip {
-  min-width: 280px;
-}
 
 
 /* ── Temperature ── */
