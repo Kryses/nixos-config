@@ -62,63 +62,38 @@
       executable = true;
     };
 
-    # ChatGPT floating drawer toggle (UPDATED)
-"${config.xdg.configHome}/hypr/scripts/toggle-chatgpt.sh" = {
+    "${config.xdg.configHome}/hypr/scripts/toggle-claude.sh" = {
   text = ''
     #!/usr/bin/env bash
     set -euo pipefail
 
-    CLASS="chrome-chat.openai.com__-Default"
-    CHAT_CMD="chatgpt"
-    HIDDEN_WS="special:__chatgpt_hidden"
+    CLASS="chrome-claude.ai__-Default"
+    HIDDEN_WS="special:__claude_hidden"
 
-    # First ChatGPT client as compact JSON
     CLIENT=$(hyprctl -j clients \
       | jq -c ".[] | select(.class == \"$CLASS\")" \
       | head -n 1 || true)
 
-    # If no window yet, launch and exit
     if [ -z "$CLIENT" ]; then
-      $CHAT_CMD &
+      claude-panel &
       exit 0
     fi
 
     WIN=$(echo "$CLIENT" | jq -r '.address')
-    PINNED=$(echo "$CLIENT" | jq -r '.pinned')
     WS_NAME=$(echo "$CLIENT" | jq -r '.workspace.name')
-
-    # Current workspace id
     CURWS=$(hyprctl -j monitors \
       | jq -r '.[] | select(.focused == true) | .activeWorkspace.id')
 
-    # Visible state:
-    #   - If pinned => we treat it as "visible"
-    #   - If not pinned but not on hidden special ws => also visible
-    #   - If on hidden special ws and not pinned => hidden
-    VISIBLE=0
-    if [ "$PINNED" = "true" ] || [ "$PINNED" = "1" ]; then
-      VISIBLE=1
-    elif [ "$WS_NAME" != "$HIDDEN_WS" ]; then
-      VISIBLE=1
-    fi
-
-    if [ "$VISIBLE" -eq 1 ]; then
-      # HIDE: unpin, then move to hidden special workspace
-      hyprctl dispatch focuswindow "address:$WIN"
-      # toggle pin off if currently pinned
-      if [ "$PINNED" = "true" ] || [ "$PINNED" = "1" ]; then
-        hyprctl dispatch pin
-      fi
-      hyprctl dispatch movetoworkspacesilent "$HIDDEN_WS,address:$WIN"
-    else
-      # SHOW: move to current workspace, pin and focus
+    if [ "$WS_NAME" = "$HIDDEN_WS" ]; then
       hyprctl dispatch movetoworkspacesilent "$CURWS,address:$WIN"
       hyprctl dispatch focuswindow "address:$WIN"
-      hyprctl dispatch pin
+    else
+      hyprctl dispatch movetoworkspacesilent "$HIDDEN_WS,address:$WIN"
     fi
   '';
   executable = true;
 };
+
   };
 
   wayland.windowManager.hyprland = {
@@ -340,7 +315,7 @@
           "windows,     1, 6,  winOut,  popin 80%"
           "windowsOut,  1, 5,  winOut,  popin 80%"
           "border,      1, 8,  softIO"
-          "borderangle, 1, 8,  softIO, loop"
+          "borderangle, 1, 80, softIO, loop"
           "fade,        1, 5,  softIO"
           "workspaces,  1, 4,  softIO, slide"
           "specialWorkspace, 1, 6, default, slide"
@@ -410,8 +385,8 @@
         # Zen scratch browser
         "match:class zen, match:workspace special:zen, float on, center on, size (monitor_w)*0.9 (monitor_h)*0.9, opacity 0.65"
 
-        # ChatGPT floating drawer (nofocus REMOVED)
-        "match:class ^chrome-chat\\.openai\\.com__-Default$, float on, size (monitor_w)*0.25 (monitor_h)*0.92, move (monitor_w)*0.01 (monitor_h)*0.04, opacity 0.85"
+        # Claude panel — left side floating drawer
+        "match:class ^chrome-claude\\.ai__-Default$, float on, size 440 (monitor_h)*0.92, move (monitor_w)*0.01 (monitor_h)*0.04, opacity 0.88"
 
         # Minecraft - force opaque rendering (prevents transparency on NVIDIA/Wayland)
         "match:title ^(Minecraft.*)$, opacity 1.0 override 1.0 override"
@@ -464,7 +439,7 @@
         "hyprctl plugin load ${
           inputs.hyprhook.packages.${pkgs.stdenv.hostPlatform.system}.hyprhook
         }/lib/libHyprhook.so"
-        "chatgpt"
+        "claude-panel"
       ];
 
       bind = [
@@ -520,9 +495,9 @@
         "$mainMod, U, togglespecialworkspace,zen"
         "$mainMod CTRL, U, movetoworkspacesilent,special:zen"
 
-        # ChatGPT floating drawer
-        "$mainMod, C, exec, ${config.xdg.configHome}/hypr/scripts/toggle-chatgpt.sh"
-        "$mainMod CTRL, C, focuswindow, class:^(chrome-chat\\.openai\\.com__-Default)$"
+        # Claude panel
+        "$mainMod, I, exec, ${config.xdg.configHome}/hypr/scripts/toggle-claude.sh"
+        "$mainMod CTRL, I, focuswindow, class:^(chrome-claude\\.ai__-Default)$"
 
         "$mainMod, Z,  fullscreen, 1"
         "$mainMod SHIFT, Z,  fullscreen"
