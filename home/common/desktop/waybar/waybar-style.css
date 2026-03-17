@@ -1,0 +1,275 @@
+/* ============================================================
+   Waybar — Glassy Wave Theme (Catppuccin Macchiato)
+
+   Wave concept:
+     Left modules:  top-right + bottom-left corners are large  →  shape leans ╱ toward center
+     Right modules: top-left + bottom-right corners are large  →  shape leans ╲ toward center
+     Clock:         symmetric oval — the calm center of the wave
+     Intensity increases toward clock (more dramatic shape = more motion).
+   ============================================================ */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: bold;
+  font-size: 13px;
+  min-height: 0;
+  transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar.hidden {
+  opacity: 0.15;
+}
+
+/* ── Shared glass base ── */
+#workspaces,
+#clock,
+#submap,
+#pulseaudio,
+#custom-mem,
+#cpu,
+#backlight,
+#battery,
+#tray,
+#custom-github_notifications,
+#custom-daily-verse,
+#custom-weather {
+  background: rgba(30, 32, 48, 0.48);
+  border: 1px solid rgba(202, 211, 245, 0.08);
+  border-top: 1px solid rgba(202, 211, 245, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 8px 24px rgba(0, 0, 0, 0.40);
+  color: #cad3f5;
+  margin: 5px 4px;
+  padding: 3px 14px;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   LEFT SIDE — wave leans ╱  (top-right + bottom-left rounded)
+   Intensity increases toward center.
+   ════════════════════════════════════════════════════════════ */
+
+/* Outermost — subtle wave */
+#workspaces {
+  border-radius: 6px 28px 6px 28px;
+  padding: 2px 4px;
+}
+
+/* Middle */
+#submap {
+  border-radius: 6px 38px 6px 38px;
+  color: #eed49f;
+  background: rgba(238, 212, 159, 0.10);
+  border-top-color: rgba(238, 212, 159, 0.30);
+}
+
+/* Innermost — most dramatic wave shape */
+#custom-daily-verse {
+  border-radius: 6px 50px 6px 50px;
+  color: #b8c0e0;
+  font-style: italic;
+}
+
+#custom-daily-verse:hover {
+  background: rgba(198, 160, 246, 0.14);
+  color: #c6a0f6;
+  border-top-color: rgba(198, 160, 246, 0.35);
+}
+
+/* Innermost left — most dramatic wave shape */
+#custom-weather {
+  border-radius: 6px 56px 6px 56px;
+  color: #7dc4e4;
+}
+
+#custom-weather:hover {
+  background: rgba(125, 196, 228, 0.12);
+  border-top-color: rgba(125, 196, 228, 0.35);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   CENTER — symmetric oval, the eye of the wave
+   ════════════════════════════════════════════════════════════ */
+
+#clock {
+  border-radius: 24px;
+  padding: 5px 22px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: #cad3f5;
+  border-top: 1px solid rgba(202, 211, 245, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 10px 30px rgba(0, 0, 0, 0.50);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   RIGHT SIDE — wave leans ╲  (top-left + bottom-right rounded)
+   Intensity decreases away from center.
+   ════════════════════════════════════════════════════════════ */
+
+/* Innermost — most dramatic wave shape */
+#custom-github_notifications {
+  border-radius: 50px 6px 50px 6px;
+  color: #cad3f5;
+}
+
+/* Audio */
+#pulseaudio {
+  border-radius: 44px 6px 44px 6px;
+  color: #8bd5ca;
+}
+
+#pulseaudio:hover {
+  background: rgba(139, 213, 202, 0.12);
+}
+
+#pulseaudio.muted {
+  background: rgba(110, 115, 141, 0.20);
+  color: #6e738d;
+}
+
+/* Memory */
+#custom-mem {
+  border-radius: 38px 6px 38px 6px;
+  color: #c6a0f6;
+}
+
+/* CPU */
+#cpu {
+  border-radius: 32px 6px 32px 6px;
+  color: #8aadf4;
+}
+
+/* Backlight */
+#backlight {
+  border-radius: 26px 6px 26px 6px;
+  color: #eed49f;
+}
+
+/* Battery */
+#battery {
+  border-radius: 22px 6px 22px 6px;
+  color: #a6da95;
+}
+
+#battery.charging {
+  color: #a6da95;
+  background: rgba(166, 218, 149, 0.12);
+  border-top-color: rgba(166, 218, 149, 0.30);
+}
+
+#battery.warning:not(.charging) {
+  color: #f5a97f;
+  background: rgba(245, 169, 127, 0.12);
+  border-top-color: rgba(245, 169, 127, 0.30);
+}
+
+#battery.critical:not(.charging) {
+  color: #ed8796;
+  background: rgba(237, 135, 150, 0.15);
+  border-top-color: rgba(237, 135, 150, 0.40);
+  animation: blink 0.6s linear infinite alternate;
+}
+
+/* Tray — outermost, subtlest wave */
+#tray {
+  border-radius: 18px 6px 18px 6px;
+  padding: 3px 10px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: rgba(237, 135, 150, 0.20);
+  border-radius: 8px;
+}
+
+
+/* ── Workspaces buttons ── */
+#workspaces button {
+  background: transparent;
+  color: #6e738d;
+  border-radius: 6px 18px 6px 18px;
+  padding: 3px 9px;
+  margin: 1px 1px;
+  font-size: 15px;
+  min-width: 26px;
+}
+
+#workspaces button.persistent {
+  color: #494d64;
+  font-size: 11px;
+}
+
+#workspaces button:hover {
+  background: rgba(139, 213, 202, 0.12);
+  color: #8bd5ca;
+  box-shadow: inset 0 0 0 1px rgba(139, 213, 202, 0.20);
+}
+
+#workspaces button.active {
+  background: rgba(138, 173, 244, 0.18);
+  color: #8aadf4;
+  box-shadow:
+    inset 0 0 0 1px rgba(138, 173, 244, 0.40),
+    0 0 10px rgba(138, 173, 244, 0.20);
+}
+
+#workspaces button.urgent {
+  background: rgba(237, 135, 150, 0.18);
+  color: #ed8796;
+  box-shadow: inset 0 0 0 1px rgba(237, 135, 150, 0.40);
+}
+
+
+/* ── Tooltips ── */
+tooltip {
+  background: rgba(24, 25, 38, 0.96);
+  border-radius: 16px;
+  border: 1px solid rgba(202, 211, 245, 0.10);
+  border-top: 1px solid rgba(202, 211, 245, 0.28);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.60);
+  padding: 6px;
+}
+
+tooltip label {
+  color: #cad3f5;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  padding: 14px 24px;
+}
+
+
+
+/* ── Temperature ── */
+#temperature {
+  color: #8bd5ca;
+}
+
+#temperature.critical {
+  color: #ed8796;
+  background: rgba(237, 135, 150, 0.15);
+  border-top-color: rgba(237, 135, 150, 0.40);
+}
+
+
+/* ── Blink animation ── */
+@keyframes blink {
+  to {
+    background: rgba(237, 135, 150, 0.35);
+    color: #ffffff;
+  }
+}

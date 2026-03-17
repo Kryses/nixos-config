@@ -1,0 +1,37 @@
+[project]
+name = "{project_name}"
+description = ""
+authors = [
+  {'name'='Chad Provencher', 'email'='kryses@kryses.com'}
+]
+version = ""
+dependancies = []
+classifiers = []
+readme = "README.md"
+
+[tool.pyright]
+include = [
+  'src/**/*.py',
+]
+extraPaths = []
+
+
+exclude = ["**/node_modules",
+        "**/__pycache__",
+]
+ignore = []
+stubPath = ""
+venvPath = "./"
+venv = "venv"
+
+reportMissingImports = true
+reportMissingTypeStubs = false
+
+pythonVersion = "3.10"
+pythonPlatform = "Linux"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src",
+] 
+addopts = "-ra -q -s"
