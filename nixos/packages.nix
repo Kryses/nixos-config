@@ -5,7 +5,7 @@ let
   # Our custom Gather Town package
   gather-town = pkgs.callPackage ../hosts/common/packages/tools/gather-town { };
   jira = pkgs.callPackage ../hosts/common/packages/tools/jira { };
-  chatgpt = pkgs.callPackage ../hosts/common/packages/tools/chatgpt { };
+  claude-panel = pkgs.callPackage ../hosts/common/packages/tools/claude-panel { };
 
   # Wrap prismlauncher to force XWayland for Minecraft (native Wayland GLFW fails on NVIDIA)
   prismlauncher-xwayland = pkgs.symlinkJoin {
@@ -28,7 +28,7 @@ in
   };
 
   environment.systemPackages = [
-    chatgpt
+    claude-panel
     gather-town
     jira
     pkgs.android-tools
