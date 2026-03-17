@@ -2,7 +2,7 @@
   imports = [
     ./gpg.nix
     ./steam.nix
-    ./sound.nix
+    # ./sound.nix
     ./zram.nix
     ./env.nix
     ./user.nix
@@ -16,5 +16,8 @@
     ./samba.nix
     ./xserver.nix
     ./dolphin.nix
+    ./disk.nix
+    ./udev.nix
+    ./syncthing.nix
   ];
 }
