@@ -1,0 +1,32 @@
+[user]
+	name = Chad Provencher
+	email = thechad802@gmail.com
+[credential]
+	helper = cache
+[core]
+	excludesFile = /home/kryses/.gitignore_global
+[init]
+	defaultBranch = main
+  	editor = nvim
+	filemode = false
+	excludesfile = ~/.gitignore_global
+
+[pull]
+  ff = no
+[merge]
+  ff = false
+
+[merge "no-binary-merge"]
+  name = Prevent automatic merging of binary files
+
+[mergetool]
+  prompt = true
+
+[mergetool "nvim"]
+  cmd = nvim -f -c \"DiffviewOpen\" \"$MERGED\"
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

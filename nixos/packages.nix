@@ -1,41 +1,79 @@
-{ pkgs, inputs, ... }:
+{ pkgs, nixpkgs, nixpkgs-python, inputs, ... }:
 let
   system = "x86_64-linux";
-in
 
+  # Our custom Gather Town package
+  gather-town = pkgs.callPackage ../hosts/common/packages/tools/gather-town { };
+  jira = pkgs.callPackage ../hosts/common/packages/tools/jira { };
+  chatgpt = pkgs.callPackage ../hosts/common/packages/tools/chatgpt { };
+
+  # Wrap prismlauncher to force XWayland for Minecraft (native Wayland GLFW fails on NVIDIA)
+  prismlauncher-xwayland = pkgs.symlinkJoin {
+    name = "prismlauncher";
+    paths = [ pkgs.prismlauncher ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/prismlauncher \
+        --set QT_QPA_PLATFORM xcb \
+        --set __NV_PRIME_RENDER_OFFLOAD 1 \
+        --set __GLX_VENDOR_LIBRARY_NAME nvidia \
+        --set __EGL_VENDOR_LIBRARY_FILENAMES /run/opengl-driver/share/glvnd/egl_vendor.d/10_nvidia.json
+    '';
+  };
+in
 {
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" ];
+    permittedInsecurePackages = [ "python-2.7.18.8" "electron-25.9.0" "openssl-1.1.1w"];
   };
+
   environment.systemPackages = [
-    # Desktop apps
-    (pkgs.callPackage ./packages/splashtop/default.nix {})
-    inputs.zen-browser.packages."${system}".default
+    chatgpt
+    gather-town
+    jira
+    pkgs.android-tools
+    pkgs.jmtpfs
+
+    # pkgs.legacyPackages.${system}.python39
+    # nixpkgs-python.packages.${system}."3.9.2"
+    inputs.zen-browser.packages.x86_64-linux.default
+    # pkgs.tasksh
+    pkgs.firefoxpwa
+    pkgs.btop
+    pkgs.zellij
+    pkgs.satty
+    pkgs.krita
+    pkgs.ghostty
+    pkgs.luajitPackages.luarocks
     pkgs.audacity
     pkgs.chromium
     pkgs.obs-studio
+    pkgs.git
     pkgs.rofi
     pkgs.wofi
     pkgs.mpv
-    pkgs.kdenlive
     pkgs.discord-development
     pkgs.gparted
     pkgs.obsidian
-    pkgs.pcmanfm-qt
-    pkgs.polymc
+    # pkgs.pcmanfm-qt
     pkgs.nushell
     pkgs.appgate-sdp
     pkgs.slack
     pkgs.remmina
     pkgs.spotify
-
+    pkgs.godotPackages_4_3.godot
+    pkgs.deadnix
+    pkgs.statix
+    pkgs.termdown
+    pkgs.sox
+    pkgs.posting
+    inputs.compose2nix.packages.x86_64-linux.default
+    pkgs.qt6Packages.qtwayland
 
     # pkgs.Coding stuff
     pkgs.gnumake
     pkgs.gcc
     pkgs.nodejs
-    pkgs.python
     pkgs.neovim
     pkgs.telescope
     pkgs.ripgrep
@@ -43,20 +81,10 @@ in
     pkgs.carapace
     pkgs.cargo
     pkgs.vit
-    (pkgs.python311.withPackages (ps: with ps; [ 
-      pbr
-      taskw
-      notify-py
-      pycairo
-      pygobject3
-      requests 
-      bugwarrior
-    ]))
     # pkgs.CLI utils
     pkgs.inotify-tools
     pkgs.tmuxinator
     pkgs.zoxide
-    pkgs.neofetch
     pkgs.file
     pkgs.tree
     pkgs.wget
@@ -68,8 +96,6 @@ in
     pkgs.unzip
     pkgs.scrot
     pkgs.ffmpeg
-    pkgs.devenv
-    pkgs.light
     pkgs.lux
     pkgs.mediainfo
     pkgs.yazi
@@ -94,6 +120,7 @@ in
     pkgs.imv
     pkgs.dmenu
     pkgs.screenkey
+    pkgs.nmap
     pkgs.mako
     pkgs.gromit-mpx
     pkgs.taskwarrior3
@@ -101,23 +128,13 @@ in
     pkgs.gh
     pkgs.jq
 
-
-    #Python
-
-
-    # pkgs.Xorg stuff
-    #pkgs.xterm
-    #pkgs.xclip
-    #pkgs.xorg.xbacklight
-
-    # pkgs.Wayland stuff
     pkgs.xwayland
     pkgs.wl-clipboard
     pkgs.cliphist
 
     # pkgs.WMs and stuff
-    pkgs.herbstluftwm
     pkgs.hyprland
+    # pkgs.hyprlandPlugins.hyprsplit
     pkgs.seatd
     pkgs.xdg-desktop-portal-hyprland
     pkgs.waybar
@@ -128,11 +145,10 @@ in
     pkgs.pamixer
     pkgs.pavucontrol
     # pkgs.GPU stuff 
-    pkgs.amdvlk
     # pkgs.rocm-opencl-icd
     pkgs.glaxnimate
-    pkgs.elegant-sddm
-    pkgs.dwarf-fortress-packages.dwarf-fortress-full
+    pkgs.pciutils
+    # pkgs.dwarf-fortress-packages.dwarf-fortress-full 
     pkgs.cataclysm-dda-git
     # pkgs.Screenshotting
     pkgs.grim
@@ -140,6 +156,7 @@ in
     pkgs.slurp
     pkgs.flameshot
     pkgs.swappy
+    pkgs.protonvpn-gui
 
     # pkgs.Other
     pkgs.home-manager
@@ -151,26 +168,55 @@ in
     pkgs.networkmanagerapplet
     pkgs.openvpn
     pkgs.networkmanager-openvpn
+    pkgs.docker
     pkgs.blender
-    pkgs.chatgpt-cli
     pkgs.bat
     pkgs.postman
-    pkgs.ghostty
+    pkgs.devenv
+    pkgs.protontricks
+    pkgs.awscli2
+    pkgs.aws-gate
+    pkgs.ssm-session-manager-plugin
+    pkgs.qmk
+    pkgs.qmk-udev-rules
+    pkgs.qmk_hid
+    pkgs.via
+    pkgs.vial
+    pkgs.wofi-pass
+    pkgs.wofi-emoji
+    pkgs.imagemagick
+    pkgs.libnotify
     pkgs.nixd
-    pkgs.deadnix
-    pkgs.newsboat
+    pkgs.cmatrix
+    pkgs.pyenv
+    pkgs.tcl
+    pkgs.bibletime
+    pkgs.lazyssh
+    pkgs.handbrake
+    pkgs.dvdbackup
+    pkgs.regionset
+    pkgs.makemkv
+    pkgs.vlc
+    pkgs.lsscsi
+    pkgs.cloudflare-warp
+    prismlauncher-xwayland
+    pkgs.ftb-app
+    pkgs.netcat
+    pkgs.claude-code
+    pkgs.arp-scan
+
   ];
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     twemoji-color-font
     font-awesome
     powerline-fonts
     powerline-symbols
-    pkgs.nerd-fonts._0xproto
-    pkgs.nerd-fonts.droid-sans-mono
-    pkgs.nerd-fonts.symbols-only
+    nerd-fonts._0xproto
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
   ];
 }
+
