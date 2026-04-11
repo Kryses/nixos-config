@@ -3,9 +3,231 @@
     eww
     jq
     playerctl
+    rofi
   ];
 
   home.file = {
+    # Portal chooser config — use wofi picker instead of the default Qt one
+    "${config.xdg.configHome}/hypr/xdph.conf".text = ''
+      screencopy {
+        custom_picker_binary = ${config.xdg.configHome}/hypr/scripts/wofi-share-picker.sh
+      }
+    '';
+
+    "${config.xdg.configHome}/hypr/scripts/wofi-share-picker.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        THUMB_DIR="$(mktemp -d /tmp/share-picker-XXXXXX)"
+        trap 'rm -rf "$THUMB_DIR"' EXIT
+
+        # Look up app icon path from desktop files
+        find_icon() {
+          local wm_class="$1"
+          local desktop_file icon_name icon_path
+
+          for attempt in "$wm_class" "$(echo "$wm_class" | tr '[:upper:]' '[:lower:]')"; do
+            desktop_file=$(find /run/current-system/sw/share/applications \
+              ~/.local/share/applications ~/.nix-profile/share/applications \
+              -maxdepth 2 -name "''${attempt}*.desktop" -print -quit 2>/dev/null || true)
+            [[ -n "$desktop_file" ]] && break
+          done
+
+          if [[ -n "''${desktop_file:-}" ]]; then
+            icon_name=$(grep -m1 '^Icon=' "$desktop_file" 2>/dev/null | cut -d= -f2)
+          fi
+          [[ -z "''${icon_name:-}" ]] && return 1
+
+          # Absolute path
+          if [[ "$icon_name" == /* && -f "$icon_name" ]]; then
+            echo "$icon_name"; return 0
+          fi
+
+          # Search icon theme
+          icon_path=$(find /run/current-system/sw/share/icons/hicolor \
+            ~/.local/share/icons ~/.nix-profile/share/icons/hicolor \
+            /run/current-system/sw/share/pixmaps \
+            -maxdepth 4 \( -name "''${icon_name}.png" -o -name "''${icon_name}.svg" \) \
+            -print 2>/dev/null | sort -t/ -k8 -rn | head -1 || true)
+
+          if [[ -n "''${icon_path:-}" && -f "$icon_path" ]]; then
+            echo "$icon_path"; return 0
+          fi
+          return 1
+        }
+
+        # ── Generate rofi dmenu entries ──
+        # Rofi dmenu format: DISPLAY_TEXT\0icon\x1fICON_PATH\0info\x1fMETADATA
+        # Also writes metadata to $META (one line per entry, parallel index)
+        generate_menu() {
+          # ── Screens (use grim thumbnails) ──
+          while IFS=$'\t' read -r name w h; do
+            thumb="$THUMB_DIR/screen_$name.png"
+            if grim -o "$name" -t png -l 1 "$thumb" 2>/dev/null; then
+              magick "$thumb" -thumbnail 250x141^ \
+                -gravity center -extent 250x141 "$thumb" 2>/dev/null || true
+            fi
+            if [[ -f "$thumb" ]]; then
+              echo -en "$name (''${w}x''${h})\0icon\x1f$thumb\x1finfo\x1fscreen:$name\n"
+            else
+              echo -en "$name (''${w}x''${h})\0info\x1fscreen:$name\n"
+            fi
+            echo "screen:$name" >> "$META"
+          done < <(hyprctl monitors -j | jq -r '.[] | [.name, .width, .height] | @tsv')
+
+          # ── Region ──
+          echo -en "Select a region\0icon\x1fpreferences-desktop-display\x1finfo\x1fregion:slurp\n"
+          echo "region:slurp" >> "$META"
+
+          # ── Windows ──
+          if [[ -n "''${XDPH_WINDOW_SHARING_LIST:-}" ]]; then
+            while IFS= read -r segment; do
+              [[ -z "$segment" ]] && continue
+
+              handle_id=''${segment%%\[HC\>]*}
+              rest=''${segment#*\[HC\>]}
+              class=''${rest%%\[HT\>]*}
+              rest=''${rest#*\[HT\>]}
+              title=''${rest%%\[HE\>]*}
+
+              [[ -z "$handle_id" ]] && continue
+              [[ -z "$title" ]] && title="$class"
+
+              label="$title"
+              [[ ''${#label} -gt 50 ]] && label="''${label:0:47}..."
+
+              icon_path=$(find_icon "$class" 2>/dev/null || echo "")
+              if [[ -n "$icon_path" ]]; then
+                echo -en "$label\0icon\x1f$icon_path\x1finfo\x1fwindow:$handle_id\n"
+              else
+                echo -en "$label\0icon\x1fapplication-x-executable\x1finfo\x1fwindow:$handle_id\n"
+              fi
+              echo "window:$handle_id" >> "$META"
+            done < <(echo "''${XDPH_WINDOW_SHARING_LIST}" | sed 's/\[HA>\]/\n/g')
+          fi
+        }
+
+        # ── Save metadata alongside generation ──
+        META="$THUMB_DIR/meta.txt"
+        generate_menu > "$THUMB_DIR/entries.bin"
+
+        # ── Show rofi grid picker ──
+        idx=$(rofi -dmenu \
+          -show-icons \
+          -i \
+          -p "Share" \
+          -theme ${config.xdg.configHome}/hypr/styles/share-picker.rasi \
+          -format 'i' \
+          -input "$THUMB_DIR/entries.bin") || exit 1
+
+        [[ -z "$idx" || "$idx" == "-1" ]] && exit 1
+
+        info=$(sed -n "$(( idx + 1 ))p" "$META")
+        [[ -z "$info" ]] && exit 1
+
+        sel_type="''${info%%:*}"
+        sel_value="''${info#*:}"
+
+        case "$sel_type" in
+          screen)  echo "[SELECTION]/screen:$sel_value" ;;
+          region)  region=$(slurp -f "%o@%x,%y,%w,%h") || exit 1
+                   echo "[SELECTION]/region:$region" ;;
+          window)  echo "[SELECTION]/window:$sel_value" ;;
+          *)       exit 1 ;;
+        esac
+      '';
+    };
+
+    "${config.xdg.configHome}/hypr/styles/share-picker.rasi".text = ''
+      * {
+        bg:           #1e1e2e;
+        bg-alt:       #313244;
+        fg:           #cdd6f4;
+        accent:       #89b4fa;
+        border-color: #45475a;
+      }
+
+      window {
+        width:            900px;
+        height:           650px;
+        background-color: @bg;
+        border:           2px solid;
+        border-color:     @border-color;
+        border-radius:    8px;
+        location:         center;
+      }
+
+      mainbox {
+        background-color: transparent;
+        children:         [ inputbar, listview ];
+        spacing:          8px;
+        padding:          12px;
+      }
+
+      inputbar {
+        background-color: @bg-alt;
+        border-radius:    6px;
+        padding:          8px 12px;
+        children:         [ prompt, entry ];
+        spacing:          8px;
+      }
+
+      prompt {
+        background-color: transparent;
+        text-color:       @accent;
+      }
+
+      entry {
+        background-color: transparent;
+        text-color:       @fg;
+        placeholder:      "Type to filter...";
+        placeholder-color: #585b70;
+      }
+
+      listview {
+        background-color: transparent;
+        columns:          3;
+        lines:            3;
+        flow:             horizontal;
+        fixed-columns:    true;
+        spacing:          8px;
+        scrollbar:        false;
+      }
+
+      element {
+        orientation:      vertical;
+        background-color: @bg-alt;
+        border-radius:    6px;
+        padding:          8px;
+        spacing:          6px;
+      }
+
+      element selected {
+        background-color: @bg-alt;
+        border:           2px solid;
+        border-color:     @accent;
+      }
+
+      element-icon {
+        size:             128px;
+        horizontal-align: 0.5;
+        background-color: transparent;
+      }
+
+      element-text {
+        horizontal-align: 0.5;
+        background-color: transparent;
+        text-color:       @fg;
+        font:             "Sans 11";
+      }
+
+      element-text selected {
+        text-color:       @accent;
+      }
+    '';
+
     "${config.xdg.configHome}/eww-which-key/eww.yuck".source =
       ./which-key/eww.yuck;
     "${config.xdg.configHome}/eww-which-key/eww.scss".source =
@@ -62,63 +284,38 @@
       executable = true;
     };
 
-    # ChatGPT floating drawer toggle (UPDATED)
-"${config.xdg.configHome}/hypr/scripts/toggle-chatgpt.sh" = {
+    "${config.xdg.configHome}/hypr/scripts/toggle-claude.sh" = {
   text = ''
     #!/usr/bin/env bash
     set -euo pipefail
 
-    CLASS="chrome-chat.openai.com__-Default"
-    CHAT_CMD="chatgpt"
-    HIDDEN_WS="special:__chatgpt_hidden"
+    CLASS="chrome-claude.ai__-Default"
+    HIDDEN_WS="special:__claude_hidden"
 
-    # First ChatGPT client as compact JSON
     CLIENT=$(hyprctl -j clients \
       | jq -c ".[] | select(.class == \"$CLASS\")" \
       | head -n 1 || true)
 
-    # If no window yet, launch and exit
     if [ -z "$CLIENT" ]; then
-      $CHAT_CMD &
+      claude-panel &
       exit 0
     fi
 
     WIN=$(echo "$CLIENT" | jq -r '.address')
-    PINNED=$(echo "$CLIENT" | jq -r '.pinned')
     WS_NAME=$(echo "$CLIENT" | jq -r '.workspace.name')
-
-    # Current workspace id
     CURWS=$(hyprctl -j monitors \
       | jq -r '.[] | select(.focused == true) | .activeWorkspace.id')
 
-    # Visible state:
-    #   - If pinned => we treat it as "visible"
-    #   - If not pinned but not on hidden special ws => also visible
-    #   - If on hidden special ws and not pinned => hidden
-    VISIBLE=0
-    if [ "$PINNED" = "true" ] || [ "$PINNED" = "1" ]; then
-      VISIBLE=1
-    elif [ "$WS_NAME" != "$HIDDEN_WS" ]; then
-      VISIBLE=1
-    fi
-
-    if [ "$VISIBLE" -eq 1 ]; then
-      # HIDE: unpin, then move to hidden special workspace
-      hyprctl dispatch focuswindow "address:$WIN"
-      # toggle pin off if currently pinned
-      if [ "$PINNED" = "true" ] || [ "$PINNED" = "1" ]; then
-        hyprctl dispatch pin
-      fi
-      hyprctl dispatch movetoworkspacesilent "$HIDDEN_WS,address:$WIN"
-    else
-      # SHOW: move to current workspace, pin and focus
+    if [ "$WS_NAME" = "$HIDDEN_WS" ]; then
       hyprctl dispatch movetoworkspacesilent "$CURWS,address:$WIN"
       hyprctl dispatch focuswindow "address:$WIN"
-      hyprctl dispatch pin
+    else
+      hyprctl dispatch movetoworkspacesilent "$HIDDEN_WS,address:$WIN"
     fi
   '';
   executable = true;
 };
+
   };
 
   wayland.windowManager.hyprland = {
@@ -340,7 +537,7 @@
           "windows,     1, 6,  winOut,  popin 80%"
           "windowsOut,  1, 5,  winOut,  popin 80%"
           "border,      1, 8,  softIO"
-          "borderangle, 1, 8,  softIO, loop"
+          "borderangle, 1, 80, softIO, loop"
           "fade,        1, 5,  softIO"
           "workspaces,  1, 4,  softIO, slide"
           "specialWorkspace, 1, 6, default, slide"
@@ -401,17 +598,14 @@
         "match:class steam, workspace special:steam silent"
         "match:class ^(steam_app_.*)$, workspace special:steam silent"
 
-        # Obsidian notes scratchpad
-        "match:class obsidian, float on, center on,  size (monitor_w)*0.9 (monitor_h)*0.9, opacity 0.65, workspace special:notes"
-
         # TermPad scratchpad
         "match:title ^(TermPad)$, float on, center on,  size (monitor_w)*0.9 (monitor_h)*0.9, opacity 0.65, workspace special:term"
 
         # Zen scratch browser
         "match:class zen, match:workspace special:zen, float on, center on, size (monitor_w)*0.9 (monitor_h)*0.9, opacity 0.65"
 
-        # ChatGPT floating drawer (nofocus REMOVED)
-        "match:class ^chrome-chat\\.openai\\.com__-Default$, float on, size (monitor_w)*0.25 (monitor_h)*0.92, move (monitor_w)*0.01 (monitor_h)*0.04, opacity 0.85"
+        # Claude panel — left side floating drawer
+        "match:class ^chrome-claude\\.ai__-Default$, float on, size 440 (monitor_h)*0.92, move (monitor_w)*0.01 (monitor_h)*0.04, opacity 0.88"
 
         # Minecraft - force opaque rendering (prevents transparency on NVIDIA/Wayland)
         "match:title ^(Minecraft.*)$, opacity 1.0 override 1.0 override"
@@ -445,7 +639,6 @@
         "special:slack, on-created-empty:foot"
         "special:music, on-created-empty:foot"
         "special:steam, on-created-empty:foot"
-        "special:notes, on-created-empty:foot"
         "special:game, on-created-empty:foot"
         "special:term, on-created-empty:ghostty --title=TermPad"
         "special:zen, on-created-empty:zen"
@@ -459,12 +652,11 @@
         "wl-paste --type image --watch cliphist store"
         "[workspace special:music silent] spotify"
         "[workspace special:steam silent] stea"
-        "[workspace special:notes silent] obsidian"
         "eww -c ~/.config/eww-which-key daemon"
         "hyprctl plugin load ${
           inputs.hyprhook.packages.${pkgs.stdenv.hostPlatform.system}.hyprhook
         }/lib/libHyprhook.so"
-        "chatgpt"
+        "claude-panel"
       ];
 
       bind = [
@@ -503,8 +695,6 @@
         "$mainMod SHIFT, R, submap, Dev"
 
         # Scratchpads (special:)
-        "$mainMod, N, togglespecialworkspace,notes"
-        "$mainMod CNRL, N, movetoworkspacesilent,special:notes"
         "$mainMod, W, togglespecialworkspace,slack"
         "$mainMod CTRL, W, movetoworkspacesilent,special:slack"
         "$mainMod, E, togglespecialworkspace,music"
@@ -520,9 +710,9 @@
         "$mainMod, U, togglespecialworkspace,zen"
         "$mainMod CTRL, U, movetoworkspacesilent,special:zen"
 
-        # ChatGPT floating drawer
-        "$mainMod, C, exec, ${config.xdg.configHome}/hypr/scripts/toggle-chatgpt.sh"
-        "$mainMod CTRL, C, focuswindow, class:^(chrome-chat\\.openai\\.com__-Default)$"
+        # Claude panel
+        "$mainMod, I, exec, ${config.xdg.configHome}/hypr/scripts/toggle-claude.sh"
+        "$mainMod CTRL, I, focuswindow, class:^(chrome-claude\\.ai__-Default)$"
 
         "$mainMod, Z,  fullscreen, 1"
         "$mainMod SHIFT, Z,  fullscreen"
