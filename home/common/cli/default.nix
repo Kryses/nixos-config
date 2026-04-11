@@ -6,7 +6,8 @@
     ./btop
     ./zoxide
     ./yazi
-    ./zellij
+    # ./zellij
+    ./tmux
     ./task
   ];
 }

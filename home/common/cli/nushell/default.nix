@@ -78,6 +78,11 @@ in {
       }; 
     in ''
       $env.config = ${conf};
+
+      # Auto-attach to tmux on terminal open (mirrors zellij attach_to_session)
+      if ($env | get -o TMUX | is-empty) and ($env | get -o ZELLIJ | is-empty) {
+        tmux new-session -A -s main
+      }
     '';
     shellAliases = {
       gg = "lazygit";
@@ -100,6 +105,9 @@ in {
       twd = "timew day";
       tws = "timew summary";
     };
+    extraEnv = ''
+      $env.PATH = ($env.PATH | prepend ($env.HOME + "/.npm-global/bin"))
+    '';
     environmentVariables = {
         PROMPT_INDICATOR_VI_INSERT = "  ";
         PROMPT_INDICATOR_VI_NORMAL = "∙ ";

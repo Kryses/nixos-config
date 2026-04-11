@@ -136,7 +136,6 @@ in
     pkgs.hyprland
     # pkgs.hyprlandPlugins.hyprsplit
     pkgs.seatd
-    pkgs.xdg-desktop-portal-hyprland
     pkgs.waybar
 
     # pkgs.Sound

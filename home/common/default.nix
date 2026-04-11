@@ -10,5 +10,8 @@
     username = "kryses";
     homeDirectory = "/home/kryses";
     stateVersion = "25.05";
+    packages = with pkgs; [
+      imagemagick
+    ];
   };
 }
