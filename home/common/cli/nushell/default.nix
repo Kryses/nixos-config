@@ -101,6 +101,9 @@ in {
       tss = "task stop";
       tt = "${configDir}/nushell/scripts/task_report.nu";
       ttu = "taskwarrior-tui";
+      tai = "task ai";
+      tr = "task review";
+      tac = "task aicreated";
       tw = "timew";
       twd = "timew day";
       tws = "timew summary";

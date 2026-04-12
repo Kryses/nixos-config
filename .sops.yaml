@@ -1,0 +1,23 @@
+keys:
+  # Personal key (for editing secrets on workstation)
+  - &admin age1372w738lz7vnw0cjteaw5dd63stg4r3rne70340zrknr0ccxt5ns7dr7vw
+
+  # Host keys (derived from SSH host keys via ssh-to-age)
+  - &kryses-tyr age16sn75vz269mp7j6red3y3h8mnw0u5rr3zrj09a9mg5atpeek4gusrqddxd
+  # TODO: add remaining hosts after running ssh-to-age on each
+  # - &kryses-nixos age1...
+  # - &kryses-kirk age1...
+  # - &kryses-brokkr age1...
+  # - &kryses-mobile-nixos age1...
+
+creation_rules:
+  - path_regex: ^secrets/secrets\.yaml$
+    key_groups:
+      - age:
+          - *admin
+          - *kryses-tyr
+          # TODO: uncomment as hosts are added
+          # - *kryses-nixos
+          # - *kryses-kirk
+          # - *kryses-brokkr
+          # - *kryses-mobile-nixos

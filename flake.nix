@@ -48,6 +48,9 @@
 
     compose2nix.url = "github:aksiksi/compose2nix";
     compose2nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -58,6 +61,7 @@
     zen-browser,
     stylix,
     nixos-vfio,
+    sops-nix,
     ...
   }: let
     inherit (self) outputs;

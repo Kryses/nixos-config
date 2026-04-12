@@ -7,17 +7,18 @@
   programs.taskwarrior = {
     enable = true;
     package = pkgs.taskwarrior3;
+    extraConfig = ''
+      include /run/secrets/rendered/taskwarrior-taskrc
+    '';
     config = {
       data.location = "~/.task";
       hooks.location = ./hooks;
       default.project = "inbox";
       priority.default = "M";
       size.default = "M";
+      sync.server.url = "http://192.168.1.212:8080";
       sync.server.client_id = "ea68034d-ac3a-4249-aed0-1f82e41cb493";
-      taskd = {
-        editor = "nvim";
-        server = "192.168.1.234:8080";
-      };
+
       recurrence.limit = 1;
       regex = "on";
       journal.time = "one";
@@ -52,6 +53,8 @@
             family.coefficient = 0.75;
             personal.coefficient = 0.1;
             meeting.coefficient = 1.0;
+            aiqueue.coefficient = 0.0;
+            aireview.coefficient = 0.5;
           };
           project = {
             ai_server.coefficient = 0.75;
@@ -61,6 +64,10 @@
         };
       };
       uda = {
+        agent = {
+          type = "string";
+          label = "Agent";
+        };
         reviewed = {
           type = "date";
           label = "Reviewed";
@@ -102,6 +109,9 @@
         tag = {
           blocked = "red";
           review = "blue";
+          aiqueue = "cyan";
+          aireview = "yellow";
+          aicreated = "color4";
         };
       };
 
@@ -147,6 +157,27 @@
           columns = "id,priority,description,urgency";
           sort = "urgency-";
           filter = "(-COMPLETED -DELETED -WAITING) and limit:page";
+        };
+        ai = {
+          labels = "Id,Size,󰘃,Project,Description,urg";
+          columns = "id,size,priority,project,description.count,urgency";
+          description = "Tasks delegated to AI";
+          sort = "urgency-";
+          filter = "status:pending +aiqueue -BLOCKED";
+        };
+        review = {
+          labels = "Id,Size,Project,Description,Agent";
+          columns = "id,size,project,description.count,agent";
+          description = "AI work awaiting review";
+          sort = "urgency-";
+          filter = "status:pending +aireview";
+        };
+        aicreated = {
+          labels = "Id,Project,Tags,Description,Created";
+          columns = "id,project,tags,description.count,entry";
+          description = "Tasks created by AI";
+          sort = "urgency-";
+          filter = "+aicreated";
         };
       };
     };

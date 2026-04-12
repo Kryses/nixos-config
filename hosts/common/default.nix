@@ -5,6 +5,7 @@
     ./boot.nix
     ./openssh.nix
     ./greetd.nix
+    ./secrets.nix
     ./modules/gtk-theme.nix
     ./modules/disk-services.nix
     inputs.home-manager.nixosModules.home-manager

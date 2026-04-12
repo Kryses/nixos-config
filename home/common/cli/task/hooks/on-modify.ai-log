@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Log AI agent task completions to Flow vault journal
+# Fires on every task modification; only logs when agent UDA is set and status is completed
+
+read -r old_task
+read -r new_task
+
+agent=$(echo "$new_task" | python3 -c "import sys,json; t=json.load(sys.stdin); print(t.get('agent',''))" 2>/dev/null)
+status=$(echo "$new_task" | python3 -c "import sys,json; t=json.load(sys.stdin); print(t.get('status',''))" 2>/dev/null)
+desc=$(echo "$new_task" | python3 -c "import sys,json; t=json.load(sys.stdin); print(t.get('description',''))" 2>/dev/null)
+project=$(echo "$new_task" | python3 -c "import sys,json; t=json.load(sys.stdin); print(t.get('project',''))" 2>/dev/null)
+
+if [ "$status" = "completed" ] && [ -n "$agent" ]; then
+  log_dir="$HOME/documents/flow/flow/05_journal"
+  mkdir -p "$log_dir"
+  echo "$(date -Iseconds) | $agent | $project | $desc" >> "$log_dir/ai-tasks.log"
+fi
+
+echo "$new_task"
