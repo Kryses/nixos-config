@@ -104,6 +104,7 @@ in {
       tai = "task ai";
       tr = "task review";
       tac = "task aicreated";
+      twr = "${configDir}/nushell/scripts/task_weekly.nu";
       tw = "timew";
       twd = "timew day";
       tws = "timew summary";
