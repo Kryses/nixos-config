@@ -4,11 +4,7 @@ keys:
 
   # Host keys (derived from SSH host keys via ssh-to-age)
   - &kryses-tyr age16sn75vz269mp7j6red3y3h8mnw0u5rr3zrj09a9mg5atpeek4gusrqddxd
-  # TODO: add remaining hosts after running ssh-to-age on each
-  # - &kryses-nixos age1...
-  # - &kryses-kirk age1...
-  # - &kryses-brokkr age1...
-  # - &kryses-mobile-nixos age1...
+  - &kryses-brokkr age1shhve703c2hlr63a67xzll2k5khp22zxhz0auqff3q9qcdyn0d4qhpp4lp
 
 creation_rules:
   - path_regex: ^secrets/secrets\.yaml$
@@ -16,8 +12,4 @@ creation_rules:
       - age:
           - *admin
           - *kryses-tyr
-          # TODO: uncomment as hosts are added
-          # - *kryses-nixos
-          # - *kryses-kirk
-          # - *kryses-brokkr
-          # - *kryses-mobile-nixos
+          - *kryses-brokkr
